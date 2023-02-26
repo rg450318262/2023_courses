@@ -1,0 +1,27 @@
+---
+title: "Comment on Karoliina's Exerciese2"
+author: "Rong Guang"
+date: "2023-02-22"
+output:
+  bookdown::pdf_document2:
+    latex_engine: lualatex
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE, warning = F, message = F, cache = F, fig.align = 'center')
+```
+
+I can see substantial meaningfulness in the study, especially for higher-level education. It resonates with my personal experience and with my observations. When I think back to the courses I took in university, the most comprehensible ones stuck with me were those, however intricate in theory, given as much in layman's language as possible. On the other hands, however, the majority of the professors would like to give their lectures under the auspices of terminologies and jargon, with amazing precision in terms of science, for which I would praise as a peer scientist, yet would frown upon as their student. It is a negligible but powerful truth that college professors need to communicate in way that strains scientific strictness with their peers; whereas when standing behind the platform a classroom, they should have switched over to another language system of a pure educator, whose task is to make science simple and easy. Your study aims to tap on this issue in a quantitative way, into a focused and representative scenario (explaining double-slit experiment) and the practical value is beyond doubt. 
+
+I believe if the following information could be further clarified or supplemented, I would have seen a clearer picture of this study in the abstract. 
+
+a. How did you arrive at the nine thematic categories? I believe this is one of the starting points of the design. I am not meaning the full thematic categories should be detailed in an abstract, for the interest of space. It is clear enough just mentioning its source with one sentence, no matter being a newly proposed or well-established one. 
+
+b. what are the levels of these teachers? I see it important since it influences how we can judge the goodness of teacher's educational description. For higher education, both understandability and scientific precision are necessary, justifying the proposed standard of evaluation (many perspectives and terminology transparency). Yet if it were for elementary or secondary students, the standard could have been lowered.
+
+c. Have the teachers given sufficient time to prepare the description? I ask because teaching is not an impromptu task. Substantial preparation is needed before any class given. I suppose in the study you want to simulate the real-world description of these teachers facing their students, which for sure entails preparation. 
+
+d. Text categorization is a demanding task. Quality could be variant dependent on who are doing it and how serious they are. Is there any quality control planned?
+
+e. In the beginning of the abstract an important issue was brought up-- *teachers and textbooks often forget that their students may not be fluent in understanding and using the language of science*. It sounds to me an issue of terminology barrier (And I hence expected to see a study about how to remove this barrier). Yet the body of the study seems to be focusing on how teachers keep their teaching language consistent across concepts and how well they maintain the coverage of all necessary aspects of a topic. 
+
