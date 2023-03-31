@@ -842,9 +842,10 @@ mycor(fa4_leader_full, c(2:10), "mycor")
 
 
 ```{r}
-kfc <- read_spss("Kattfjord_v3.0_2023.01.18+-+FERDIG_March+30,+2023_03.14.sav")
+kfc <- read_spss("Kattfjord_v3.0_2023.01.18+-+FERDIG_March+30,+2023_07.40.sav")
 kfc |> names()
-count(kfc, group_nr)
+count(kfc, group_nr) |> arrange(desc(as.integer(group_nr)))
+?arrange
 count(kfc, n_people)
 kfc <- kfc |> 
   filter(!consent == 2)
