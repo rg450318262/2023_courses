@@ -1,0 +1,918 @@
+---
+title: "Untitled"
+author: "Rong Guang"
+date: "2023-03-14"
+output: html_document
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+```
+
+## R Markdown
+
+This is an R Markdown document. Markdown is a simple formatting syntax for authoring HTML, PDF, and MS Word documents. For more details on using R Markdown see <http://rmarkdown.rstudio.com>.
+
+When you click the **Knit** button a document will be generated that includes both content as well as the output of any embedded R code chunks within the document. You can embed an R code chunk like this:
+
+```{r cars}
+if (!require("pacman")) install.packages("pacman")
+pacman::p_load(here, 
+               expss, 
+               tidyverse, 
+               janitor,
+               knitr, 
+               qualtRics, 
+               arules, 
+               arulesViz, 
+               sjlabelled,
+               DT,
+               stringr,
+               rCBA,
+               labelled,
+               sjPlot,
+               ggstatsplot)
+library(haven)
+library(janitor)
+library(tidyverse)
+library(tibble)
+library(here)
+library(sjPlot)
+```
+
+```{r}
+social22 <- read_spss("SOCIAL_2022.sav")
+social23 <- read_spss("SOCIAL_2023.sav")
+social23 <- social23 |> 
+  rename(id = ID)
+social22$ID.0 <- NULL
+social <- rbind(social22, social23)
+social <- social |> 
+  mutate(index = 1:nrow(social)) |> 
+  dplyr::select(index, everything())
+```
+
+```{r}
+#val_lab(social$Q10_5)
+social_remove <- social |> 
+  filter((Q10_2 %in% c(1,2) & Q10_5 %in% c(1,2) | Q10_2 %in% c(3,4) & Q10_5 %in% c(3,4)) |((Q19_1 %in% c(1,2) & Q19_4 %in% c(1,2)) | (Q19_1 %in% c(3,4) & Q19_4 %in% c(3,4)))) 
+#|> 
+#  dplyr::select(starts_with(c("Q10", "Q19")))
+remove <- social_remove$index
+social <- social |> 
+  filter(!index %in% remove)
+
+social <- social |> 
+  mutate(across(everything(), ~replace(.x, .== -99, NA)))
+```
+
+```{r}
+val_lab(social$BG_Q_leader)
+var_lab(social)
+sjPlot::view_df(social)
+```
+
+
+```{r}
+library(finalfit)
+ff_glimpse(social)
+168+51
+```
+
+```{r}
+#Q14 leadership 2-4
+#Q8 skill 2-5
+#Q10 orgnization 2-5
+#Q22 communication 2-4
+#Q23 Identification 2-3
+#Q13 Anomaly 2-5
+#Q12 Identification 2-4
+#Q20_1 organisation
+#Q18_1 skill
+#Q26_1 anomaly
+#28_1 leadership
+#24_1 identification
+#11_1 Communication
+#19 organisation 1-5
+#Q17 skill 1-4
+#Q21 communication 1-3
+#23 identification 1-3
+#25 anomaly 1-4
+#27 leadership 1-3
+
+sofa <- social |> 
+  select(index, Q14_1:Q27_3)
+val_labels(sofa$Q14_1) <- c("Strongly disagree"=1,
+                         "Disagree"=2,
+                         "Neither agree nor disagree"=3,
+                         "Agree"=4,
+                         "Strongly agree"=5,
+                         "Don't know"=6)
+val_labels(sofa$Q18_1) <- c("Strongly disagree"=1,
+                         "Disagree"=2,
+                         "Neither agree nor disagree"=3,
+                         "Agree"=4,
+                         "Strongly agree"=5,
+                         "Don't know"=6)
+#val_lab(sofa) <- NULL
+sofa <- sofa %>% mutate(across(starts_with("Q"), ~replace(.,. == 7, 3)))
+sofa <- sofa %>% mutate(across(starts_with("Q"), ~replace(.,. == 8, 4)))
+sofa <- sofa %>% mutate(across(starts_with("Q"), ~replace(.,. == 9, 5)))
+sofa <- sofa %>% mutate(across(starts_with("Q"), ~replace(.,. == 10, 6)))
+sjPlot::view_df(sofa)
+```
+
+
+```{r}
+sofa <- sofa |> 
+  mutate(across(everything(), ~replace(.x, .== -99, NA)))
+```
+
+
+```{r}
+#Q14 leadership 2-4
+#Q8 skill 2-5
+#Q10 orgnization 2-5
+#Q22 communication 2-4
+
+#Q13 Anomaly 2-5
+#Q12 Identification 2-4
+#Q20_1 organisation
+#Q18_1 skill
+#Q26_1 anomaly
+#28_1 leadership
+#24_1 identification
+#11_1 Communication
+#19 organisation 1-4(5 is trap)
+#Q17 skill 1-4
+#Q21 communication 1-3
+#Q23 identification 1-3
+#25 anomaly 1-4
+#27 leadership 1-3
+
+##leader
+
+sofa <- sofa |> 
+  mutate(i_leader0 = if_else(is.na(Q14_1), Q28_1, Q14_1) |> 
+           ff_label(var_lab(sofa$Q14_1)))
+
+sofa <- sofa |> 
+  mutate(i_leader1 = if_else(is.na(Q14_2), Q27_1, Q14_2) |> 
+           ff_label(var_lab(sofa$Q14_2)))
+
+sofa <- sofa |> 
+  mutate(i_leader2 = if_else(is.na(Q14_3), Q27_2, Q14_3) |> 
+           ff_label(var_lab(sofa$Q14_3))) 
+
+sofa <- sofa |> 
+  mutate(i_leader3 = if_else(is.na(Q14_4), Q27_3, Q14_4) |> 
+           ff_label(var_lab(sofa$Q14_4)))
+
+##skill
+sofa <- sofa |> 
+  mutate(i_skill0 = if_else(is.na(Q8_1), Q18_1, Q8_1) |> 
+           ff_label(var_lab(sofa$Q8_1)))
+
+sofa <- sofa |> 
+  mutate(i_skill1 = if_else(is.na(Q8_2), Q17_1, Q8_2) |> 
+           ff_label(var_lab(sofa$Q8_2)))
+
+sofa <- sofa |> 
+  mutate(i_skill2 = if_else(is.na(Q8_3), Q17_2, Q8_3) |> 
+         ff_label(var_lab(sofa$Q8_3)))
+
+sofa <- sofa |> 
+  mutate(i_skill3 = if_else(is.na(Q8_4), Q17_3, Q8_4) |> 
+           ff_label(var_lab(sofa$Q8_4)))
+
+sofa <- sofa |> 
+  mutate(i_skill4 = if_else(is.na(Q8_5), Q17_3, Q8_5) |> 
+           ff_label(var_lab(sofa$Q8_5)))
+
+##organization
+sofa <- sofa |> 
+  mutate(i_orga0 = if_else(is.na(Q10_1), Q20_1, Q10_1) |> 
+           ff_label(var_lab(sofa$Q10_1)))
+
+sofa <- sofa |> 
+  mutate(i_orga1 = if_else(is.na(Q10_2), Q19_1, Q10_2) |> 
+           ff_label(var_lab(sofa$Q10_2)))
+
+sofa <- sofa |> 
+  mutate(i_orga2 = if_else(is.na(Q10_3), Q19_2, Q10_3) |> 
+           ff_label(var_lab(sofa$Q10_3)))
+
+sofa <- sofa |> 
+  mutate(i_orga3 = if_else(is.na(Q10_4), Q19_3, Q10_4) |> 
+           ff_label(var_lab(sofa$Q10_4)))
+
+sofa <- sofa |> 
+  mutate(i_orga4 = if_else(is.na(Q10_5), Q19_4, Q10_5) |> 
+           ff_label(var_lab(sofa$Q10_5)))
+
+## communication
+sofa <- sofa |> 
+  mutate(i_comm0 = if_else(is.na(Q22_1), Q11_1, Q22_1) |> 
+           ff_label(var_lab(sofa$Q22_1)))
+
+sofa <- sofa |> 
+  mutate(i_comm1 = if_else(is.na(Q22_2), Q23_1, Q22_2) |> 
+           ff_label(var_lab(sofa$Q22_2)))
+
+sofa <- sofa |> 
+  mutate(i_comm2 = if_else(is.na(Q22_3), Q23_2, Q22_3) |> 
+           ff_label(var_lab(sofa$Q22_3)))
+
+sofa <- sofa |> 
+  mutate(i_comm3 = if_else(is.na(Q22_4), Q21_3, Q22_4) |> 
+           ff_label(var_lab(sofa$Q22_4)))
+
+##identification
+
+sofa <- sofa |> 
+  mutate(i_iden0 = if_else(is.na(Q12_1), Q24_1, Q12_1) |> 
+           ff_label(var_lab(sofa$Q12_1)))
+
+sofa <- sofa |> 
+  mutate(i_iden1 = if_else(is.na(Q12_2), Q23_1, Q12_2) |> 
+           ff_label(var_lab(sofa$Q12_2)))
+
+sofa <- sofa |> 
+  mutate(i_iden2 = if_else(is.na(Q12_3), Q23_2, Q12_3) |> 
+           ff_label(var_lab(sofa$Q12_3)))
+
+sofa <- sofa |> 
+  mutate(i_iden2 = if_else(is.na(Q12_4), Q23_3, Q12_4) |> 
+           ff_label(var_lab(sofa$Q12_4)))
+
+## anomaly
+
+sofa <- sofa |> 
+  mutate(i_anom0 = if_else(is.na(Q13_1), Q26_1, Q13_1) |> 
+           ff_label(var_lab(sofa$Q13_1)))
+
+sofa <- sofa |> 
+  mutate(i_anom1 = if_else(is.na(Q13_2), Q25_1, Q13_2) |> 
+           ff_label(var_lab(sofa$Q13_2)))
+
+sofa <- sofa |> 
+  mutate(i_anom2 = if_else(is.na(Q13_3), Q25_2, Q13_3) |> 
+           ff_label(var_lab(sofa$Q13_3)))
+
+sofa <- sofa |> 
+  mutate(i_anom3 = if_else(is.na(Q13_4), Q25_3, Q13_4) |> 
+           ff_label(var_lab(sofa$Q13_4)))
+
+sofa <- sofa |> 
+  mutate(i_anom4 = if_else(is.na(Q13_5), Q25_4, Q13_5) |> 
+           ff_label(var_lab(sofa$Q13_5)))
+
+sofa_one <- sofa |> 
+  select(ends_with("0"))
+
+sofa <- sofa |> 
+  select(-ends_with("0"))
+
+```
+
+```{r}
+sofa <- sofa |> 
+  mutate(across(everything(), ~replace(.x, .== -99, NA)))
+
+sofa_ifleader <- 
+  left_join(sofa, 
+            social[,c("index", "BG_Q_leader")], 
+            by = "index" )
+
+sofa_noleader_missing <- 
+  sofa_ifleader |> 
+  filter(BG_Q_leader == 1 | is.na(sofa_ifleader$BG_Q_leader)) |> 
+  dplyr::select(
+    index, 
+    starts_with("i_")
+  ) |> 
+  dplyr::select( 
+    !starts_with("i_leader")
+    )
+
+
+sofa_noleader <- 
+  sofa_noleader_missing |>
+  mutate(across(everything(), 
+                ~replace_na(., median(., na.rm=TRUE)
+                            )
+                )
+         )
+sofa_leader_missing <- sofa_ifleader |> 
+  filter(BG_Q_leader != 1) |> 
+  dplyr::select(index,starts_with("i_"))
+
+sofa_leader <- 
+  sofa_leader_missing |>
+  mutate(across(everything(), 
+                ~replace_na(., median(., na.rm=TRUE)
+                            )
+                )
+         )
+```
+
+```{r}
+sofa_all <- sofa |> select(index, starts_with("i_"))
+sofa_all_full <- na.omit(sofa_all)
+
+```
+
+# 1. no leader analysis
+
+```{r}
+library(psych)
+c.matrix <- cor.plot(sofa_noleader[-1], method = "spearman")
+```
+
+```{r}
+KMO(c.matrix) 
+```
+
+```{r}
+cortest.bartlett(c.matrix, nrow(sofa_noleader))
+```
+
+
+
+```{r}
+# Parallel analysis and scree plot
+fa.parallel(c.matrix, fa = "fa", fm = "ml", plot = T, n.obs = nrow(sofa_noleader)) 
+?fa.parallel
+# very simple structure and BIC
+nfactors(c.matrix, n=8, rotate = "oblimin", fm = "pa", n.obs=nrow(sofa_noleader))
+#vss(c_matrix,n=5, rotate = "oblimin", fm = "pa", n.obs=12)
+```
+
+
+Without leader 4 factors
+
+```{r, fig.height= 4, fig.width= 3}
+#Examining the 4 factors solution
+fa4 <- fa(sofa_noleader[-1], nfactors = 4, rotate = "varimax", fm = "pa", scores = "regression")
+fa.diagram(fa4, cut = 0, digits =2, main = "Factor Analysis, Varimax rotation")
+
+print(fa4, digits = 2, sort = T)
+print(fa4$loadings,cutoff = 0.3, sort=TRUE)
+summary(fa4)
+prop.table(fa4$values) #how much variance explained
+```
+
+```{r}
+sofa_noleader_mius <-sofa_noleader |> 
+  select(
+    #-i_orga2, 
+    -i_anom3, 
+    -i_anom4, 
+    -i_anom1, 
+    #-i_orga4, 
+    -i_comm2, 
+     -i_comm3, 
+    #-i_orga3, 
+    -i_anom2, 
+    -i_orga1
+  )
+
+fa4 <- fa(sofa_noleader_mius[-1], nfactors = 4, rotate = "varimax", fm = "ml", scores = "regression")
+fa.diagram(fa4, cut = 0, digits =2, main = "Factor Analysis, Varimax rotation")
+print(fa4$loadings,cutoff = 0.4, sort=TRUE)
+```
+
+```{r}
+a <- c(var_lab(sofa_noleader_mius$i_comm1),var_lab(sofa_noleader_mius$i_iden1),var_lab(sofa_noleader_mius$i_orga2),var_lab(sofa_noleader_mius$i_iden2))
+
+b <- a |> strsplit(split = " - ") |> data.frame()
+names(b) <- c("i_comm1", "i_iden1", "i_orga2", "iden2")
+b[2,] |>  t()
+```
+
+```{r}
+a <- c(var_lab(sofa_noleader_mius$i_skill1),var_lab(sofa_noleader_mius$i_skill2))
+
+b <- a |> strsplit(split = " - ") |> data.frame()
+names(b) <- c("i_skill1", "i_skill2")
+b[2,] |>  t()
+```
+
+
+```{r}
+a <- c(var_lab(sofa_noleader_mius$i_skill3),var_lab(sofa_noleader_mius$i_skill4))
+
+b <- a |> strsplit(split = " - ") |> data.frame()
+names(b) <- c("i_skill3", "i_skill4")
+b[2,] |>  t()
+```
+
+```{r}
+a <- c(var_lab(sofa_noleader_mius$i_orga3),var_lab(sofa_noleader_mius$i_orga4))
+
+b <- a |> strsplit(split = " - ") |> data.frame()
+names(b) <- c("i_orga3", "i_orga4")
+b[2,] |>  t()
+```
+
+Without leader 3 factors
+
+```{r, fig.height= 4, fig.width= 3}
+#Examining the 4 factors solution
+fa3 <- fa(sofa_noleader[-1], nfactors = 3, rotate = "varimax", fm = "pa", scores = "regression")
+fa.diagram(fa3, cut = 0, digits =2, main = "Factor Analysis, Varimax rotation")
+print(fa3$loadings,cutoff = 0.3, sort=TRUE)
+prop.table(fa3$values) #how much variance explained
+```
+
+```{r}
+sofa_noleader_mius <-sofa_noleader |> 
+  select(
+    #-i_orga2, 
+    -i_anom3, 
+    -i_anom4, 
+    -i_anom1, 
+    #-i_orga4, 
+    -i_comm2, 
+     -i_comm3, 
+    #-i_orga3, 
+    -i_anom2, 
+    -i_orga1
+  )
+
+fa3 <- fa(sofa_noleader_mius[-1], nfactors = 3, rotate = "varimax", fm = "ml", scores = "regression")
+fa.diagram(fa3, cut = 0, digits =2, main = "Factor Analysis, Varimax rotation")
+print(fa3$loadings,cutoff = 0.4, sort=TRUE)
+```
+
+```{r}
+a <- c(var_lab(sofa_noleader_mius$i_skill4),var_lab(sofa_noleader_mius$i_skill3),var_lab(sofa_noleader_mius$i_skill2),var_lab(sofa_noleader_mius$i_skill1))
+
+b <- a |> strsplit(split = " - ") |> data.frame()
+names(b) <- c("i_skill4", "i_skill3", "i_skill2",  "i_skill1")
+b[2,] |>  t()
+```
+```{r}
+a <- c(var_lab(sofa_noleader_mius$i_orga3),var_lab(sofa_noleader_mius$i_orga4))
+
+b <- a |> strsplit(split = " - ") |> data.frame()
+names(b) <- c("i_orga3", "i_orga4")
+b[2,] |>  t()
+```
+# 2. leader analysis
+
+```{r}
+c.matrix <- cor.plot(sofa_leader[-1], method = "spearman")
+```
+
+```{r}
+KMO(c.matrix) 
+```
+
+```{r}
+cortest.bartlett(c.matrix, nrow(sofa_leader))
+```
+
+```{r}
+# Parallel analysis and scree plot
+fa.parallel(c.matrix, fa = "fa", fm = "ml", plot = T) 
+# very simple structure and BIC
+nfactors(c.matrix, n=7, rotate = "oblimin", fm = "pa", n.obs=nrow(sofa_noleader))
+#vss(c_matrix,n=5, rotate = "oblimin", fm = "pa", n.obs=12)
+```
+
+#5-factor, leader
+
+```{r, fig.height= 4, fig.width= 3}
+#Examining the 4 factors solution
+fa5 <- fa(sofa_leader[-1], nfactors = 5, rotate = "varimax", fm = "ml", scores = "regression")
+fa.diagram(fa5, cut = 0, digits =2, main = "Factor Analysis, Varimax rotation")
+print(fa5$loadings,cutoff = 0.3, sort=TRUE)
+prop.table(fa5$values) #how much variance explained
+```
+
+#4-factor, leader
+
+```{r, fig.height= 4, fig.width= 3}
+#Examining the 4 factors solution
+fa4 <- fa(sofa_leader[-1], nfactors = 4, rotate = "varimax", fm = "ml", scores = "regression")
+fa.diagram(fa4, cut = 0, digits =2, main = "Factor Analysis, Varimax rotation")
+print(fa4$loadings,cutoff = 0.3, sort=TRUE)
+prop.table(fa4$values) #how much variance explained
+```
+
+# explore 4 factor
+
+```{r}
+sofa_leader_mius <-sofa_leader |> 
+  select(
+    -i_orga2, 
+    -i_anom3, 
+    -i_anom4, 
+    #-i_anom1, 
+    -i_orga4, 
+    -i_comm2, 
+     #-i_comm3, 
+    -i_orga3, 
+    -i_anom2, 
+    -i_orga1
+  )
+
+fa4 <- fa(sofa_leader_mius[-1], nfactors = 4, rotate = "varimax", fm = "ml", scores = "regression")
+fa.diagram(fa4, cut = 0, digits =2, main = "Factor Analysis, Varimax rotation")
+print(fa4$loadings,cutoff = 0.4, sort=TRUE)
+prop.table(fa4$values) #how much variance explained
+```
+
+```{r}
+a <- c(var_lab(sofa_leader_mius$i_iden2),var_lab(sofa_leader_mius$i_anom1),var_lab(sofa_leader_mius$i_leader3),var_lab(sofa_leader_mius$i_leader1), var_lab(sofa_leader_mius$i_leader2), var_lab(sofa_leader_mius$i_comm3), var_lab(sofa_leader_mius$i_comm1))
+
+b <- a |> strsplit(split = " - ") |> data.frame()
+names(b) <- c("i_iden2", "i_anom1", "i_leader3", 
+              "i_leader1", "i_leader2", "i_comm3", "i_comm1")
+b[2,] |>  t()
+```
+
+```{r}
+a <- c(var_lab(sofa_leader_mius$i_comm1),var_lab(sofa_leader_mius$i_iden1))
+
+b <- a |> strsplit(split = " - ") |> data.frame()
+names(b) <- c("i_comm1", "i_iden1")
+b[2,] |>  t()
+```
+
+```{r}
+a <- c(var_lab(sofa_leader_mius$i_skill4),var_lab(sofa_leader_mius$i_skill3))
+
+b <- a |> strsplit(split = " - ") |> data.frame()
+names(b) <- c("i_skill4", "i_skill3")
+b[2,] |>  t()
+```
+
+#3-factor, leader
+
+```{r, fig.height= 4, fig.width= 3}
+#Examining the 4 factors solution
+fa3 <- fa(sofa_leader[-1], nfactors = 3, rotate = "varimax", fm = "ml", scores = "regression")
+fa.diagram(fa3, cut = 0, digits =2, main = "Factor Analysis, Varimax rotation")
+print(fa3$loadings,cutoff = 0.3, sort=TRUE)
+prop.table(fa3$values) #how much variance explained
+```
+
+Explore 3 factors
+
+```{r}
+sofa_leader_mius <-sofa_leader |> 
+  select(
+    -i_orga2, 
+    -i_anom3, 
+    -i_anom4, 
+    #-i_anom1, 
+    -i_orga4, 
+    #-i_comm2, 
+     #-i_comm3, 
+    -i_orga3, 
+    -i_anom2, 
+    -i_orga1
+  )
+
+fa3 <- fa(sofa_leader_mius[-1], nfactors = 3, rotate = "varimax", fm = "ml", scores = "regression")
+fa.diagram(fa3, cut = 0, digits =2, main = "Factor Analysis, Varimax rotation")
+print(fa3$loadings,cutoff = 0.4, sort=TRUE)
+prop.table(fa3$values) #how much variance explained
+```
+
+```{r}
+a <- c(var_lab(sofa_leader_mius$i_iden2),var_lab(sofa_leader_mius$i_anom1),var_lab(sofa_leader_mius$i_leader3),var_lab(sofa_leader_mius$i_leader1), var_lab(sofa_leader_mius$i_leader2), var_lab(sofa_leader_mius$i_comm3), var_lab(sofa_leader_mius$i_comm2))
+
+b <- a |> strsplit(split = " - ") |> data.frame()
+names(b) <- c("i_iden2", "i_anom1", "i_leader3", 
+              "i_leader1", "i_leader2", "i_comm3", "i_comm2")
+b[2,] |>  t()
+```
+
+```{r}
+a <- c(var_lab(sofa_leader_mius$i_comm1),var_lab(sofa_leader_mius$i_iden1))
+
+b <- a |> strsplit(split = " - ") |> data.frame()
+names(b) <- c("i_comm1", "i_iden1")
+b[2,] |>  t()
+```
+
+
+Factor score
+
+```{r}
+sofa_noleader_minus <-sofa_noleader |> 
+  select(
+    #-i_orga2, 
+    -i_anom3, 
+    -i_anom4, 
+    -i_anom1, 
+    #-i_orga4, 
+    -i_comm2, 
+     -i_comm3, 
+    #-i_orga3, 
+    -i_anom2, 
+    -i_orga1
+  )
+
+fa3 <- fa(sofa_noleader_minus[-1], nfactors = 3, rotate = "varimax", fm = "ml", scores = "regression")
+fa.diagram(fa3, cut = 0, digits =2, main = "Factor Analysis, Varimax rotation")
+print(fa3$loadings,cutoff = 0.4, sort=TRUE)
+
+```
+# factor scores for without leader
+
+```{r}
+fa3_noleader  <-  as.data.frame( 
+  factor.scores(sofa_noleader_minus[-1], fa3)$scores)  |> 
+  mutate(index = sofa_noleader$index) |>  
+  rename(skill = ML1,
+         individual_contribution =ML2,
+         planning = ML3)
+```
+
+```{r}
+fa3_noleader |> 
+  select(-index) |> 
+  pivot_longer(everything(),names_to = "Factor", values_to = "FactorScore") |> 
+  ggplot(aes(x = FactorScore, fill = Factor)) +
+  geom_histogram () +
+  facet_wrap(~Factor) +
+  theme_bw()+
+  theme(legend.position = "bottom")
+  
+  
+fa3_noleader
+```
+
+```{r}
+fa3_noleader_full <- left_join(fa3_noleader, social[,c("index", "Q15","Q16_1","BG_Q_familiar","BG_Q_confidence_1" ), by = "index"], 
+ )
+fa3_noleader_full <-  fa3_noleader_full |> 
+  dplyr::rename(dynamic = Q15,
+         trust = Q16_1,
+         familiar = BG_Q_familiar,
+         confidence = BG_Q_confidence_1) |> 
+  dplyr::select(index, everything()) |> 
+  dplyr::mutate(fs.total = individual_contribution + skill + planning)
+```
+
+```{r, echo=F}
+mycor <- 
+  function(data, cols, title){
+  data |> 
+      dplyr::select(all_of(cols)) |> 
+      ggstatsplot::ggcorrmat(
+        colors = c("#B2182B", "white", "#4D4D4D"),
+        title = title,
+        matrix.type  = "lower",
+        type = "parametric"
+      )
+  }
+```
+
+```{r}
+library(ggcorrplot)
+mycor(fa3_noleader_full, c(2:9), "mycor")
+```
+
+
+
+
+# factor scores for with leader
+
+```{r}
+sofa_leader_minus <-sofa_leader |> 
+  select(
+    -i_orga2, 
+    -i_anom3, 
+    -i_anom4, 
+    #-i_anom1, 
+    -i_orga4, 
+    #-i_comm2, 
+     #-i_comm3, 
+    -i_orga3, 
+    -i_anom2, 
+    -i_orga1
+  )
+
+fa3 <- fa(sofa_leader_minus[-1], nfactors = 3, rotate = "varimax", fm = "ml", scores = "regression")
+fa.diagram(fa3, cut = 0, digits =2, main = "Factor Analysis, Varimax rotation")
+print(fa3$loadings,cutoff = 0.4, sort=TRUE)
+prop.table(fa3$values) #how much variance explained
+```
+
+```{r}
+fa3_leader  <-  as.data.frame( 
+  factor.scores(sofa_leader_minus[-1], fa3)$scores)  %>% 
+  mutate(index = sofa_leader$index)  %>% 
+  rename(leadership_quality = ML1,
+         skill =ML2,
+         individual_contribution = ML3)
+```
+
+
+
+```{r}
+fa3_leader |> 
+  select(-index) |> 
+  pivot_longer(everything(),names_to = "Factor", values_to = "FactorScore") |> 
+  ggplot(aes(x = FactorScore, fill = Factor)) +
+  geom_histogram () +
+  facet_wrap(~Factor) +
+  theme_bw()+
+  theme(legend.position = "bottom")
+```
+
+```{r}
+fa3_leader_full <- left_join(fa3_leader, social[,c("index", "Q15","Q16_1","BG_Q_familiar","BG_Q_confidence_1" ), by = "index"], 
+ )
+fa3_leader_full <-  fa3_leader_full |> 
+  dplyr::rename(dynamic = Q15,
+         trust = Q16_1,
+         familiar = BG_Q_familiar,
+         confidence = BG_Q_confidence_1) |> 
+  dplyr::select(index, everything()) |> 
+  dplyr::mutate(fs.total = individual_contribution + skill + leadership_quality)
+```
+
+
+```{r}
+fa3_leader_full <- 
+  fa3_leader_full |>
+  mutate(across(everything(), 
+                ~replace_na(., median(., na.rm=TRUE)
+                            )
+                )
+         )
+```
+
+```{r, fig.height = 5, fig.width =5}
+mycor(fa3_leader_full, c(2:9), "mycor")
+```
+
+#4 factor solution factor scores
+
+```{r}
+sofa_leader_minus <-sofa_leader |> 
+  select(
+    -i_orga2, 
+    -i_anom3, 
+    -i_anom4, 
+    #-i_anom1, 
+    -i_orga4, 
+    -i_comm2, 
+     #-i_comm3, 
+    -i_orga3, 
+    -i_anom2, 
+    -i_orga1
+  )
+
+fa4 <- fa(sofa_leader_minus[-1], nfactors = 4, rotate = "varimax", fm = "ml", scores = "regression")
+fa.diagram(fa4, cut = 0, digits =2, main = "Factor Analysis, Varimax rotation")
+print(fa4$loadings,cutoff = 0.4, sort=TRUE)
+prop.table(fa4$values) #how much variance explained
+```
+
+```{r}
+fa4_leader  <-  as.data.frame( 
+  factor.scores(sofa_leader_minus[-1], fa4)$scores)  %>% 
+  mutate(index = sofa_leader$index)  %>% 
+  rename(leadership_quality = ML1,
+         individual_contribution = ML2,
+         explicit_skills =ML3,
+         implicit_skills =ML4)
+```
+
+```{r}
+fa4_leader |> 
+  select(-index) |> 
+  pivot_longer(everything(),names_to = "Factor", values_to = "FactorScore") |> 
+  ggplot(aes(x = FactorScore, fill = Factor)) +
+  geom_histogram () +
+  facet_wrap(~Factor) +
+  theme_bw()+
+  theme(legend.position = "bottom")
+```
+
+```{r}
+fa4_leader_full <- left_join(fa4_leader, social[,c("index", "Q15","Q16_1","BG_Q_familiar","BG_Q_confidence_1" ), by = "index"], 
+ )
+fa4_leader_full <-  fa4_leader_full |> 
+  dplyr::rename(dynamic = Q15,
+         trust = Q16_1,
+         familiar = BG_Q_familiar,
+         confidence = BG_Q_confidence_1) |> 
+  dplyr::select(index, everything()) |> 
+  dplyr::mutate(fs.total = individual_contribution + 
+                  explicit_skills+ implicit_skills + leadership_quality)
+```
+
+
+```{r}
+mycor(fa4_leader_full, c(2:10), "mycor")
+```
+
+```{r}
+
+```
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+########
+########
+
+
+
+```{r}
+kfc <- read_spss("Kattfjord_v3.0_2023.01.18+-+FERDIG_March+30,+2023_07.40.sav")
+kfc |> names()
+count(kfc, group_nr) |> arrange(desc(as.integer(group_nr)))
+?arrange
+count(kfc, n_people)
+kfc <- kfc |> 
+  filter(!consent == 2)
+
+kfc |> filter(group_nr == 1) |> 
+  select(leader_self)
+val_lab(kfc$leader_self)
+
+kfc |> select(contains("dm"))
+
+view_df(kfc)
+var_lab(kfc$snow_interpret_1)
+```
+
+
+```{r}
+count(kfc, dp_dic)
+```
+
+```{r}
+
+```
+
+
+
+
+```{r}
+```
+
+
+```{r}
+```
+
+
+```{r}
+```
+
+
+```{r}
+```
+
+
+```{r}
+```
+
+
+```{r}
+```
+
+
+```{r}
+```
+
+
+```{r}
+```
+
+
+
+
+
+
+
+
+
+
+
+
+
+

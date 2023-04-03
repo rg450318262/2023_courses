@@ -1,0 +1,105 @@
+% Options for packages loaded elsewhere
+\PassOptionsToPackage{unicode}{hyperref}
+\PassOptionsToPackage{hyphens}{url}
+%
+\documentclass[
+]{article}
+\usepackage{amsmath,amssymb}
+\usepackage{lmodern}
+\usepackage{iftex}
+\ifPDFTeX
+  \usepackage[T1]{fontenc}
+  \usepackage[utf8]{inputenc}
+  \usepackage{textcomp} % provide euro and other symbols
+\else % if luatex or xetex
+  \usepackage{unicode-math}
+  \defaultfontfeatures{Scale=MatchLowercase}
+  \defaultfontfeatures[\rmfamily]{Ligatures=TeX,Scale=1}
+\fi
+% Use upquote if available, for straight quotes in verbatim environments
+\IfFileExists{upquote.sty}{\usepackage{upquote}}{}
+\IfFileExists{microtype.sty}{% use microtype if available
+  \usepackage[]{microtype}
+  \UseMicrotypeSet[protrusion]{basicmath} % disable protrusion for tt fonts
+}{}
+\makeatletter
+\@ifundefined{KOMAClassName}{% if non-KOMA class
+  \IfFileExists{parskip.sty}{%
+    \usepackage{parskip}
+  }{% else
+    \setlength{\parindent}{0pt}
+    \setlength{\parskip}{6pt plus 2pt minus 1pt}}
+}{% if KOMA class
+  \KOMAoptions{parskip=half}}
+\makeatother
+\usepackage{xcolor}
+\usepackage[margin=1in]{geometry}
+\usepackage{longtable,booktabs,array}
+\usepackage{calc} % for calculating minipage widths
+% Correct order of tables after \paragraph or \subparagraph
+\usepackage{etoolbox}
+\makeatletter
+\patchcmd\longtable{\par}{\if@noskipsec\mbox{}\fi\par}{}{}
+\makeatother
+% Allow footnotes in longtable head/foot
+\IfFileExists{footnotehyper.sty}{\usepackage{footnotehyper}}{\usepackage{footnote}}
+\makesavenoteenv{longtable}
+\usepackage{graphicx}
+\makeatletter
+\def\maxwidth{\ifdim\Gin@nat@width>\linewidth\linewidth\else\Gin@nat@width\fi}
+\def\maxheight{\ifdim\Gin@nat@height>\textheight\textheight\else\Gin@nat@height\fi}
+\makeatother
+% Scale images if necessary, so that they will not overflow the page
+% margins by default, and it is still possible to overwrite the defaults
+% using explicit options in \includegraphics[width, height, ...]{}
+\setkeys{Gin}{width=\maxwidth,height=\maxheight,keepaspectratio}
+% Set default figure placement to htbp
+\makeatletter
+\def\fps@figure{htbp}
+\makeatother
+\setlength{\emergencystretch}{3em} % prevent overfull lines
+\providecommand{\tightlist}{%
+  \setlength{\itemsep}{0pt}\setlength{\parskip}{0pt}}
+\setcounter{secnumdepth}{5}
+\ifLuaTeX
+  \usepackage{selnolig}  % disable illegal ligatures
+\fi
+\IfFileExists{bookmark.sty}{\usepackage{bookmark}}{\usepackage{hyperref}}
+\IfFileExists{xurl.sty}{\usepackage{xurl}}{} % add URL line breaks if available
+\urlstyle{same} % disable monospaced font for URLs
+\hypersetup{
+  pdftitle={A protocol for systematically reviewing traditional Chinese medicine meta-analyses where the translation ``modified'' is used},
+  pdfauthor={Rong Guang},
+  hidelinks,
+  pdfcreator={LaTeX via pandoc}}
+
+\title{A protocol for systematically reviewing traditional Chinese medicine meta-analyses where the translation ``modified'' is used}
+\author{Rong Guang}
+\date{2023-03-20}
+
+\begin{document}
+\maketitle
+
+{
+\setcounter{tocdepth}{2}
+\tableofcontents
+}
+A protocol for systematically reviewing traditional Chinese medicine meta-analyses where the translation ``modified'' is used
+
+Abstract: (263 words excluding the keywords, please note that the section of results is neither possible nor required in a protocol)
+Background
+Borrowing established terminologies from modern medicine is a common practice in writing English-medium reports on meta-analyses for traditional Chinese medicine (TCM). If proper clarification about some key translations is not accompanied in the reports, readers' perceived reliability of the evidence might inflate. An example is the term ``加减''. It is often translated into ``modified'' for ``clarity'', yet at the cost of fidelity. Clarifying this translation is important to unbiasedly delivering the meta-analytical evidence to international readers. Yet, there is no evidence if this is sufficiently done.
+
+Aims
+We aim to justify the concern over the practice of borrowing established terminologies without sufficient clarification when writing English-medium reports on TCM meta-analyses, and to report a protocol allowing to systematically review TCM meta-analyses analyses where ``modified'' was used to translate ``加减''.
+
+Methods (Note that )
+We plan to retrieve all TCM meta-analyses involving modified formula published throughout 2018 to 2022. Two independent reviewers will screen titles and abstracts, include relevant full text articles, extract data from the studies, and evaluate the prevalent practices in clarifying the borrowed term ``modified''. The data extracted will be used to estimate the prevalent practice in clarifying the term ``modified''.
+
+Discussion
+The systematic review based on the current protocol will assesses the practice of clarifying the term ``modified'' in TCM meta-analyses involving modified formula. The finding will inform
+international readers/peer-reviewers of a. the validity of published TCM meta-analyses; b. if inflated quality of TCM meta-analytical evidence is a concern, practically. The systematic review will be crucial for understanding the quality of published TCM meta-analyses.
+
+Key words: Traditional Chinese medicine; meta-analysis; modified formula; insufficient translation of terminology; protocol
+
+\end{document}
