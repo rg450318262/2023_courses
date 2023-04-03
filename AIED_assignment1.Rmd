@@ -1,0 +1,16 @@
+---
+title: "PSYT-917 Basics of Artificial Intelligence in Educational Sciences, Assignment 1"
+author: "Rong Guang"
+output:
+  bookdown::pdf_document2:
+    latex_engine: lualatex
+---
+
+**1. You must provide a keyword or phrase for the six categories**
+
+\textcolor{red}{*Does ChatGPT know how to protect himself in avalanche terrain?*}
+I am interested in the accuracy of ChatGPT 4.0 [**AI tool** and **subject**] in answering 50 (ish) key questions [**educational process**] about backcountry skiing safety [**actors** and **activity**]  (e.g. what are the basic safety gears in backcountry skiing?), in comparison to the mean accuracy of Google's search results (first page) for the same questions [**environment**].
+
+**2. You must provide one or more questions or puzzles about AI that you wish to be answered by this course. **
+
+Is there anything in a typical educational process in UH (or any other university worldwide) that is realized via AI (that we might ignore it is)?

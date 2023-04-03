@@ -1,0 +1,70 @@
+---
+title: "PSYT-917 Basics of Artificial Intelligence in Educational Sciences, Assignment 2"
+author: "Rong Guang"
+output:
+  bookdown::pdf_document2:
+    latex_engine: lualatex
+---
+
+# Prepare one or more questions or comments on the topic of this paper, to provide prof Teemu Roos with a picture of you as a group. 
+
+One simple question: is there any difference in the aims, practices and definitions of K12 education among different countries across the world?
+
+# Prepare comments on the topic of this paper, to provide prof Teemu Roos with a picture of you as a group. 
+
+To begin with a quick summary of my idea: I do not agree with many of the arguments the authors made. 
+
+The article argues that the emergence of machine learning (ML) is likely to challenge traditional computational thinking (CT) concepts in K-12 education. While CT has been a central focus of computing education for over a decade, ML-driven services and applications introduce new concepts such as neural networks, data curation, and reinforcement learning that are not part of traditional CT. The authors suggest that CT needs to be extended and revised to include these new concepts and to prepare students for the world of ML and other emerging technologies.
+
+However, I disagree in the following aspects:
+
+## Marchine learning is only a special case of classical programming
+
+Machine learning (ML) uses many of the same fundamental concepts and techniques as classical programming, such as algorithms, data structures, and programming languages. In fact, machine learning algorithms are often implemented using classical programming techniques. 
+
+As was also implied by the authors, ML algorithms can be seen as a way of automating the process of finding patterns in data and making predictions based on those patterns. However, what fails to be clarified in the article is this process is achieved by using a combination of classical programming techniques, such as linear algebra, calculus, and probability theory, to create models that can learn from data and make predictions.
+
+In addition, ML algorithms often require preprocessing of data to make it suitable for analysis. This preprocessing typically involves techniques such as data cleaning, normalization, and feature engineering, which are all common techniques in classical programming.
+
+Furthermore, machine learning models require careful evaluation to determine their accuracy and effectiveness. This involves techniques such as cross-validation and error analysis, which are again fundamental techniques in classical programming.
+
+Moreover, there is a blurred boderline between ML. For example, C4.5 decision tree algorithm is probably considered to be both classical programming and ML. It seems that there is a hidden rule that any complicated task for prediction using a complicated algorithm is called ML. Thus, ML is more a special case of clasical programming than a standalone concept. People need to know basic programming if they are to learn ML. Think about regression, which is believed to be a classical programming (NO black box in it), and other advanced evolvments of it, such as ridge regression, LASSO and least angle regression, which are usually considered as ML. It is hard to imagine one can understand the latter, without proper knowledge of the former.  
+
+Overal all, ML is still fundamentally grounded in classical programming concepts and techniques. As such, machine learning can be seen as a special case of classical programming that is tailored specifically to solving problems related to prediction.
+
+## ML, as a special case of classical programming, is by no means replacing classical programming
+
+Classical programming involves designing and implementing algorithms and procedures that follow a set of predetermined rules and logic to solve a specific problem. It is used to build many of the software applications and systems that we use every day, such as desktop and mobile applications, websites, databases, and operating systems.
+
+ML, as was discussed above, is often used for tasks invovling prediction that are difficult to solve using classical programming techniques, such as image recognition, natural language processing, and fraud detection. Machine learning algorithms learn from data, allowing them to make predictions and decisions based on patterns and relationships within the data. However, machine learning is not a silver bullet that can solve every problem, and classical programming remains an important tool for software developers.
+
+## Is ML really a black box?
+
+The term "black box" in machine learning refers to models that are opaque or difficult to interpret, meaning that the internal workings of the model are not easily understood by humans. While it is true that some machine learning models can be difficult to interpret, it is not entirely accurate to say that they are "black boxes" in the traditional sense.
+
+Firstly, there are techniques available to help interpret and understand the output of machine learning models. For example, techniques like feature importance analysis, partial dependence plots, and SHAP values can help to identify which input features are most important for a given prediction. These techniques can provide insights into how the model is making its predictions and can help to identify potential biases or limitations of the model.
+
+Secondly, many machine learning models are not entirely opaque and can be understood to some extent by examining the model structure and parameters. For example, decision tree models can be visualized as a series of if-then rules, while linear regression models have coefficients that can be directly interpreted as the effect of each input feature on the output variable. Neural network models, while often more complex, can be understood in terms of the individual neurons and layers that make up the model.
+
+Finally, it's worth noting that not all machine learning models are designed to be interpretable. Some models, such as deep neural networks, are optimized for predictive accuracy rather than interpretability. While it may be difficult to understand exactly how these models are making their predictions, they can still be very useful for tasks like image recognition or natural language processing.
+
+In summary, while some machine learning models can be difficult to interpret, it is not entirely accurate to call them "black boxes". There are techniques available to help interpret and understand these models, and even the most complex models can be understood to some extent by examining their structure and parameters. Most of these techniques are realized via classical programming. We can see there is a clear hierarchy or order for classical programming and ML and this should be presented in the order of curriculum setting, insead of blending them into one course for a group of very basic level learners. 
+
+## It is argubly not necessary to add anything new or important to K12 education
+
+K-12 education aims to develop students' foundational knowledge and skills in subjects such as mathematics, science, language arts, and social studies. It also aims to foster critical thinking, problem-solving, creativity, and communication skills that are essential for success in college and career. Here "Foundational" is the key word. As has been discussed, classical programming is the most fundemantal and crucial part for CT, and ML is only a special case of it. And due to the less interpretable nature (I don't actually believe ML always involves black box), its value in cultivating critical thinking is arguably weaker. Moreover, there is well-documented evidence that carefully-set curriculum difficulty is important to K12 education. Althougt I agree that ML for some cases can be very easy to implement even for K12 students, the difficulty it invovles is disporportionate with the problem-solving and creativity exercies it provides. Students will spend precious time on waiting for models being trained and basically learn that they do not have to think too hardly because some agents would help them do all the thinking. This violates the aim of K12 education.
+
+I enourage you to think about a similar example: classic statistics and Bayesian statistics to higher education. They are both statistical paradigms that approach inference and data analysis in different ways. While they differ in their philosophical foundations and computational methods, Bayesian statistics is built on the foundation of classical statistics. Bayesian methods are also well-suited to situations with limited or noisy data, as they can use prior information to regularize and stabilize estimates. As such, Bayesian statistics can be regarded as a special case of classic statistics for solving a specific type of problems. In higher education, is Baysian statistics courses replacing classic statistics ones? No. Is Baysian statistics courses merging with classic statistics into one course? No. How is this problem solved? 
+classic statistics is still the fundamental course for students in relevant majors. Baysian statistics is added into it as introductory chapter, and is added into the whole crriculum as a follow-up course for classic statistics.
+
+
+
+
+
+
+
+
+
+
+
+
