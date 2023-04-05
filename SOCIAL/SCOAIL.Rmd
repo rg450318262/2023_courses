@@ -1,0 +1,96 @@
+---
+title: "Developing a scale to measure factors influencing skier's self-perceived group dynamics (FISSGD)"
+author: "Rong Guang"
+output:
+  bookdown::pdf_document2:
+    latex_engine: lualatex
+---
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+```
+
+```{r}
+if (!require("pacman")) install.packages("pacman")
+pacman::p_load(here, 
+               expss, 
+               tidyverse, 
+               janitor,
+               knitr, 
+               qualtRics, 
+               arules, 
+               arulesViz, 
+               sjlabelled,
+               DT,
+               stringr,
+               rCBA,
+               labelled,
+               sjPlot,
+               ggstatsplot)
+```
+
+```{r}
+library(tidyverse)
+library(haven)
+library(here)
+latest.name22 <- "SOCIAL_2022.sav"#This week's file name
+latest.name23 <- "SOCIAL_2023.sav"#This week's file name
+#read in the data
+social22 <-  #
+  read_spss(
+    file.path(
+      here(),'data',
+      latest.name22 )
+    )
+```
+
+```{r}
+```
+
+
+```{r}
+```
+
+
+```{r}
+```
+
+
+```{r}
+```
+
+
+```{r}
+```
+
+
+```{r}
+```
+
+
+```{r}
+```
+
+
+```{r}
+```
+
+
+```{r}
+```
+
+
+```{r}
+```
+
+
+```{r}
+```
+
+
+```{r}
+```
+
+
+```{r}
+```
+

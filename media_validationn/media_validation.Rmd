@@ -1,0 +1,77 @@
+---
+title: "Untitled"
+output: html_document
+date: "2023-03-31"
+---
+
+```{r setup, include=FALSE}
+library(tidyverse)
+urban <- read_csv("CARE_March 31, 2023_09.59.csv", na = "", col_names = T)
+
+urban <- urban[-c(1,2),]
+urban |> dim()
+names(urban)
+urban$`Duration (in seconds)`
+urban <- urban |> filter(!`Duration (in seconds)`<150)
+
+
+urban.fvi <- urban |> 
+  filter(!is.na(Q1)) |> 
+  dplyr::select(Q1)
+urban.fvi <- urban.fvi|> 
+  mutate(index = 1:nrow(urban.fvi))
+
+```
+
+```{r}
+ifvi <- function(x){ #x is a data frame containing only the expert rating
+  newdf <- x %>% mutate(fvi = rowSums(. == "3"| . == "4")/ncol(.))
+  newdf
+}
+```
+
+```{r}
+ifvi(a)
+b <- t(urban.fvi) |> as.data.frame()
+ifvi(b)
+
+mydf <- as.matrix(rep(NA,100), ncol= 1, nrow = 100)
+
+for (i in 1:100) {
+  set.seed(i)
+  ss <- sample_n(urban.fvi,30)
+  a <- t(ss) |> as.data.frame()
+  b <- ifvi(a)
+  mydf[i,1] <- b[1,"fvi"]
+}
+```
+
+```{r}
+df <- as.data.frame(mydf)
+library(ggplot2)
+df |> 
+  ggplot(aes(x = V1, fill = "blue"))+
+  geom_histogram(binwidth = 0.05)
+```
+
+```{r, fig.width=1, fig.height=1.5}
+df <- as.data.frame(mydf)
+library(ggplot2)
+df |> 
+  ggplot(aes(y = V1, fill = "blue"))+
+  geom_boxplot()+
+  geom_hline(yintercept = 0.8, color = "purple", linetype = "dashed")+
+  theme(legend.position = "none", axis.text.x = element_blank(), axis.ticks.x = element_blank())+
+  labs(y = "FVI", caption = "Purple line is the minmum requirement ")
+```
+
+```{r}
+median(df$V1, na.rm = T)
+mean(df$V1, na.rm = T)
+mysd <- sd(df$V1, na.rm = T)
+CI <- qnorm(0.975)*mysd/sqrt(100)
+CI.plus <- mean(df$V1, na.rm = T) + CI
+CI.minus <- mean(df$V1, na.rm = T) - CI
+mean(df$V1, na.rm = T);CI.plus;CI.minus
+```
+
