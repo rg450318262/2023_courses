@@ -93,7 +93,9 @@ social <-
     )
 ```
 
-## Remove careless responses (according to attention trap)
+## Reomove cases
+
+### Remove careless responses (according to attention trap)
 
 Q10_2 and Q10_5, as well as Q19_1 and Q19_4 were same questions with different wordings. If the responses had conflictory results between them, they were regarded as careless responses.
 
@@ -118,17 +120,34 @@ social <- social |>
   filter(!index %in% remove)
 ```
 
+### Remove cases who did not consent
+
 ```{r}
 #find the cases who did not consent
-social_remove_empty <- 
+social_remove_refuse <- 
   social |> 
-  filter(is.na(Q30) | Q30 == -99 | is.na(BG_Q_leader))
-
-remove_ept <- social_remove_empty$index
+  filter(is.na(Q30) | Q30 == -99)
+#remove those cases
+remove_refuse <- social_remove_refuse$index
 
 social <- 
   social |>
-  filter(!index %in% remove_ept)
+  filter(!index %in% remove_refuse)
+
+```
+
+### Remove cases with NA for if having a leader
+
+```{r}
+social_remove_ldrNA <- 
+  social |> 
+  filter(is.na(BG_Q_leader))
+
+remove_ldrNA <- social_remove_ldrNA$index
+
+social <- 
+  social |> 
+  filter(!index %in% remove_ldrNA)
 ```
 
 
@@ -497,7 +516,7 @@ sofa_ifleader <-
 #         )
 ```
 
-### Create data set: 17 item without leader
+### Create with-leader and without-leader data-sets
 
 ```{r, echo = F}
 #find cases without leader or "BG_Q_leader" is NA (long items + short items)
@@ -514,11 +533,48 @@ sofa_noleader <-
 ```
 
 ```{r, echo = F}
+#find cases with leader (long items + short items)
+sofa_leader <- 
+  sofa_ifleader |> 
+  filter(
+    BG_Q_leader != 1
+  ) |> 
+  dplyr::select(
+    index,
+    starts_with("i_")
+  )
+```
+
+### Remove cases with 50% NAs across major questions for each data sets
+
+```{r}
+#Add a column for number of rowwise NA
+sofa_leader$n_na <- rowSums(is.na(sofa_leader))
+sofa_noleader$n_na <- rowSums(is.na(sofa_noleader))
+
+#filter out number of NA > half of the items
+sofa_leader <- 
+  sofa_leader |> 
+  filter(n_na < 0.5*ncol(sofa_leader[,-1]))
+
+sofa_noleader <- 
+  sofa_noleader |> 
+  filter(n_na < 0.5*ncol(sofa_noleader[,-1]))
+
+sofa_leader$ifleader <- "leader"
+sofa_noleader$ifleader <- "no leader"
+```
+
+### Create data set: 17 item without leader
+
+```{r, echo = F}
 #create 17 item no leader data set
 sofa_noleader17 <- 
   sofa_noleader |> 
   select(
-    -ends_with("0")
+    -ends_with("0"),
+    -ifleader,
+    -n_na
     )
 ```
 
@@ -536,23 +592,12 @@ sofa_noleader5 <-
 ### Create data set: 20 item with leader
 
 ```{r, echo = F}
-#find cases with leader (long items + short items)
-sofa_leader <- 
-  sofa_ifleader |> 
-  filter(
-    BG_Q_leader != 1
-  ) |> 
-  dplyr::select(
-    index,
-    starts_with("i_")
-  )
-```
-
-```{r, echo = F}
 sofa_leader20 <- 
   sofa_leader |> 
   select(
-    -ends_with("0")
+    -ends_with("0"),
+    -ifleader,
+    -n_na
   )
 ```
 
@@ -571,8 +616,36 @@ sofa_leader6 <-
 #sofa_noleader |> view()
 ```
 
-```{r}
-#sofa_noleader |> apply(2, function(x)tabyl(x))
+```{r, eval=F}
+sofa_leader |> select(starts_with("i_")) |> apply(2, function(x)tabyl(x))
+idn_index_ldr <- sofa_leader |> 
+  filter_all(any_vars(.==6))
+idn_index_ldr <- idn_index_ldr$index
+idn_index_ldr <- idn_index_ldr[-1] 
+
+idn_index_noldr <- sofa_noleader |> 
+  filter_all(any_vars(.==6))
+idn_index_noldr <- idn_index_noldr$index
+
+
+
+sofa_noleader |> 
+  filter_all(any_vars(is.na(.)))
+
+sofa |> filter(index == 200) |> select(starts_with("i")) |> t()
+social$BG_Q_leader |> val_lab()
+social |> filter(index == 160)
+
+social$Q10_1 |> val_lab()
+
+sofa |> filter(index %in% idn_index_noldr ) |> select(starts_with("i"))|> t()
+
+social |> filter(index == 18)
+
+sofa |> filter(index %in% c(3,18,217))
+
+nrow(sofa_noleader)
+sofa$i_anom0 |> var_lab();sofa$i_skill4 |> var_lab()
 ```
 
 
@@ -661,6 +734,7 @@ corr.density(sofa_leader20 [,-1],
          fig.num = 1, 
          "Distributions of the item for with-leader group (long)")
 ```
+
 
 ```{r, fig.height= 5, fig.width=5}
 corr.density(sofa_noleader17 [,-1], 
@@ -880,13 +954,14 @@ loading_ldr20 |>
   select(Item, everything()) |> 
   mutate(
     across(starts_with("ML"), ~round(., digits = 3)),
-    across(starts_with("ML"), ~replace(.,.<0.3, ""))
+    across(starts_with("ML"), ~replace(.,abs(.)<0.3, ""))
          ) |> 
   kable(
     booktab = T,
     digits  = 3,
     linesep = "",
-    caption = "Factor loadings of the 5-factor solution for with-leader group (long)"
+    caption = "Factor loadings of the 5-factor solution for with-leader group (long)",
+    align = "lrrrrr"
   ) |> 
   kable_styling(latex_options = "striped")
 ```
@@ -922,13 +997,14 @@ loading_ldr20_fa4 |>
   select(Item, everything()) |> 
   mutate(
     across(starts_with("ML"), ~round(., digits = 3)),
-    across(starts_with("ML"), ~replace(.,.<0.3, ""))
+    across(starts_with("ML"), ~replace(.,abs(.)<0.3, ""))
          ) |> 
   kable(
     booktab = T,
     digits  = 3,
     linesep = "",
-    caption = "Factor loadings of the 4-factor solution for with-leader group (long)"
+    caption = "Factor loadings of the 4-factor solution for with-leader group (long)",
+    align = "lrrrr"
   ) |> 
   kable_styling(latex_options = "striped")
 ```
@@ -965,37 +1041,51 @@ loading_ldr20_fa3 |>
   select(Item, everything()) |> 
   mutate(
     across(starts_with("ML"), ~round(., digits = 3)),
-    across(starts_with("ML"), ~replace(.,.<0.3, ""))
+    across(starts_with("ML"), ~replace(., abs(.)<0.3, ""))
          ) |> 
   kable(
     booktab = T,
     digits  = 3,
     linesep = "",
-    caption = "Factor loadings of the 3-factor solution for with-leader group (long)"
+    caption = "Factor loadings of the 3-factor solution for with-leader group (long)",
+    align = "lrrr"
   ) |> 
   kable_styling(latex_options = "striped")
 ```
 
 ### Finetune 3-factor solution
 
-```{r}
+```{r, fig.width=10, fig.height=10}
 sofa_ldr20_ft <-sofa_ldr20 |> #ft for fine-tune
   select(
     -i_orga2, 
     -i_anom3, 
     -i_anom4, 
     #-i_anom1, 
-    -i_orga4, 
-    #-i_comm2, 
+    #-i_orga4, 
+    -i_comm1,
+    -i_comm2, 
     #-i_comm3, 
-    #-i_orga3, 
-    -i_anom2, 
-    -i_orga1
+    -i_orga3, 
+    #-i_anom2, 
+    #-i_orga1,
+    -i_skill3,
+    -i_iden1
   )
 
-sofa_ldr20_fa3_ft <- fa(sofa_ldr20_ft[-1], nfactors = 3, rotate = "varimax", fm = "ml", scores = "regression")
-fa.diagram(sofa_ldr20_fa3_ft, cut = 0, digits =2, main = "Factor Analysis, Varimax rotation")
-loading_ldr20_fa3_ft <- sofa_ldr20_fa3_ft$loadings[1:13,]
+sofa_ldr20_fa3_ft <- 
+  fa(sofa_ldr20_ft[-1], 
+     nfactors = 3, 
+     rotate = "varimax", 
+     fm = "ml", 
+     scores = "regression")
+
+fa.diagram(sofa_ldr20_fa3_ft, 
+           cut = 0, 
+           digits =2,
+           main = "Figure 13. Fine-tuned three-factor solution, with-leader group (long)")
+
+loading_ldr20_fa3_ft <- sofa_ldr20_fa3_ft$loadings[1:12,]
 loading_ldr20_fa3_ft <- loading_ldr20_fa3_ft |> as.data.frame()
 loading_ldr20_fa3_ft$Item <- rownames(loading_ldr20_fa3_ft)
 rownames(loading_ldr20_fa3_ft) <- NULL
@@ -1004,24 +1094,130 @@ loading_ldr20_fa3_ft |>
   select(Item, everything()) |> 
   mutate(
     across(starts_with("ML"), ~round(., digits = 3)),
-    across(starts_with("ML"), ~replace(.,.<0.3, ""))
+    across(starts_with("ML"), ~replace(.,abs(.)<0.3, ""))
          ) |> 
   kable(
     booktab = T,
     digits  = 3,
     linesep = "",
-    caption = "Factor loadings of the 3-factor solution for with-leader group (long)"
+    caption = "Factor loadings of the 3-factor solution for with-leader group (long)",
+    align = "lrrr"
   ) |> 
   kable_styling(latex_options = "striped")
 ```
 
-### Comparison between factor solutions, with-leader (long)
+### Explore 2-factor solution 
+
+```{r, fig.width=10, fig.height=10}
+sofa_ldr20_fa2 <- 
+  fa(sofa_ldr20[-1], 
+     nfactors = 2, 
+     rotate = "varimax", 
+     fm = "ml", 
+     scores = "regression"
+     )
+
+fa.diagram(
+  sofa_ldr20_fa2, 
+  cut = 0, 
+  digits =2, 
+  main = "Figure 14. Two-factor solution, with-leader group (long)"
+  )
+
+loading_ldr20_fa2 <- 
+  sofa_ldr20_fa2$loadings[1:20,]
+
+loading_ldr20_fa2 <- 
+  loading_ldr20_fa2 |> 
+  as.data.frame()
+
+loading_ldr20_fa2$Item <- rownames(loading_ldr20_fa2)
+rownames(loading_ldr20_fa2) <- NULL
+
+loading_ldr20_fa2 |> 
+  select(Item, everything()) |> 
+  mutate(
+    across(starts_with("ML"), ~round(., digits = 3)),
+    across(starts_with("ML"), ~replace(., abs(.)<0.3, ""))
+         ) |> 
+  kable(
+    booktab = T,
+    digits  = 3,
+    linesep = "",
+    caption = "Factor loadings of the 2-factor solution for with-leader group (long)",
+    align = "lrrr"
+  ) |> 
+  kable_styling(latex_options = "striped")
+```
+
+### Finetune 2-factor solution
+
+```{r, fig.width=10, fig.height=10}
+sofa_ldr20_ft_fa2 <-sofa_ldr20 |> #ft for fine-tune
+  select(
+    i_leader1,
+    i_leader2,
+    i_leader3,
+    i_skill1,
+    i_skill2,
+    i_skill3,
+    i_skill4,
+    i_orga1,
+    i_orga2,
+    i_orga3,
+    i_orga4,
+    i_comm1,
+    i_comm2,
+    i_comm3,
+    i_iden1,
+    i_iden2,
+    i_anom1,
+    i_anom2,
+    i_anom3,
+    i_anom4
+  )
+
+sofa_ldr20_fa2_ft <- 
+  fa(sofa_ldr20_ft_fa2[-1], 
+     nfactors = 2, 
+     rotate = "varimax", 
+     fm = "ml", 
+     scores = "regression")
+
+fa.diagram(sofa_ldr20_fa2_ft, 
+           cut = 0, 
+           digits =2,
+           main = "Figure 15. Fine-tuned two-factor solution, with-leader group (long)")
+
+loading_ldr20_fa2_ft <- sofa_ldr20_fa2_ft$loadings[1:12,]
+loading_ldr20_fa2_ft <- loading_ldr20_fa2_ft |> as.data.frame()
+loading_ldr20_fa2_ft$Item <- rownames(loading_ldr20_fa2_ft)
+rownames(loading_ldr20_fa2_ft) <- NULL
+
+loading_ldr20_fa2_ft |> 
+  select(Item, everything()) |> 
+  mutate(
+    across(starts_with("ML"), ~round(., digits = 3)),
+    across(starts_with("ML"), ~replace(.,abs(.)<0.3, ""))
+         ) |> 
+  kable(
+    booktab = T,
+    digits  = 3,
+    linesep = "",
+    caption = "Factor loadings of the 3-factor solution for with-leader group (long)",
+    align = "lrrr"
+  ) |> 
+  kable_styling(latex_options = "striped")
+```
+
+
+## Comparison between factor solutions, with-leader (long)
 
 ```{r}
-ldr20_fa3_cv_ft <- sofa_ldr20_fa3_ft$Vaccounted[3,3] #cv is for cumulative variance
-ldr20_fa3_cv <- sofa_ldr20_fa3$Vaccounted[3,3]
-ldr20_fa4_cv <- sofa_ldr20_fa4$Vaccounted[3,4]
-ldr20_fa5_cv <- sofa_ldr20_fa5$Vaccounted[3,5]
+ldr20_fa3_cv_ft <- sofa_ldr20_fa3_ft$Vaccounted[3,3] |> round(3)#cv is for cumulative variance
+ldr20_fa3_cv <- sofa_ldr20_fa3$Vaccounted[3,3] |> round(3)
+ldr20_fa4_cv <- sofa_ldr20_fa4$Vaccounted[3,4]|> round(3)
+ldr20_fa5_cv <- sofa_ldr20_fa5$Vaccounted[3,5]|> round(3)
 
 CumulativeVariance <- 
   c(ldr20_fa3_cv_ft, ldr20_fa3_cv, ldr20_fa4_cv, ldr20_fa5_cv)
