@@ -1,4 +1,4 @@
-This is LuaHBTeX, Version 1.16.0 (TeX Live 2023)  (format=lualatex 2023.4.9)  9 APR 2023 22:50
+This is LuaHBTeX, Version 1.16.0 (TeX Live 2023)  (format=lualatex 2023.4.9)  13 APR 2023 10:08
  restricted system commands enabled.
 **SCOAIL.tex
 (./SCOAIL.tex
@@ -548,6 +548,36 @@ LaTeX Warning: Label `tab:unnamed-chunk-36' multiply defined.
 
 LaTeX Warning: Label `tab:unnamed-chunk-36' multiply defined.
 
+
+LaTeX Warning: Label `tab:unnamed-chunk-60' multiply defined.
+
+
+LaTeX Warning: Label `tab:unnamed-chunk-61' multiply defined.
+
+
+LaTeX Warning: Label `tab:unnamed-chunk-61' multiply defined.
+
+
+LaTeX Warning: Label `tab:unnamed-chunk-62' multiply defined.
+
+
+LaTeX Warning: Label `tab:unnamed-chunk-62' multiply defined.
+
+
+LaTeX Warning: Label `tab:unnamed-chunk-63' multiply defined.
+
+
+LaTeX Warning: Label `tab:unnamed-chunk-78' multiply defined.
+
+
+LaTeX Warning: Label `tab:unnamed-chunk-79' multiply defined.
+
+
+LaTeX Warning: Label `tab:unnamed-chunk-80' multiply defined.
+
+
+LaTeX Warning: Label `tab:unnamed-chunk-81' multiply defined.
+
 )
 \openout1 = SCOAIL.aux
 
@@ -911,111 +941,55 @@ LaTeX Font Info:    Font shape `TU/latinmodern-math.otf(3)/m/n' will be
 \tf@toc=\write3
 
 \openout3 = SCOAIL.toc
-[2] [3] [4]
-Overfull \hbox (46.34941pt too wide) in alignment at lines 204--211
- [][][][][][][][][] 
- []
-
-
-Overfull \hbox (46.34941pt too wide) in alignment at lines 211--218
- [][][][][][][][][] 
- []
-
-
-Overfull \hbox (46.34941pt too wide) in alignment at lines 218--220
- [][][][][][][][][] 
- []
-
-
-Overfull \hbox (46.34941pt too wide) in alignment at lines 220--224
- [][][][][][][][][] 
- []
-
-
-Overfull \hbox (46.34941pt too wide) in alignment at lines 224--247
- [][][][][][][][][] 
- []
-
-[5
-
-]
-Overfull \hbox (46.34941pt too wide) in alignment at lines 251--258
- [][][][][][][][][] 
- []
-
-
-Overfull \hbox (46.34941pt too wide) in alignment at lines 258--265
- [][][][][][][][][] 
- []
-
-
-Overfull \hbox (46.34941pt too wide) in alignment at lines 265--267
- [][][][][][][][][] 
- []
-
-
-Overfull \hbox (46.34941pt too wide) in alignment at lines 267--271
- [][][][][][][][][] 
- []
-
-
-Overfull \hbox (46.34941pt too wide) in alignment at lines 271--291
- [][][][][][][][][] 
- []
-
-[6
-
-
-]
-Overfull \hbox (46.34941pt too wide) in alignment at lines 295--302
- [][][][][][][][][] 
- []
-
-
+[2] [3] [4] [5] [6]
 Overfull \hbox (46.34941pt too wide) in alignment at lines 302--309
  [][][][][][][][][] 
  []
 
 
-Overfull \hbox (46.34941pt too wide) in alignment at lines 309--311
+Overfull \hbox (46.34941pt too wide) in alignment at lines 309--316
  [][][][][][][][][] 
  []
 
 
-Overfull \hbox (46.34941pt too wide) in alignment at lines 311--315
+Overfull \hbox (46.34941pt too wide) in alignment at lines 316--318
  [][][][][][][][][] 
  []
 
 
-Overfull \hbox (46.34941pt too wide) in alignment at lines 315--321
+Overfull \hbox (46.34941pt too wide) in alignment at lines 318--322
+ [][][][][][][][][] 
+ []
+
+
+Overfull \hbox (46.34941pt too wide) in alignment at lines 322--345
  [][][][][][][][][] 
  []
 
 [7
 
-
 ]
-Overfull \hbox (46.34941pt too wide) in alignment at lines 325--332
+Overfull \hbox (46.34941pt too wide) in alignment at lines 349--356
  [][][][][][][][][] 
  []
 
 
-Overfull \hbox (46.34941pt too wide) in alignment at lines 332--339
+Overfull \hbox (46.34941pt too wide) in alignment at lines 356--363
  [][][][][][][][][] 
  []
 
 
-Overfull \hbox (46.34941pt too wide) in alignment at lines 339--341
+Overfull \hbox (46.34941pt too wide) in alignment at lines 363--365
  [][][][][][][][][] 
  []
 
 
-Overfull \hbox (46.34941pt too wide) in alignment at lines 341--345
+Overfull \hbox (46.34941pt too wide) in alignment at lines 365--369
  [][][][][][][][][] 
  []
 
 
-Overfull \hbox (46.34941pt too wide) in alignment at lines 345--350
+Overfull \hbox (46.34941pt too wide) in alignment at lines 369--389
  [][][][][][][][][] 
  []
 
@@ -1023,197 +997,280 @@ Overfull \hbox (46.34941pt too wide) in alignment at lines 345--350
 
 
 ]
-<data/data_cleansing_flowchart.png, id=143, 1238.6275pt x 727.71875pt>
-File: data/data_cleansing_flowchart.png Graphic file (type png)
-<use data/data_cleansing_flowchart.png>
-Package luatex.def Info: data/data_cleansing_flowchart.png  used on input line 365.
-(luatex.def)             Requested size: 469.75725pt x 275.9919pt.
-<SCOAIL_files/figure-latex/unnamed-chunk-43-1.pdf, id=144, 433.62pt x 289.08pt>
-File: SCOAIL_files/figure-latex/unnamed-chunk-43-1.pdf Graphic file (type pdf)
-<use SCOAIL_files/figure-latex/unnamed-chunk-43-1.pdf>
-Package luatex.def Info: SCOAIL_files/figure-latex/unnamed-chunk-43-1.pdf  used on input line 377.
-(luatex.def)             Requested size: 433.63878pt x 289.09251pt.
+Overfull \hbox (46.34941pt too wide) in alignment at lines 393--400
+ [][][][][][][][][] 
+ []
+
+
+Overfull \hbox (46.34941pt too wide) in alignment at lines 400--407
+ [][][][][][][][][] 
+ []
+
+
+Overfull \hbox (46.34941pt too wide) in alignment at lines 407--409
+ [][][][][][][][][] 
+ []
+
+
+Overfull \hbox (46.34941pt too wide) in alignment at lines 409--413
+ [][][][][][][][][] 
+ []
+
+
+Overfull \hbox (46.34941pt too wide) in alignment at lines 413--419
+ [][][][][][][][][] 
+ []
+
 [9
 
-<./data/data_cleansing_flowchart.png>]
-<SCOAIL_files/figure-latex/unnamed-chunk-44-1.pdf, id=155, 433.62pt x 289.08pt>
-File: SCOAIL_files/figure-latex/unnamed-chunk-44-1.pdf Graphic file (type pdf)
-<use SCOAIL_files/figure-latex/unnamed-chunk-44-1.pdf>
-Package luatex.def Info: SCOAIL_files/figure-latex/unnamed-chunk-44-1.pdf  used on input line 379.
-(luatex.def)             Requested size: 433.63878pt x 289.09251pt.
-<SCOAIL_files/figure-latex/unnamed-chunk-45-1.pdf, id=156, 433.62pt x 216.81pt>
-File: SCOAIL_files/figure-latex/unnamed-chunk-45-1.pdf Graphic file (type pdf)
-<use SCOAIL_files/figure-latex/unnamed-chunk-45-1.pdf>
-Package luatex.def Info: SCOAIL_files/figure-latex/unnamed-chunk-45-1.pdf  used on input line 381.
-(luatex.def)             Requested size: 433.63878pt x 216.81938pt.
-[10<./SCOAIL_files/figure-latex/unnamed-chunk-43-1.pdf><./SCOAIL_files/figure-latex/unnamed-chunk-44-1.pdf>]
-<SCOAIL_files/figure-latex/unnamed-chunk-46-1.pdf, id=177, 433.62pt x 216.81pt>
+
+]
+Overfull \hbox (46.34941pt too wide) in alignment at lines 423--430
+ [][][][][][][][][] 
+ []
+
+
+Overfull \hbox (46.34941pt too wide) in alignment at lines 430--437
+ [][][][][][][][][] 
+ []
+
+
+Overfull \hbox (46.34941pt too wide) in alignment at lines 437--439
+ [][][][][][][][][] 
+ []
+
+
+Overfull \hbox (46.34941pt too wide) in alignment at lines 439--443
+ [][][][][][][][][] 
+ []
+
+
+Overfull \hbox (46.34941pt too wide) in alignment at lines 443--448
+ [][][][][][][][][] 
+ []
+
+[10
+
+
+]
+<data/data_cleansing_flowchart.png, id=171, 1238.6275pt x 727.71875pt>
+File: data/data_cleansing_flowchart.png Graphic file (type png)
+<use data/data_cleansing_flowchart.png>
+Package luatex.def Info: data/data_cleansing_flowchart.png  used on input line 463.
+(luatex.def)             Requested size: 469.75725pt x 275.9919pt.
+<data/method.png, id=172, 1240.635pt x 1473.505pt>
+File: data/method.png Graphic file (type png)
+<use data/method.png>
+Package luatex.def Info: data/method.png  used on input line 474.
+(luatex.def)             Requested size: 469.74245pt x 557.91418pt.
+[11
+
+<./data/data_cleansing_flowchart.png>] [12<./data/method.png>] [13]
+<SCOAIL_files/figure-latex/unnamed-chunk-46-1.pdf, id=199, 433.62pt x 289.08pt>
 File: SCOAIL_files/figure-latex/unnamed-chunk-46-1.pdf Graphic file (type pdf)
 <use SCOAIL_files/figure-latex/unnamed-chunk-46-1.pdf>
-Package luatex.def Info: SCOAIL_files/figure-latex/unnamed-chunk-46-1.pdf  used on input line 383.
-(luatex.def)             Requested size: 433.63878pt x 216.81938pt.
-<SCOAIL_files/figure-latex/unnamed-chunk-48-1.pdf, id=178, 505.89pt x 325.215pt>
+Package luatex.def Info: SCOAIL_files/figure-latex/unnamed-chunk-46-1.pdf  used on input line 580.
+(luatex.def)             Requested size: 433.63878pt x 289.09251pt.
+[14]
+<SCOAIL_files/figure-latex/unnamed-chunk-47-1.pdf, id=208, 433.62pt x 289.08pt>
+File: SCOAIL_files/figure-latex/unnamed-chunk-47-1.pdf Graphic file (type pdf)
+<use SCOAIL_files/figure-latex/unnamed-chunk-47-1.pdf>
+Package luatex.def Info: SCOAIL_files/figure-latex/unnamed-chunk-47-1.pdf  used on input line 582.
+(luatex.def)             Requested size: 433.63878pt x 289.09251pt.
+<SCOAIL_files/figure-latex/unnamed-chunk-48-1.pdf, id=209, 433.62pt x 216.81pt>
 File: SCOAIL_files/figure-latex/unnamed-chunk-48-1.pdf Graphic file (type pdf)
 <use SCOAIL_files/figure-latex/unnamed-chunk-48-1.pdf>
-Package luatex.def Info: SCOAIL_files/figure-latex/unnamed-chunk-48-1.pdf  used on input line 394.
-(luatex.def)             Requested size: 469.76265pt x 301.99028pt.
-[11
-Missing character: There is no ≥ (U+2265) in font [lmroman10-regular]:+tlig;!
-Missing character: There is no ≥ (U+2265) in font [lmroman10-regular]:+tlig;!
-Missing character: There is no ≥ (U+2265) in font [lmroman10-regular]:+tlig;!
-<./SCOAIL_files/figure-latex/unnamed-chunk-45-1.pdf><./SCOAIL_files/figure-latex/unnamed-chunk-46-1.pdf>]
-<SCOAIL_files/figure-latex/unnamed-chunk-49-1.pdf, id=201, 505.89pt x 289.08pt>
+Package luatex.def Info: SCOAIL_files/figure-latex/unnamed-chunk-48-1.pdf  used on input line 584.
+(luatex.def)             Requested size: 433.63878pt x 216.81938pt.
+[15<./SCOAIL_files/figure-latex/unnamed-chunk-46-1.pdf><./SCOAIL_files/figure-latex/unnamed-chunk-47-1.pdf>]
+<SCOAIL_files/figure-latex/unnamed-chunk-49-1.pdf, id=230, 433.62pt x 216.81pt>
 File: SCOAIL_files/figure-latex/unnamed-chunk-49-1.pdf Graphic file (type pdf)
 <use SCOAIL_files/figure-latex/unnamed-chunk-49-1.pdf>
-Package luatex.def Info: SCOAIL_files/figure-latex/unnamed-chunk-49-1.pdf  used on input line 398.
-(luatex.def)             Requested size: 469.76265pt x 268.43579pt.
-[12<./SCOAIL_files/figure-latex/unnamed-chunk-48-1.pdf><./SCOAIL_files/figure-latex/unnamed-chunk-49-1.pdf>]
-<SCOAIL_files/figure-latex/unnamed-chunk-50-1.pdf, id=222, 361.35pt x 216.81pt>
-File: SCOAIL_files/figure-latex/unnamed-chunk-50-1.pdf Graphic file (type pdf)
-<use SCOAIL_files/figure-latex/unnamed-chunk-50-1.pdf>
-Package luatex.def Info: SCOAIL_files/figure-latex/unnamed-chunk-50-1.pdf  used on input line 402.
-(luatex.def)             Requested size: 361.34912pt x 216.80946pt.
-<SCOAIL_files/figure-latex/unnamed-chunk-51-1.pdf, id=223, 361.35pt x 216.81pt>
+Package luatex.def Info: SCOAIL_files/figure-latex/unnamed-chunk-49-1.pdf  used on input line 586.
+(luatex.def)             Requested size: 433.63878pt x 216.81938pt.
+<SCOAIL_files/figure-latex/unnamed-chunk-51-1.pdf, id=231, 505.89pt x 325.215pt>
 File: SCOAIL_files/figure-latex/unnamed-chunk-51-1.pdf Graphic file (type pdf)
 <use SCOAIL_files/figure-latex/unnamed-chunk-51-1.pdf>
-Package luatex.def Info: SCOAIL_files/figure-latex/unnamed-chunk-51-1.pdf  used on input line 406.
+Package luatex.def Info: SCOAIL_files/figure-latex/unnamed-chunk-51-1.pdf  used on input line 597.
+(luatex.def)             Requested size: 469.76265pt x 301.99028pt.
+[16
+Missing character: There is no ≥ (U+2265) in font [lmroman10-regular]:+tlig;!
+Missing character: There is no ≥ (U+2265) in font [lmroman10-regular]:+tlig;!
+Missing character: There is no ≥ (U+2265) in font [lmroman10-regular]:+tlig;!
+<./SCOAIL_files/figure-latex/unnamed-chunk-48-1.pdf><./SCOAIL_files/figure-latex/unnamed-chunk-49-1.pdf>]
+<SCOAIL_files/figure-latex/unnamed-chunk-52-1.pdf, id=253, 505.89pt x 289.08pt>
+File: SCOAIL_files/figure-latex/unnamed-chunk-52-1.pdf Graphic file (type pdf)
+<use SCOAIL_files/figure-latex/unnamed-chunk-52-1.pdf>
+Package luatex.def Info: SCOAIL_files/figure-latex/unnamed-chunk-52-1.pdf  used on input line 601.
+(luatex.def)             Requested size: 469.76265pt x 268.43579pt.
+[17<./SCOAIL_files/figure-latex/unnamed-chunk-51-1.pdf><./SCOAIL_files/figure-latex/unnamed-chunk-52-1.pdf>]
+<SCOAIL_files/figure-latex/unnamed-chunk-53-1.pdf, id=275, 361.35pt x 216.81pt>
+File: SCOAIL_files/figure-latex/unnamed-chunk-53-1.pdf Graphic file (type pdf)
+<use SCOAIL_files/figure-latex/unnamed-chunk-53-1.pdf>
+Package luatex.def Info: SCOAIL_files/figure-latex/unnamed-chunk-53-1.pdf  used on input line 605.
 (luatex.def)             Requested size: 361.34912pt x 216.80946pt.
-[13<./SCOAIL_files/figure-latex/unnamed-chunk-50-1.pdf><./SCOAIL_files/figure-latex/unnamed-chunk-51-1.pdf>] [14]
-<SCOAIL_files/figure-latex/unnamed-chunk-56-1.pdf, id=252, 722.7pt x 505.89pt>
-File: SCOAIL_files/figure-latex/unnamed-chunk-56-1.pdf Graphic file (type pdf)
-<use SCOAIL_files/figure-latex/unnamed-chunk-56-1.pdf>
-Package luatex.def Info: SCOAIL_files/figure-latex/unnamed-chunk-56-1.pdf  used on input line 490.
-(luatex.def)             Requested size: 469.76045pt x 328.8323pt.
-
-Overfull \hbox (39.49498pt too wide) in paragraph at lines 494--494
+<SCOAIL_files/figure-latex/unnamed-chunk-54-1.pdf, id=276, 361.35pt x 216.81pt>
+File: SCOAIL_files/figure-latex/unnamed-chunk-54-1.pdf Graphic file (type pdf)
+<use SCOAIL_files/figure-latex/unnamed-chunk-54-1.pdf>
+Package luatex.def Info: SCOAIL_files/figure-latex/unnamed-chunk-54-1.pdf  used on input line 609.
+(luatex.def)             Requested size: 361.34912pt x 216.80946pt.
+[18<./SCOAIL_files/figure-latex/unnamed-chunk-53-1.pdf><./SCOAIL_files/figure-latex/unnamed-chunk-54-1.pdf>] [19]
+Overfull \hbox (39.49498pt too wide) in paragraph at lines 682--682
 []\TU/lmtt/m/n/10 ## Parallel analysis suggests that the number of factors =  3  and the number of components =  NA[] 
  []
 
-<SCOAIL_files/figure-latex/unnamed-chunk-56-2.pdf, id=253, 722.7pt x 505.89pt>
-File: SCOAIL_files/figure-latex/unnamed-chunk-56-2.pdf Graphic file (type pdf)
-<use SCOAIL_files/figure-latex/unnamed-chunk-56-2.pdf>
-Package luatex.def Info: SCOAIL_files/figure-latex/unnamed-chunk-56-2.pdf  used on input line 496.
-(luatex.def)             Requested size: 469.76045pt x 328.8323pt.
-[15
-Missing character: There is no χ (U+03C7) in font [lmroman10-regular]:+tlig;!
-<./SCOAIL_files/figure-latex/unnamed-chunk-56-1.pdf>]
-<SCOAIL_files/figure-latex/unnamed-chunk-57-1.pdf, id=267, 722.7pt x 722.7pt>
-File: SCOAIL_files/figure-latex/unnamed-chunk-57-1.pdf Graphic file (type pdf)
-<use SCOAIL_files/figure-latex/unnamed-chunk-57-1.pdf>
-Package luatex.def Info: SCOAIL_files/figure-latex/unnamed-chunk-57-1.pdf  used on input line 530.
-(luatex.def)             Requested size: 469.76045pt x 469.76045pt.
-[16<./SCOAIL_files/figure-latex/unnamed-chunk-56-2.pdf>]
-<SCOAIL_files/figure-latex/unnamed-chunk-58-1.pdf, id=278, 722.7pt x 722.7pt>
+<SCOAIL_files/figure-latex/unnamed-chunk-58-1.pdf, id=304, 469.755pt x 325.215pt>
 File: SCOAIL_files/figure-latex/unnamed-chunk-58-1.pdf Graphic file (type pdf)
 <use SCOAIL_files/figure-latex/unnamed-chunk-58-1.pdf>
-Package luatex.def Info: SCOAIL_files/figure-latex/unnamed-chunk-58-1.pdf  used on input line 567.
-(luatex.def)             Requested size: 469.76045pt x 469.76045pt.
-[17<./SCOAIL_files/figure-latex/unnamed-chunk-57-1.pdf>] [18]
-<SCOAIL_files/figure-latex/unnamed-chunk-59-1.pdf, id=297, 722.7pt x 722.7pt>
+Package luatex.def Info: SCOAIL_files/figure-latex/unnamed-chunk-58-1.pdf  used on input line 684.
+(luatex.def)             Requested size: 469.75386pt x 325.2142pt.
+<SCOAIL_files/figure-latex/unnamed-chunk-59-1.pdf, id=305, 722.7pt x 505.89pt>
 File: SCOAIL_files/figure-latex/unnamed-chunk-59-1.pdf Graphic file (type pdf)
 <use SCOAIL_files/figure-latex/unnamed-chunk-59-1.pdf>
-Package luatex.def Info: SCOAIL_files/figure-latex/unnamed-chunk-59-1.pdf  used on input line 604.
-(luatex.def)             Requested size: 469.76045pt x 469.76045pt.
-[19<./SCOAIL_files/figure-latex/unnamed-chunk-58-1.pdf>] [20]
-<SCOAIL_files/figure-latex/unnamed-chunk-60-1.pdf, id=314, 722.7pt x 722.7pt>
+Package luatex.def Info: SCOAIL_files/figure-latex/unnamed-chunk-59-1.pdf  used on input line 691.
+(luatex.def)             Requested size: 469.76045pt x 328.8323pt.
+[20
+Missing character: There is no χ (U+03C7) in font [lmroman10-regular]:+tlig;!
+Missing character: There is no χ (U+03C7) in font [lmroman10-regular]:+tlig;!
+<./SCOAIL_files/figure-latex/unnamed-chunk-58-1.pdf>]
+<SCOAIL_files/figure-latex/unnamed-chunk-60-1.pdf, id=317, 469.755pt x 325.215pt>
 File: SCOAIL_files/figure-latex/unnamed-chunk-60-1.pdf Graphic file (type pdf)
 <use SCOAIL_files/figure-latex/unnamed-chunk-60-1.pdf>
-Package luatex.def Info: SCOAIL_files/figure-latex/unnamed-chunk-60-1.pdf  used on input line 641.
-(luatex.def)             Requested size: 469.76045pt x 469.76045pt.
+Package luatex.def Info: SCOAIL_files/figure-latex/unnamed-chunk-60-1.pdf  used on input line 747.
+(luatex.def)             Requested size: 469.75386pt x 325.2142pt.
 [21<./SCOAIL_files/figure-latex/unnamed-chunk-59-1.pdf>] [22]
-<SCOAIL_files/figure-latex/unnamed-chunk-61-1.pdf, id=332, 722.7pt x 722.7pt>
+<SCOAIL_files/figure-latex/unnamed-chunk-61-1.pdf, id=336, 469.755pt x 325.215pt>
 File: SCOAIL_files/figure-latex/unnamed-chunk-61-1.pdf Graphic file (type pdf)
 <use SCOAIL_files/figure-latex/unnamed-chunk-61-1.pdf>
-Package luatex.def Info: SCOAIL_files/figure-latex/unnamed-chunk-61-1.pdf  used on input line 670.
-(luatex.def)             Requested size: 469.76045pt x 469.76045pt.
-[23<./SCOAIL_files/figure-latex/unnamed-chunk-60-1.pdf>] [24]
-<SCOAIL_files/figure-latex/unnamed-chunk-62-1.pdf, id=349, 722.7pt x 722.7pt>
+Package luatex.def Info: SCOAIL_files/figure-latex/unnamed-chunk-61-1.pdf  used on input line 800.
+(luatex.def)             Requested size: 469.75386pt x 325.2142pt.
+[23<./SCOAIL_files/figure-latex/unnamed-chunk-60-1.pdf>]
+<SCOAIL_files/figure-latex/unnamed-chunk-62-1.pdf, id=348, 469.755pt x 325.215pt>
 File: SCOAIL_files/figure-latex/unnamed-chunk-62-1.pdf Graphic file (type pdf)
 <use SCOAIL_files/figure-latex/unnamed-chunk-62-1.pdf>
-Package luatex.def Info: SCOAIL_files/figure-latex/unnamed-chunk-62-1.pdf  used on input line 707.
-(luatex.def)             Requested size: 469.76045pt x 469.76045pt.
-[25<./SCOAIL_files/figure-latex/unnamed-chunk-61-1.pdf>] [26]
-<SCOAIL_files/figure-latex/unnamed-chunk-67-1.pdf, id=366, 469.755pt x 325.215pt>
-File: SCOAIL_files/figure-latex/unnamed-chunk-67-1.pdf Graphic file (type pdf)
-<use SCOAIL_files/figure-latex/unnamed-chunk-67-1.pdf>
-Package luatex.def Info: SCOAIL_files/figure-latex/unnamed-chunk-67-1.pdf  used on input line 826.
+Package luatex.def Info: SCOAIL_files/figure-latex/unnamed-chunk-62-1.pdf  used on input line 868.
 (luatex.def)             Requested size: 469.75386pt x 325.2142pt.
-[27<./SCOAIL_files/figure-latex/unnamed-chunk-62-1.pdf>] [28] [29]
-Overfull \hbox (39.49498pt too wide) in paragraph at lines 830--830
+[24<./SCOAIL_files/figure-latex/unnamed-chunk-61-1.pdf>] [25]
+<SCOAIL_files/figure-latex/unnamed-chunk-63-1.pdf, id=367, 722.7pt x 722.7pt>
+File: SCOAIL_files/figure-latex/unnamed-chunk-63-1.pdf Graphic file (type pdf)
+<use SCOAIL_files/figure-latex/unnamed-chunk-63-1.pdf>
+Package luatex.def Info: SCOAIL_files/figure-latex/unnamed-chunk-63-1.pdf  used on input line 945.
+(luatex.def)             Requested size: 469.76045pt x 469.76045pt.
+[26<./SCOAIL_files/figure-latex/unnamed-chunk-62-1.pdf>] [27] [28<./SCOAIL_files/figure-latex/unnamed-chunk-63-1.pdf>] [29
+Missing character: There is no χ (U+03C7) in font [lmroman10-regular]:+tlig;!
+]
+Overfull \hbox (39.49498pt too wide) in paragraph at lines 1048--1048
 []\TU/lmtt/m/n/10 ## Parallel analysis suggests that the number of factors =  1  and the number of components =  NA[] 
  []
 
-<SCOAIL_files/figure-latex/unnamed-chunk-67-2.pdf, id=391, 469.755pt x 325.215pt>
-File: SCOAIL_files/figure-latex/unnamed-chunk-67-2.pdf Graphic file (type pdf)
-<use SCOAIL_files/figure-latex/unnamed-chunk-67-2.pdf>
-Package luatex.def Info: SCOAIL_files/figure-latex/unnamed-chunk-67-2.pdf  used on input line 832.
-(luatex.def)             Requested size: 469.75386pt x 325.2142pt.
-[30<./SCOAIL_files/figure-latex/unnamed-chunk-67-1.pdf>]
-<SCOAIL_files/figure-latex/unnamed-chunk-68-1.pdf, id=406, 722.7pt x 722.7pt>
+<SCOAIL_files/figure-latex/unnamed-chunk-68-1.pdf, id=407, 469.755pt x 325.215pt>
 File: SCOAIL_files/figure-latex/unnamed-chunk-68-1.pdf Graphic file (type pdf)
 <use SCOAIL_files/figure-latex/unnamed-chunk-68-1.pdf>
-Package luatex.def Info: SCOAIL_files/figure-latex/unnamed-chunk-68-1.pdf  used on input line 865.
-(luatex.def)             Requested size: 469.76045pt x 469.76045pt.
-[31<./SCOAIL_files/figure-latex/unnamed-chunk-67-2.pdf>]
-<SCOAIL_files/figure-latex/unnamed-chunk-69-1.pdf, id=418, 722.7pt x 722.7pt>
+Package luatex.def Info: SCOAIL_files/figure-latex/unnamed-chunk-68-1.pdf  used on input line 1050.
+(luatex.def)             Requested size: 469.75386pt x 325.2142pt.
+<SCOAIL_files/figure-latex/unnamed-chunk-69-1.pdf, id=408, 722.7pt x 505.89pt>
 File: SCOAIL_files/figure-latex/unnamed-chunk-69-1.pdf Graphic file (type pdf)
 <use SCOAIL_files/figure-latex/unnamed-chunk-69-1.pdf>
-Package luatex.def Info: SCOAIL_files/figure-latex/unnamed-chunk-69-1.pdf  used on input line 888.
-(luatex.def)             Requested size: 469.76045pt x 469.76045pt.
-[32<./SCOAIL_files/figure-latex/unnamed-chunk-68-1.pdf>] [33<./SCOAIL_files/figure-latex/unnamed-chunk-69-1.pdf>]
-<SCOAIL_files/figure-latex/unnamed-chunk-70-1.pdf, id=441, 722.7pt x 722.7pt>
+Package luatex.def Info: SCOAIL_files/figure-latex/unnamed-chunk-69-1.pdf  used on input line 1057.
+(luatex.def)             Requested size: 469.76045pt x 328.8323pt.
+[30<./SCOAIL_files/figure-latex/unnamed-chunk-68-1.pdf>]
+<SCOAIL_files/figure-latex/unnamed-chunk-70-1.pdf, id=418, 722.7pt x 722.7pt>
 File: SCOAIL_files/figure-latex/unnamed-chunk-70-1.pdf Graphic file (type pdf)
 <use SCOAIL_files/figure-latex/unnamed-chunk-70-1.pdf>
-Package luatex.def Info: SCOAIL_files/figure-latex/unnamed-chunk-70-1.pdf  used on input line 910.
+Package luatex.def Info: SCOAIL_files/figure-latex/unnamed-chunk-70-1.pdf  used on input line 1065.
 (luatex.def)             Requested size: 469.76045pt x 469.76045pt.
-[34<./SCOAIL_files/figure-latex/unnamed-chunk-70-1.pdf>]
-<SCOAIL_files/figure-latex/unnamed-chunk-76-1.pdf, id=455, 469.755pt x 325.215pt>
+[31<./SCOAIL_files/figure-latex/unnamed-chunk-69-1.pdf>]
+<SCOAIL_files/figure-latex/unnamed-chunk-72-1.pdf, id=429, 722.7pt x 722.7pt>
+File: SCOAIL_files/figure-latex/unnamed-chunk-72-1.pdf Graphic file (type pdf)
+<use SCOAIL_files/figure-latex/unnamed-chunk-72-1.pdf>
+Package luatex.def Info: SCOAIL_files/figure-latex/unnamed-chunk-72-1.pdf  used on input line 1088.
+(luatex.def)             Requested size: 469.76045pt x 469.76045pt.
+[32<./SCOAIL_files/figure-latex/unnamed-chunk-70-1.pdf>] [33<./SCOAIL_files/figure-latex/unnamed-chunk-72-1.pdf>] [34
+Missing character: There is no χ (U+03C7) in font [lmroman10-regular]:+tlig;!
+Missing character: There is no χ (U+03C7) in font [lmroman10-regular]:+tlig;!
+]
+Overfull \hbox (39.49498pt too wide) in paragraph at lines 1176--1176
+[]\TU/lmtt/m/n/10 ## Parallel analysis suggests that the number of factors =  3  and the number of components =  NA[] 
+ []
+
+<SCOAIL_files/figure-latex/unnamed-chunk-76-1.pdf, id=462, 469.755pt x 325.215pt>
 File: SCOAIL_files/figure-latex/unnamed-chunk-76-1.pdf Graphic file (type pdf)
 <use SCOAIL_files/figure-latex/unnamed-chunk-76-1.pdf>
-Package luatex.def Info: SCOAIL_files/figure-latex/unnamed-chunk-76-1.pdf  used on input line 970.
+Package luatex.def Info: SCOAIL_files/figure-latex/unnamed-chunk-76-1.pdf  used on input line 1178.
 (luatex.def)             Requested size: 469.75386pt x 325.2142pt.
-[35]
-Overfull \hbox (39.49498pt too wide) in paragraph at lines 974--974
+<SCOAIL_files/figure-latex/unnamed-chunk-77-1.pdf, id=463, 722.7pt x 505.89pt>
+File: SCOAIL_files/figure-latex/unnamed-chunk-77-1.pdf Graphic file (type pdf)
+<use SCOAIL_files/figure-latex/unnamed-chunk-77-1.pdf>
+Package luatex.def Info: SCOAIL_files/figure-latex/unnamed-chunk-77-1.pdf  used on input line 1185.
+(luatex.def)             Requested size: 469.76045pt x 328.8323pt.
+[35<./SCOAIL_files/figure-latex/unnamed-chunk-76-1.pdf>]
+<SCOAIL_files/figure-latex/unnamed-chunk-78-1.pdf, id=473, 469.755pt x 325.215pt>
+File: SCOAIL_files/figure-latex/unnamed-chunk-78-1.pdf Graphic file (type pdf)
+<use SCOAIL_files/figure-latex/unnamed-chunk-78-1.pdf>
+Package luatex.def Info: SCOAIL_files/figure-latex/unnamed-chunk-78-1.pdf  used on input line 1238.
+(luatex.def)             Requested size: 469.75386pt x 325.2142pt.
+[36<./SCOAIL_files/figure-latex/unnamed-chunk-77-1.pdf>]
+<SCOAIL_files/figure-latex/unnamed-chunk-79-1.pdf, id=486, 469.755pt x 325.215pt>
+File: SCOAIL_files/figure-latex/unnamed-chunk-79-1.pdf Graphic file (type pdf)
+<use SCOAIL_files/figure-latex/unnamed-chunk-79-1.pdf>
+Package luatex.def Info: SCOAIL_files/figure-latex/unnamed-chunk-79-1.pdf  used on input line 1288.
+(luatex.def)             Requested size: 469.75386pt x 325.2142pt.
+[37<./SCOAIL_files/figure-latex/unnamed-chunk-78-1.pdf>] [38]
+<SCOAIL_files/figure-latex/unnamed-chunk-80-1.pdf, id=504, 469.755pt x 325.215pt>
+File: SCOAIL_files/figure-latex/unnamed-chunk-80-1.pdf Graphic file (type pdf)
+<use SCOAIL_files/figure-latex/unnamed-chunk-80-1.pdf>
+Package luatex.def Info: SCOAIL_files/figure-latex/unnamed-chunk-80-1.pdf  used on input line 1338.
+(luatex.def)             Requested size: 469.75386pt x 325.2142pt.
+[39<./SCOAIL_files/figure-latex/unnamed-chunk-79-1.pdf>]
+<SCOAIL_files/figure-latex/unnamed-chunk-81-1.pdf, id=517, 722.7pt x 722.7pt>
+File: SCOAIL_files/figure-latex/unnamed-chunk-81-1.pdf Graphic file (type pdf)
+<use SCOAIL_files/figure-latex/unnamed-chunk-81-1.pdf>
+Package luatex.def Info: SCOAIL_files/figure-latex/unnamed-chunk-81-1.pdf  used on input line 1388.
+(luatex.def)             Requested size: 469.76045pt x 469.76045pt.
+[40<./SCOAIL_files/figure-latex/unnamed-chunk-80-1.pdf>] [41] [42<./SCOAIL_files/figure-latex/unnamed-chunk-81-1.pdf>]
+Overfull \hbox (39.49498pt too wide) in paragraph at lines 1461--1461
 []\TU/lmtt/m/n/10 ## Parallel analysis suggests that the number of factors =  1  and the number of components =  NA[] 
  []
 
-<SCOAIL_files/figure-latex/unnamed-chunk-76-2.pdf, id=463, 469.755pt x 325.215pt>
-File: SCOAIL_files/figure-latex/unnamed-chunk-76-2.pdf Graphic file (type pdf)
-<use SCOAIL_files/figure-latex/unnamed-chunk-76-2.pdf>
-Package luatex.def Info: SCOAIL_files/figure-latex/unnamed-chunk-76-2.pdf  used on input line 976.
+<SCOAIL_files/figure-latex/unnamed-chunk-85-1.pdf, id=547, 469.755pt x 325.215pt>
+File: SCOAIL_files/figure-latex/unnamed-chunk-85-1.pdf Graphic file (type pdf)
+<use SCOAIL_files/figure-latex/unnamed-chunk-85-1.pdf>
+Package luatex.def Info: SCOAIL_files/figure-latex/unnamed-chunk-85-1.pdf  used on input line 1463.
 (luatex.def)             Requested size: 469.75386pt x 325.2142pt.
-[36<./SCOAIL_files/figure-latex/unnamed-chunk-76-1.pdf>]
-<SCOAIL_files/figure-latex/unnamed-chunk-77-1.pdf, id=475, 722.7pt x 722.7pt>
-File: SCOAIL_files/figure-latex/unnamed-chunk-77-1.pdf Graphic file (type pdf)
-<use SCOAIL_files/figure-latex/unnamed-chunk-77-1.pdf>
-Package luatex.def Info: SCOAIL_files/figure-latex/unnamed-chunk-77-1.pdf  used on input line 1003.
+[43
+Missing character: There is no χ (U+03C7) in font [lmroman10-regular]:+tlig;!
+]
+<SCOAIL_files/figure-latex/unnamed-chunk-86-1.pdf, id=556, 722.7pt x 505.89pt>
+File: SCOAIL_files/figure-latex/unnamed-chunk-86-1.pdf Graphic file (type pdf)
+<use SCOAIL_files/figure-latex/unnamed-chunk-86-1.pdf>
+Package luatex.def Info: SCOAIL_files/figure-latex/unnamed-chunk-86-1.pdf  used on input line 1470.
+(luatex.def)             Requested size: 469.76045pt x 328.8323pt.
+[44<./SCOAIL_files/figure-latex/unnamed-chunk-85-1.pdf>]
+<SCOAIL_files/figure-latex/unnamed-chunk-87-1.pdf, id=565, 722.7pt x 722.7pt>
+File: SCOAIL_files/figure-latex/unnamed-chunk-87-1.pdf Graphic file (type pdf)
+<use SCOAIL_files/figure-latex/unnamed-chunk-87-1.pdf>
+Package luatex.def Info: SCOAIL_files/figure-latex/unnamed-chunk-87-1.pdf  used on input line 1475.
 (luatex.def)             Requested size: 469.76045pt x 469.76045pt.
-[37<./SCOAIL_files/figure-latex/unnamed-chunk-76-2.pdf>] [38<./SCOAIL_files/figure-latex/unnamed-chunk-77-1.pdf>]
-<SCOAIL_files/figure-latex/unnamed-chunk-78-1.pdf, id=497, 722.7pt x 722.7pt>
-File: SCOAIL_files/figure-latex/unnamed-chunk-78-1.pdf Graphic file (type pdf)
-<use SCOAIL_files/figure-latex/unnamed-chunk-78-1.pdf>
-Package luatex.def Info: SCOAIL_files/figure-latex/unnamed-chunk-78-1.pdf  used on input line 1025.
-(luatex.def)             Requested size: 469.76045pt x 469.76045pt.
-[39<./SCOAIL_files/figure-latex/unnamed-chunk-78-1.pdf>] [40] (./SCOAIL.aux)
+[45<./SCOAIL_files/figure-latex/unnamed-chunk-86-1.pdf>] [46<./SCOAIL_files/figure-latex/unnamed-chunk-87-1.pdf>] [47] (./SCOAIL.aux)
 
 LaTeX Warning: There were multiply-defined labels.
 
 )
 
 Here is how much of LuaTeX's memory you used:
- 20541 strings out of 478278
- 100000,1977958 words of node,token memory allocated
+ 20650 strings out of 478278
+ 125009,1977958 words of node,token memory allocated
  547 words of node memory still in use:
    6 hlist, 2 vlist, 2 rule, 2 glue, 4 kern, 1 glyph, 7 attribute, 63 glue_spec, 7 attribute_list, 1 write, 1 user_defined nodes
-   avail lists: 2:1686,3:888,4:372,5:887,6:108,7:6630,8:2,9:1678,10:15,11:332
- 39678 multiletter control sequences out of 65536+600000
- 64 fonts using 19221403 bytes
- 86i,13n,121p,913b,416s stack positions out of 10000i,1000n,20000p,200000b,200000s
-</Users/rongguang/Library/TinyTeX/texmf-dist/fonts/opentype/public/lm/lmmono10-regular.otf></Users/rongguang/Library/TinyTeX/texmf-dist/fonts/opentype/public/lm/lmroman7-regular.otf></Users/rongguang/Library/TinyTeX/texmf-dist/fonts/opentype/public/lm/lmroman10-regular.otf></Users/rongguang/Library/TinyTeX/texmf-dist/fonts/opentype/public/lm/lmroman10-bold.otf></Users/rongguang/Library/TinyTeX/texmf-dist/fonts/opentype/public/lm/lmroman12-bold.otf></Users/rongguang/Library/TinyTeX/texmf-dist/fonts/opentype/public/lm/lmroman12-regular.otf></Users/rongguang/Library/TinyTeX/texmf-dist/fonts/opentype/public/lm/lmroman17-regular.otf>
-Output written on SCOAIL.pdf (40 pages, 518176 bytes).
+   avail lists: 2:1984,3:410,4:372,5:892,6:110,7:9649,8:6,9:1678,10:16,11:607
+ 39723 multiletter control sequences out of 65536+600000
+ 64 fonts using 19221479 bytes
+ 86i,13n,121p,913b,418s stack positions out of 10000i,1000n,20000p,200000b,200000s
+</Users/rongguang/Library/TinyTeX/texmf-dist/fonts/opentype/public/lm/lmmono10-regular.otf></Users/rongguang/Library/TinyTeX/texmf-dist/fonts/opentype/public/lm-math/latinmodern-math.otf></Users/rongguang/Library/TinyTeX/texmf-dist/fonts/opentype/public/lm/lmroman10-italic.otf></Users/rongguang/Library/TinyTeX/texmf-dist/fonts/opentype/public/lm/lmroman7-regular.otf></Users/rongguang/Library/TinyTeX/texmf-dist/fonts/opentype/public/lm/lmroman10-regular.otf></Users/rongguang/Library/TinyTeX/texmf-dist/fonts/opentype/public/lm/lmroman10-bold.otf></Users/rongguang/Library/TinyTeX/texmf-dist/fonts/opentype/public/lm/lmroman12-bold.otf></Users/rongguang/Library/TinyTeX/texmf-dist/fonts/opentype/public/lm/lmroman12-regular.otf></Users/rongguang/Library/TinyTeX/texmf-dist/fonts/opentype/public/lm/lmroman17-regular.otf>
+Output written on SCOAIL.pdf (47 pages, 799862 bytes).
 
-PDF statistics: 670 PDF objects out of 1000 (max. 8388607)
- 549 compressed objects within 6 object streams
- 163 named destinations out of 1000 (max. 131072)
- 273 words of extra memory for PDF output out of 10000 (max. 100000000)
+PDF statistics: 788 PDF objects out of 1000 (max. 8388607)
+ 647 compressed objects within 7 object streams
+ 209 named destinations out of 1000 (max. 131072)
+ 345 words of extra memory for PDF output out of 10000 (max. 100000000)
 
