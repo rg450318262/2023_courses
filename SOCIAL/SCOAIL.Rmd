@@ -1265,7 +1265,14 @@ KMO.ldr20 |>
                       "excluing i_anom3 and i_anom4"))
 ```
 
-Bartlett’s test of sphericity was significant (χ2 (190) = 518.94, p < .001), suggesting that there is a certain redundancy between the variables that we can summarize with a few number of factors.
+Bartlett’s test of sphericity were significant for full items (χ2 (190) = 518.94, p < .001) and selected items (χ2 (153) = 483.67, p < .001) , suggesting that there is a certain redundancy between the variables that we can summarize with a few number of factors. 
+
+Given these overall indicators, factor analysis was deemed to be suitable with all 18 of the 20 items (excluding two anomaly items). The following factor analysis were done on the these 18 items.
+
+```{r}
+sofa_ldr20 <- sofa_ldr20[, !names(sofa_ldr20) %in% c("i_anom3", "i_anom4")]
+```
+
 
 ```{r}
 library(kableExtra)
@@ -1296,6 +1303,10 @@ Bart.ldr20.tbl |>
 
 ## Explore number of factors
 
+Often principal axis factoring is used when there is interest in studying relations among the variables, while principal components is used when there is a greater emphasis on data reduction and less on interpretation. In the present study principal axis factoring (fa = "fa") was used because the primary purpose was to identify factors from the items and their relationships.
+
+Scree plots indicated an 3 factor solution, while Velicer MAP, Empirical BIC and Sample size adjusted BIC suggested 2-, 4-, and 5-factor solution, respectively. Solutions for three, four and five were each examined using varimax rotations of the factor loading matrix. Oblimin rotations were not performed with the considerations that the latent aspects of SOCIAL might not be correlated with each other (e.g. skill and communication).
+
 ```{r, fig.width= 10, fig.height=7}
 # Parallel analysis and scree plot
 fa.parallel(
@@ -1303,7 +1314,7 @@ fa.parallel(
   fa = "fa", 
   fm = "ml", 
   plot = T,
-  main = "Figure 9. Scree plot for with-leader group (long)") 
+  main = "Figure 10. Scree plot for with-leader group (long)") 
 # very simple structure and BIC
 nfactors(
   sofa_ldr20[-1], 
@@ -1337,7 +1348,7 @@ fa.diagram(
   )
 
 loading_ldr20 <- 
-  sofa_ldr20_fa5$loadings[1:20,]|> 
+  sofa_ldr20_fa5$loadings[1:18,]|> 
   as.data.frame()
 
 loading_ldr20$Item <- rownames(loading_ldr20)
@@ -1379,7 +1390,7 @@ fa.diagram(
   )
 
 loading_ldr20_fa4 <- 
-  sofa_ldr20_fa4$loadings[1:20,] |> 
+  sofa_ldr20_fa4$loadings[1:18,] |> 
   as.data.frame()
 
 loading_ldr20_fa4$Item <- 
@@ -1421,7 +1432,7 @@ fa.diagram(
   )
 
 loading_ldr20_fa3 <- 
-  sofa_ldr20_fa3$loadings[1:20,]
+  sofa_ldr20_fa3$loadings[1:18,]
 
 loading_ldr20_fa3 <- 
   loading_ldr20_fa3 |> 
