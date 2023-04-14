@@ -2,8 +2,12 @@
 title: "Developing a scale to measure factors influencing skier's self-perceived group dynamics (FISSGD)"
 author: "Rong Guang"
 output:
-  bookdown::pdf_document2:
-    latex_engine: lualatex 
+  bookdown::gitbook:
+    lib_dir: assets
+    split_by: section
+    config:
+      toolbar:
+        position: static
 ---
 ```{r, eval=F, echo = F}
 bookdown::gitbook:
@@ -1551,7 +1555,6 @@ Bart.ldr20.tbl |>
 
 ## Explore number of factors
 
-<<<<<<< HEAD
 Scree plots and VSS indicated an 3 factor solution (figures 11 and 12), while Velicer MAP, Empirical BIC and Sample size adjusted BIC suggested 2-, 4-, and 5-factor solution, respectively. Solutions for three, four and five were separately examined using varimax rotations of the factor loading matrix. 
 
 ```{r}
@@ -1630,29 +1633,6 @@ vss(sofa_ldr20[-1],n=5,
     n.obs=nrow(sofa_ldr20),
     title = ""
     )[3]
-=======
-Often principal axis factoring is used when there is interest in studying relations among the variables, while principal components is used when there is a greater emphasis on data reduction and less on interpretation. In the present study principal axis factoring (fa = "fa") was used because the primary purpose was to identify factors from the items and their relationships.
-
-Scree plots indicated an 3 factor solution, while Velicer MAP, Empirical BIC and Sample size adjusted BIC suggested 2-, 4-, and 5-factor solution, respectively. Solutions for three, four and five were each examined using varimax rotations of the factor loading matrix. Oblimin rotations were not performed with the considerations that the latent aspects of SOCIAL might not be correlated with each other (e.g. skill and communication).
-
-```{r, fig.width= 10, fig.height=7}
-# Parallel analysis and scree plot
-fa.parallel(
-  sofa_ldr20[-1], 
-  fa = "fa", 
-  fm = "ml", 
-  plot = T,
-  main = "Figure 10. Scree plot for with-leader group (long)") 
-# very simple structure and BIC
-nfactors(
-  sofa_ldr20[-1], 
-  n=5, 
-  rotate = "varimax", 
-  fm = "ml", 
-  n.obs=nrow(sofa_ldr20)
-)
-#vss(c_matrix,n=5, rotate = "oblimin", fm = "pa", n.obs=12)
->>>>>>> e4078e59a12781668ac403f8dcf8e970f40f620a
 
 title(main = "Figure 12. VSS plot for with-leader group (long)",
       cex.main = 1.4,
@@ -1687,34 +1667,9 @@ fa.diagram(
   digits =2,
   main = ""
   )
-<<<<<<< HEAD
 title(main = "Figure 13. Path diagram of 5 factor solution, with-leader group (long)",
       cex.main = 1.0,
       font.main = 1)
-=======
-
-loading_ldr20 <- 
-  sofa_ldr20_fa5$loadings[1:18,]|> 
-  as.data.frame()
-
-loading_ldr20$Item <- rownames(loading_ldr20)
-rownames(loading_ldr20) <- NULL
-
-loading_ldr20 |> 
-  select(Item, everything()) |> 
-  mutate(
-    across(starts_with("ML"), ~round(., digits = 3)),
-    across(starts_with("ML"), ~replace(.,abs(.)<0.3, ""))
-         ) |> 
-  kable(
-    booktab = T,
-    digits  = 3,
-    linesep = "",
-    caption = "Factor loadings of the 5-factor solution for with-leader group (long)",
-    align = "lrrrrr"
-  ) |> 
-  kable_styling(latex_options = "striped")
->>>>>>> e4078e59a12781668ac403f8dcf8e970f40f620a
 ```
 
 ### Explore 4-factor solution
@@ -1748,18 +1703,12 @@ title(main = "Figure 14. Path diagram of 4 factor solution, with-leader group (l
       cex.main = 1.0,
       font.main = 1)
 
-<<<<<<< HEAD
 check.table1 <- 
   c(
     var_lab(sofa$i_skill1),
     var_lab(sofa$i_skill2),
     var_lab(sofa$i_leader1)
   )
-=======
-loading_ldr20_fa4 <- 
-  sofa_ldr20_fa4$loadings[1:18,] |> 
-  as.data.frame()
->>>>>>> e4078e59a12781668ac403f8dcf8e970f40f620a
 
 names(check.table1) <- c(
   "i_skill1",
@@ -1813,7 +1762,6 @@ title(main = "Figure 15. Path diagram of 3 factor solution, with-leader group (l
       cex.main = 1.0,
       font.main = 1)
 
-<<<<<<< HEAD
 #check 3 factor solution
 check.table2 <- 
   c(
@@ -1823,52 +1771,6 @@ check.table2 <-
     var_lab(sofa$i_comm3),
     var_lab(sofa$i_anom1),
     var_lab(sofa$i_iden3)
-=======
-loading_ldr20_fa3 <- 
-  sofa_ldr20_fa3$loadings[1:18,]
-
-loading_ldr20_fa3 <- 
-  loading_ldr20_fa3 |> 
-  as.data.frame()
-
-loading_ldr20_fa3$Item <- rownames(loading_ldr20_fa3)
-rownames(loading_ldr20_fa3) <- NULL
-
-loading_ldr20_fa3 |> 
-  select(Item, everything()) |> 
-  mutate(
-    across(starts_with("ML"), ~round(., digits = 3)),
-    across(starts_with("ML"), ~replace(., abs(.)<0.3, ""))
-         ) |> 
-  kable(
-    booktab = T,
-    digits  = 3,
-    linesep = "",
-    caption = "Factor loadings of the 3-factor solution for with-leader group (long)",
-    align = "lrrr"
-  ) |> 
-  kable_styling(latex_options = "striped")
-```
-
-### Finetune 3-factor solution
-
-```{r, fig.width=10, fig.height=10}
-sofa_ldr20_ft <-sofa_ldr20 |> #ft for fine-tune
-  select(
-    -i_orga2, 
-    -i_anom3, 
-    -i_anom4, 
-    #-i_anom1, 
-    #-i_orga4, 
-    -i_comm1,
-    -i_comm2, 
-    #-i_comm3, 
-    -i_orga3, 
-    #-i_anom2, 
-    #-i_orga1,
-    -i_skill3,
-    -i_iden1
->>>>>>> e4078e59a12781668ac403f8dcf8e970f40f620a
   )
 
 names(check.table2) <- c(
