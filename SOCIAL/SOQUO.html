@@ -1,0 +1,2843 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en"><head>
+
+<meta charset="utf-8">
+<meta name="generator" content="quarto-1.1.189">
+
+<meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
+
+
+<title>Untitled</title>
+<style>
+code{white-space: pre-wrap;}
+span.smallcaps{font-variant: small-caps;}
+div.columns{display: flex; gap: min(4vw, 1.5em);}
+div.column{flex: auto; overflow-x: auto;}
+div.hanging-indent{margin-left: 1.5em; text-indent: -1.5em;}
+ul.task-list{list-style: none;}
+ul.task-list li input[type="checkbox"] {
+  width: 0.8em;
+  margin: 0 0.8em 0.2em -1.6em;
+  vertical-align: middle;
+}
+</style>
+
+
+<script src="SOQUO_files/libs/clipboard/clipboard.min.js"></script>
+<script src="SOQUO_files/libs/quarto-html/quarto.js"></script>
+<script src="SOQUO_files/libs/quarto-html/popper.min.js"></script>
+<script src="SOQUO_files/libs/quarto-html/tippy.umd.min.js"></script>
+<script src="SOQUO_files/libs/quarto-html/anchor.min.js"></script>
+<link href="SOQUO_files/libs/quarto-html/tippy.css" rel="stylesheet">
+<link href="SOQUO_files/libs/quarto-html/quarto-syntax-highlighting.css" rel="stylesheet" id="quarto-text-highlighting-styles">
+<script src="SOQUO_files/libs/bootstrap/bootstrap.min.js"></script>
+<link href="SOQUO_files/libs/bootstrap/bootstrap-icons.css" rel="stylesheet">
+<link href="SOQUO_files/libs/bootstrap/bootstrap.min.css" rel="stylesheet" id="quarto-bootstrap" data-mode="light">
+
+<script src="SOQUO_files/libs/kePrint-0.0.1/kePrint.js"></script>
+<link href="SOQUO_files/libs/lightable-0.0.1/lightable.css" rel="stylesheet">
+
+
+</head>
+
+<body class="fullcontent">
+
+<div id="quarto-content" class="page-columns page-rows-contents page-layout-article">
+
+<main class="content" id="quarto-document-content">
+
+<header id="title-block-header" class="quarto-title-block default">
+<div class="quarto-title">
+<h1 class="title">Untitled</h1>
+</div>
+
+
+
+<div class="quarto-title-meta">
+
+    
+    
+  </div>
+  
+
+</header>
+
+<div class="cell">
+
+</div>
+<div class="cell" data-layout-align="center">
+
+</div>
+<div class="cell" data-layout-align="center">
+
+</div>
+<section id="data-wrangling" class="level1">
+<h1>Data Wrangling</h1>
+<p>For the interest of space, codes in this section will not be shown. Yet they are available in the .rmd file.</p>
+<section id="read-in-the-data" class="level2">
+<h2 class="anchored" data-anchor-id="read-in-the-data">Read in the data</h2>
+<p>The data were collected across years 2022 (CARE panel, n=218) and 2023 (Students joining an avalanche course, n =59).</p>
+<div class="cell" data-layout-align="center">
+
+</div>
+</section>
+<section id="combine-2022-and-2023-data" class="level2">
+<h2 class="anchored" data-anchor-id="combine-2022-and-2023-data">Combine 2022 and 2023 data</h2>
+<p>They were combined into one data set (n = 277). An index variable was generated as the unique identifier for each case.</p>
+<div class="cell" data-layout-align="center">
+
+</div>
+</section>
+<section id="reomove-cases" class="level2">
+<h2 class="anchored" data-anchor-id="reomove-cases">Reomove cases</h2>
+<section id="remove-careless-responses-according-to-attention-trap" class="level3">
+<h3 class="anchored" data-anchor-id="remove-careless-responses-according-to-attention-trap">Remove careless responses (according to attention trap)</h3>
+<p>Q10_2 and Q10_5, as well as Q19_1 and Q19_4 were same questions with different wordings. If the responses had conflictory results between them, they would be regarded as careless responses and hence deleted (n = 24).</p>
+<div class="cell" data-layout-align="center">
+
+</div>
+</section>
+<section id="remove-cases-who-did-not-consent" class="level3">
+<h3 class="anchored" data-anchor-id="remove-cases-who-did-not-consent">Remove cases who did not consent</h3>
+<p>Respondents who did not consent to participate were removed from the data (n = 4).</p>
+<div class="cell" data-layout-align="center">
+
+</div>
+</section>
+<section id="remove-cases-with-na-for-if-having-a-leader" class="level3">
+<h3 class="anchored" data-anchor-id="remove-cases-with-na-for-if-having-a-leader">Remove cases with NA for if having a leader</h3>
+<p>Respondents who did not disclose if the ski group had a leader were removed from the data (n = 27).</p>
+<div class="cell" data-layout-align="center">
+
+</div>
+</section>
+</section>
+<section id="replace-value-of--99-with-na" class="level2">
+<h2 class="anchored" data-anchor-id="replace-value-of--99-with-na">Replace value of -99 with NA</h2>
+<p>-99 was used to label seen but unanswered questions. They were relabeled as NA.</p>
+<div class="cell" data-layout-align="center">
+
+</div>
+</section>
+<section id="unify-value-labels" class="level2">
+<h2 class="anchored" data-anchor-id="unify-value-labels">Unify value labels</h2>
+<p>Values of some of the variables had been inconsistently labeled by Qualtrics. They were unified here.</p>
+<div class="cell" data-layout-align="center">
+
+</div>
+<div class="cell" data-layout-align="center">
+
+</div>
+<div class="cell" data-layout-align="center">
+
+</div>
+</section>
+<section id="relabel-variables" class="level2">
+<h2 class="anchored" data-anchor-id="relabel-variables">Relabel variables</h2>
+<p>Properly label the variables so that the interpretation can be better managed. For the label, see Table 1.</p>
+<div class="cell" data-layout-align="center">
+
+</div>
+<div class="cell" data-layout-align="center">
+
+</div>
+<div class="cell" data-layout-align="center">
+
+</div>
+<div class="cell" data-layout-align="center">
+
+</div>
+<div class="cell" data-layout-align="center">
+
+</div>
+<div class="cell" data-layout-align="center">
+
+</div>
+<div class="cell" data-layout-align="center">
+
+</div>
+<div class="cell" data-layout-align="center">
+
+</div>
+</section>
+<section id="unify-the-direction-of-item-wording" class="level2">
+<h2 class="anchored" data-anchor-id="unify-the-direction-of-item-wording">Unify the direction of item wording</h2>
+<p>Four items of the SOCIAL were worded in negative direction (e.g.&nbsp;XXXX). Basic factor analysis attempts to identify latent variance through exploring the <strong>co-variance</strong> in measured variables. As such, the direction of the item wording (positive vs negative) does not influence the analysis. However, we still unify the results into same wording direction (positive) for the interest of easy interpretation.</p>
+<div class="cell" data-layout-align="center">
+
+</div>
+</section>
+<section id="generate-norwegian-variable-labels" class="level2">
+<h2 class="anchored" data-anchor-id="generate-norwegian-variable-labels">Generate Norwegian variable labels</h2>
+<p>The survey was carried out in Norwegian and the initial language of text is Norwegian. Norwegian labels were created here.</p>
+<div class="cell" data-layout-align="center">
+
+</div>
+<div class="cell" data-layout-align="center">
+
+</div>
+<div class="cell" data-layout-align="center">
+
+</div>
+<div class="cell" data-layout-align="center">
+
+</div>
+</section>
+</section>
+<section id="create-data-sets-for-analysis" class="level1">
+<h1>Create data sets for analysis</h1>
+<p>Four data sets were created. They are a. 18 item with leader; b. 6 item with leader; c.&nbsp;17 item without leader; d.&nbsp;5 item without leader; 3. background. The case identifier is “index” variable across data sets.</p>
+<div class="cell" data-layout-align="center">
+
+</div>
+<div class="cell" data-layout-align="center">
+
+</div>
+<section id="create-with-leader-and-without-leader-data-sets" class="level2">
+<h2 class="anchored" data-anchor-id="create-with-leader-and-without-leader-data-sets">Create with-leader and without-leader data-sets</h2>
+<p>Before generating 4 data sets, the data were first separated according to with (n = 104) or with-out leader (n = 118).</p>
+<div class="cell" data-layout-align="center">
+
+</div>
+<div class="cell" data-layout-align="center">
+
+</div>
+</section>
+<section id="remove-cases-with-50-nas-across-major-questions-for-each-data-sets" class="level2">
+<h2 class="anchored" data-anchor-id="remove-cases-with-50-nas-across-major-questions-for-each-data-sets">Remove cases with 50% NAs across major questions for each data sets</h2>
+<p>Within in each data set (with/without leader), cases with 50% NAs were removed from data. Three cases (#213,253,276) were removed from with-leader group; Four cases (#94, 252, 258, 275) were removed from without-leader group.</p>
+<div class="cell" data-layout-align="center">
+
+</div>
+</section>
+<section id="create-data-set-17-item-without-leader" class="level2">
+<h2 class="anchored" data-anchor-id="create-data-set-17-item-without-leader">Create data set: 17 item without leader</h2>
+<p>Without-leader group respondents answered 22 out of 26 questions in the survey (the remaining 4 questions were about leader). Within the 22 questions, 17 were adapted from Zeiweiful’s long version, 5 were from short version. They were further split into two data sets. They were subsequently referred to as without-leader long and without-leader short, respectively. The sample size is 114. According the publications, the minimum sample size for an exploratory factor analysis should be 5 × (number of items). In our case, the without-leader group’s long version analysis involves 17 items, indicating at least 17×5=85 samples. Our sample size meets this requirement.</p>
+<div class="cell" data-layout-align="center">
+
+</div>
+</section>
+<section id="create-data-set-5-item-without-leader" class="level2">
+<h2 class="anchored" data-anchor-id="create-data-set-5-item-without-leader">Create data set: 5 item without leader</h2>
+<p>According the publications, the minimum sample size for an exploratory factor analysis should be 5 × (number of items). In our case, the without-leader group’s long version analysis involves 5 items, indicating at least 5×5=25 samples. Our sample size meets this requirement.</p>
+<div class="cell" data-layout-align="center">
+
+</div>
+</section>
+<section id="create-data-set-20-item-with-leader" class="level2">
+<h2 class="anchored" data-anchor-id="create-data-set-20-item-with-leader">Create data set: 20 item with leader</h2>
+<p>Without-leader group respondents answered all 26 questions in the survey. Among the questions, 20 were adapted from Zeiweiful’s long version, 6 were from short version. They were further split into two data sets. They were subsequently referred to as with-leader long and with-leader short, respectively. The sample size is 101. According the publications, the minimum sample size for an exploratory factor analysis should be 5 × (number of items). In our case, the without-leader group’s long version analysis involves 20 items, indicating at least 20×5=100 samples. Our sample size meets this requirement.</p>
+<div class="cell" data-layout-align="center">
+
+</div>
+</section>
+<section id="create-data-set-6-item-with-leader" class="level2">
+<h2 class="anchored" data-anchor-id="create-data-set-6-item-with-leader">Create data set: 6 item with leader</h2>
+<p>According the publications, the minimum sample size for an exploratory factor analysis should be 5 × (number of items). In our case, the without-leader group’s long version analysis involves 5 items, indicating at least 6×5=30 samples. Our sample size meets this requirement.</p>
+<div class="cell" data-layout-align="center">
+
+</div>
+<div class="cell" data-layout-align="center">
+
+</div>
+<div class="cell" data-layout-align="center">
+
+</div>
+</section>
+</section>
+<section id="check-and-impute-nas-and-idns" class="level1">
+<h1>Check and impute NAs and IDNs</h1>
+<section id="discritpive-statistics-with-number-of-nas-and-idns-for-each-item" class="level2">
+<h2 class="anchored" data-anchor-id="discritpive-statistics-with-number-of-nas-and-idns-for-each-item">Discritpive statistics with number of NAs and IDNs for each item</h2>
+<div class="cell" data-layout-align="center">
+<div class="cell-output-display">
+
+<table class="table" style="margin-left: auto; margin-right: auto;border-bottom: 0;">
+<caption>Descriptive statistics for with-leader group (long)</caption>
+ <thead>
+<tr>
+<th style="empty-cells: hide;border-bottom:hidden;" colspan="5"></th>
+<th style="border-bottom:hidden;padding-bottom:0; padding-left:3px;padding-right:3px;text-align: center; " colspan="2"><div style="border-bottom: 1px solid #ddd; padding-bottom: 5px; ">Central tendency</div></th>
+<th style="border-bottom:hidden;padding-bottom:0; padding-left:3px;padding-right:3px;text-align: center; " colspan="2"><div style="border-bottom: 1px solid #ddd; padding-bottom: 5px; ">Dispersion tendency</div></th>
+</tr>
+  <tr>
+   <th style="text-align:left;"> var </th>
+   <th style="text-align:left;"> Question </th>
+   <th style="text-align:right;"> n* </th>
+   <th style="text-align:right;"> n of IDN† </th>
+   <th style="text-align:right;"> n of NA </th>
+   <th style="text-align:right;"> Mean </th>
+   <th style="text-align:right;"> Median </th>
+   <th style="text-align:right;"> SD </th>
+   <th style="text-align:right;"> Q1~Q3 </th>
+  </tr>
+ </thead>
+<tbody>
+  <tr>
+   <td style="text-align:left;width: 1.5cm; "> i_leader2 </td>
+   <td style="text-align:left;width: 11cm; "> The leader (formal or informal) communicated openly and clearly </td>
+   <td style="text-align:right;"> 100 </td>
+   <td style="text-align:right;"> 2 </td>
+   <td style="text-align:right;"> 1 </td>
+   <td style="text-align:right;"> 4.3 </td>
+   <td style="text-align:right;"> 4.0 </td>
+   <td style="text-align:right;"> 0.8 </td>
+   <td style="text-align:right;"> 4.0 ~ 5.0 </td>
+  </tr>
+  <tr>
+   <td style="text-align:left;width: 1.5cm; "> i_leader3 </td>
+   <td style="text-align:left;width: 11cm; "> Everyone could voice their concerns to the leader (formal or informal) </td>
+   <td style="text-align:right;"> 100 </td>
+   <td style="text-align:right;"> 3 </td>
+   <td style="text-align:right;"> 1 </td>
+   <td style="text-align:right;"> 4.6 </td>
+   <td style="text-align:right;"> 5.0 </td>
+   <td style="text-align:right;"> 0.7 </td>
+   <td style="text-align:right;"> 4.0 ~ 5.0 </td>
+  </tr>
+  <tr>
+   <td style="text-align:left;width: 1.5cm; "> i_skill1 </td>
+   <td style="text-align:left;width: 11cm; "> The least knowledgeable group member could conduct satisfactory avalanche assessments for this trip </td>
+   <td style="text-align:right;"> 101 </td>
+   <td style="text-align:right;"> 1 </td>
+   <td style="text-align:right;"> 0 </td>
+   <td style="text-align:right;"> 3.2 </td>
+   <td style="text-align:right;"> 4.0 </td>
+   <td style="text-align:right;"> 1.3 </td>
+   <td style="text-align:right;"> 2.0 ~ 4.0 </td>
+  </tr>
+  <tr>
+   <td style="text-align:left;width: 1.5cm; "> i_skill2 </td>
+   <td style="text-align:left;width: 11cm; "> There was no large gap in avalanche assessment skills between the group members </td>
+   <td style="text-align:right;"> 101 </td>
+   <td style="text-align:right;"> 2 </td>
+   <td style="text-align:right;"> 0 </td>
+   <td style="text-align:right;"> 2.5 </td>
+   <td style="text-align:right;"> 2.0 </td>
+   <td style="text-align:right;"> 1.3 </td>
+   <td style="text-align:right;"> 1.0 ~ 4.0 </td>
+  </tr>
+  <tr>
+   <td style="text-align:left;width: 1.5cm; "> i_skill3 </td>
+   <td style="text-align:left;width: 11cm; "> There was no important difference in skiing skill level between group members, given the terrain </td>
+   <td style="text-align:right;"> 101 </td>
+   <td style="text-align:right;"> 1 </td>
+   <td style="text-align:right;"> 0 </td>
+   <td style="text-align:right;"> 2.9 </td>
+   <td style="text-align:right;"> 3.0 </td>
+   <td style="text-align:right;"> 1.4 </td>
+   <td style="text-align:right;"> 2.0 ~ 4.0 </td>
+  </tr>
+  <tr>
+   <td style="text-align:left;width: 1.5cm; "> i_skill4 </td>
+   <td style="text-align:left;width: 11cm; "> All group members were equipped with standard avalanche safety equipment (beacon, shovel, probe) and trained in the use of it </td>
+   <td style="text-align:right;"> 101 </td>
+   <td style="text-align:right;"> 2 </td>
+   <td style="text-align:right;"> 0 </td>
+   <td style="text-align:right;"> 4.3 </td>
+   <td style="text-align:right;"> 5.0 </td>
+   <td style="text-align:right;"> 1.1 </td>
+   <td style="text-align:right;"> 4.0 ~ 5.0 </td>
+  </tr>
+  <tr>
+   <td style="text-align:left;width: 1.5cm; "> i_orga1 </td>
+   <td style="text-align:left;width: 11cm; "> The group members knew each other well </td>
+   <td style="text-align:right;"> 101 </td>
+   <td style="text-align:right;"> 0 </td>
+   <td style="text-align:right;"> 0 </td>
+   <td style="text-align:right;"> 3.8 </td>
+   <td style="text-align:right;"> 4.0 </td>
+   <td style="text-align:right;"> 1.2 </td>
+   <td style="text-align:right;"> 3.0 ~ 5.0 </td>
+  </tr>
+  <tr>
+   <td style="text-align:left;width: 1.5cm; "> i_orga2 </td>
+   <td style="text-align:left;width: 11cm; "> The group size was appropriate for the trip (time, difficulty) </td>
+   <td style="text-align:right;"> 100 </td>
+   <td style="text-align:right;"> 1 </td>
+   <td style="text-align:right;"> 1 </td>
+   <td style="text-align:right;"> 4.5 </td>
+   <td style="text-align:right;"> 5.0 </td>
+   <td style="text-align:right;"> 0.8 </td>
+   <td style="text-align:right;"> 4.0 ~ 5.0 </td>
+  </tr>
+  <tr>
+   <td style="text-align:left;width: 1.5cm; "> i_orga3 </td>
+   <td style="text-align:left;width: 11cm; "> The roles of the group members were clearly defined </td>
+   <td style="text-align:right;"> 101 </td>
+   <td style="text-align:right;"> 1 </td>
+   <td style="text-align:right;"> 0 </td>
+   <td style="text-align:right;"> 3.2 </td>
+   <td style="text-align:right;"> 3.0 </td>
+   <td style="text-align:right;"> 1.2 </td>
+   <td style="text-align:right;"> 2.0 ~ 4.0 </td>
+  </tr>
+  <tr>
+   <td style="text-align:left;width: 1.5cm; "> i_comm1 </td>
+   <td style="text-align:left;width: 11cm; "> Decisions concerning avalanche hazard were well discussed in the group </td>
+   <td style="text-align:right;"> 101 </td>
+   <td style="text-align:right;"> 1 </td>
+   <td style="text-align:right;"> 0 </td>
+   <td style="text-align:right;"> 4.1 </td>
+   <td style="text-align:right;"> 4.0 </td>
+   <td style="text-align:right;"> 0.9 </td>
+   <td style="text-align:right;"> 4.0 ~ 5.0 </td>
+  </tr>
+  <tr>
+   <td style="text-align:left;width: 1.5cm; "> i_comm2 </td>
+   <td style="text-align:left;width: 11cm; "> Everyone in the group understood the decisions that were made </td>
+   <td style="text-align:right;"> 101 </td>
+   <td style="text-align:right;"> 4 </td>
+   <td style="text-align:right;"> 0 </td>
+   <td style="text-align:right;"> 4.1 </td>
+   <td style="text-align:right;"> 4.0 </td>
+   <td style="text-align:right;"> 1.0 </td>
+   <td style="text-align:right;"> 4.0 ~ 5.0 </td>
+  </tr>
+  <tr>
+   <td style="text-align:left;width: 1.5cm; "> i_comm3 </td>
+   <td style="text-align:left;width: 11cm; "> Everyone voiced their concerns whenever they felt necessary </td>
+   <td style="text-align:right;"> 101 </td>
+   <td style="text-align:right;"> 5 </td>
+   <td style="text-align:right;"> 0 </td>
+   <td style="text-align:right;"> 4.0 </td>
+   <td style="text-align:right;"> 4.0 </td>
+   <td style="text-align:right;"> 1.1 </td>
+   <td style="text-align:right;"> 3.0 ~ 5.0 </td>
+  </tr>
+  <tr>
+   <td style="text-align:left;width: 1.5cm; "> i_iden1 </td>
+   <td style="text-align:left;width: 11cm; "> There were clear expectations of each group member </td>
+   <td style="text-align:right;"> 101 </td>
+   <td style="text-align:right;"> 1 </td>
+   <td style="text-align:right;"> 0 </td>
+   <td style="text-align:right;"> 3.4 </td>
+   <td style="text-align:right;"> 3.0 </td>
+   <td style="text-align:right;"> 1.0 </td>
+   <td style="text-align:right;"> 3.0 ~ 4.0 </td>
+  </tr>
+  <tr>
+   <td style="text-align:left;width: 1.5cm; "> i_iden2 </td>
+   <td style="text-align:left;width: 11cm; "> A reasonable alternative trip existed in case of disagreements </td>
+   <td style="text-align:right;"> 101 </td>
+   <td style="text-align:right;"> 1 </td>
+   <td style="text-align:right;"> 0 </td>
+   <td style="text-align:right;"> 3.8 </td>
+   <td style="text-align:right;"> 4.0 </td>
+   <td style="text-align:right;"> 1.2 </td>
+   <td style="text-align:right;"> 3.0 ~ 5.0 </td>
+  </tr>
+  <tr>
+   <td style="text-align:left;width: 1.5cm; "> i_iden3 </td>
+   <td style="text-align:left;width: 11cm; "> Everyone was happy with the decisions that were made </td>
+   <td style="text-align:right;"> 101 </td>
+   <td style="text-align:right;"> 4 </td>
+   <td style="text-align:right;"> 0 </td>
+   <td style="text-align:right;"> 4.3 </td>
+   <td style="text-align:right;"> 4.0 </td>
+   <td style="text-align:right;"> 1.0 </td>
+   <td style="text-align:right;"> 4.0 ~ 5.0 </td>
+  </tr>
+  <tr>
+   <td style="text-align:left;width: 1.5cm; "> i_anom1 </td>
+   <td style="text-align:left;width: 11cm; "> The group decisions at the decision points were unanimous </td>
+   <td style="text-align:right;"> 100 </td>
+   <td style="text-align:right;"> 3 </td>
+   <td style="text-align:right;"> 1 </td>
+   <td style="text-align:right;"> 4.0 </td>
+   <td style="text-align:right;"> 4.0 </td>
+   <td style="text-align:right;"> 1.1 </td>
+   <td style="text-align:right;"> 4.0 ~ 5.0 </td>
+  </tr>
+  <tr>
+   <td style="text-align:left;width: 1.5cm; "> i_anom2 </td>
+   <td style="text-align:left;width: 11cm; "> Someone tried to impress others. </td>
+   <td style="text-align:right;"> 101 </td>
+   <td style="text-align:right;"> 1 </td>
+   <td style="text-align:right;"> 0 </td>
+   <td style="text-align:right;"> 4.1 </td>
+   <td style="text-align:right;"> 4.0 </td>
+   <td style="text-align:right;"> 1.0 </td>
+   <td style="text-align:right;"> 4.0 ~ 5.0 </td>
+  </tr>
+  <tr>
+   <td style="text-align:left;width: 1.5cm; "> i_anom3 </td>
+   <td style="text-align:left;width: 11cm; "> Love stories were going on in the group </td>
+   <td style="text-align:right;"> 101 </td>
+   <td style="text-align:right;"> 6 </td>
+   <td style="text-align:right;"> 0 </td>
+   <td style="text-align:right;"> 4.1 </td>
+   <td style="text-align:right;"> 5.0 </td>
+   <td style="text-align:right;"> 1.4 </td>
+   <td style="text-align:right;"> 3.0 ~ 5.0 </td>
+  </tr>
+  <tr>
+   <td style="text-align:left;width: 1.5cm; "> i_anom4 </td>
+   <td style="text-align:left;width: 11cm; "> The presence of other groups impacted my group’s decision making </td>
+   <td style="text-align:right;"> 101 </td>
+   <td style="text-align:right;"> 2 </td>
+   <td style="text-align:right;"> 0 </td>
+   <td style="text-align:right;"> 4.1 </td>
+   <td style="text-align:right;"> 5.0 </td>
+   <td style="text-align:right;"> 1.2 </td>
+   <td style="text-align:right;"> 3.0 ~ 5.0 </td>
+  </tr>
+</tbody>
+<tfoot>
+<tr><td style="padding: 0; " colspan="100%">
+<sup>*</sup> number of cases minus number of NA</td></tr>
+<tr><td style="padding: 0; " colspan="100%">
+<sup>†</sup> IDN: Don't know</td></tr>
+</tfoot>
+</table>
+
+</div>
+<div class="cell-output-display">
+
+<table class="table" style="margin-left: auto; margin-right: auto;border-bottom: 0;">
+<caption>Descriptive statistics for without-leader group (long)</caption>
+ <thead>
+<tr>
+<th style="empty-cells: hide;border-bottom:hidden;" colspan="5"></th>
+<th style="border-bottom:hidden;padding-bottom:0; padding-left:3px;padding-right:3px;text-align: center; " colspan="2"><div style="border-bottom: 1px solid #ddd; padding-bottom: 5px; ">Central tendency</div></th>
+<th style="border-bottom:hidden;padding-bottom:0; padding-left:3px;padding-right:3px;text-align: center; " colspan="2"><div style="border-bottom: 1px solid #ddd; padding-bottom: 5px; ">Dispersion tendency</div></th>
+</tr>
+  <tr>
+   <th style="text-align:left;"> var </th>
+   <th style="text-align:left;"> Question </th>
+   <th style="text-align:right;"> n* </th>
+   <th style="text-align:right;"> n of IDN† </th>
+   <th style="text-align:right;"> n of NA </th>
+   <th style="text-align:right;"> Mean </th>
+   <th style="text-align:right;"> Median </th>
+   <th style="text-align:right;"> SD </th>
+   <th style="text-align:right;"> Q1~Q3 </th>
+  </tr>
+ </thead>
+<tbody>
+  <tr>
+   <td style="text-align:left;width: 1.5cm; "> i_skill2 </td>
+   <td style="text-align:left;width: 11cm; "> There was no large gap in avalanche assessment skills between the group members </td>
+   <td style="text-align:right;"> 114 </td>
+   <td style="text-align:right;"> 0 </td>
+   <td style="text-align:right;"> 0 </td>
+   <td style="text-align:right;"> 3.2 </td>
+   <td style="text-align:right;"> 3.0 </td>
+   <td style="text-align:right;"> 1.3 </td>
+   <td style="text-align:right;"> 2.0 ~ 4.0 </td>
+  </tr>
+  <tr>
+   <td style="text-align:left;width: 1.5cm; "> i_skill3 </td>
+   <td style="text-align:left;width: 11cm; "> There was no important difference in skiing skill level between group members, given the terrain </td>
+   <td style="text-align:right;"> 114 </td>
+   <td style="text-align:right;"> 0 </td>
+   <td style="text-align:right;"> 0 </td>
+   <td style="text-align:right;"> 3.6 </td>
+   <td style="text-align:right;"> 4.0 </td>
+   <td style="text-align:right;"> 1.3 </td>
+   <td style="text-align:right;"> 2.0 ~ 5.0 </td>
+  </tr>
+  <tr>
+   <td style="text-align:left;width: 1.5cm; "> i_skill4 </td>
+   <td style="text-align:left;width: 11cm; "> All group members were equipped with standard avalanche safety equipment (beacon, shovel, probe) and trained in the use of it </td>
+   <td style="text-align:right;"> 114 </td>
+   <td style="text-align:right;"> 1 </td>
+   <td style="text-align:right;"> 0 </td>
+   <td style="text-align:right;"> 4.5 </td>
+   <td style="text-align:right;"> 5.0 </td>
+   <td style="text-align:right;"> 1.0 </td>
+   <td style="text-align:right;"> 4.0 ~ 5.0 </td>
+  </tr>
+  <tr>
+   <td style="text-align:left;width: 1.5cm; "> i_orga1 </td>
+   <td style="text-align:left;width: 11cm; "> The group members knew each other well </td>
+   <td style="text-align:right;"> 113 </td>
+   <td style="text-align:right;"> 0 </td>
+   <td style="text-align:right;"> 1 </td>
+   <td style="text-align:right;"> 4.2 </td>
+   <td style="text-align:right;"> 5.0 </td>
+   <td style="text-align:right;"> 1.0 </td>
+   <td style="text-align:right;"> 4.0 ~ 5.0 </td>
+  </tr>
+  <tr>
+   <td style="text-align:left;width: 1.5cm; "> i_orga2 </td>
+   <td style="text-align:left;width: 11cm; "> The group size was appropriate for the trip (time, difficulty) </td>
+   <td style="text-align:right;"> 113 </td>
+   <td style="text-align:right;"> 1 </td>
+   <td style="text-align:right;"> 1 </td>
+   <td style="text-align:right;"> 4.6 </td>
+   <td style="text-align:right;"> 5.0 </td>
+   <td style="text-align:right;"> 0.8 </td>
+   <td style="text-align:right;"> 4.0 ~ 5.0 </td>
+  </tr>
+  <tr>
+   <td style="text-align:left;width: 1.5cm; "> i_orga3 </td>
+   <td style="text-align:left;width: 11cm; "> The roles of the group members were clearly defined </td>
+   <td style="text-align:right;"> 113 </td>
+   <td style="text-align:right;"> 5 </td>
+   <td style="text-align:right;"> 1 </td>
+   <td style="text-align:right;"> 3.2 </td>
+   <td style="text-align:right;"> 3.0 </td>
+   <td style="text-align:right;"> 1.4 </td>
+   <td style="text-align:right;"> 2.0 ~ 5.0 </td>
+  </tr>
+  <tr>
+   <td style="text-align:left;width: 1.5cm; "> i_comm1 </td>
+   <td style="text-align:left;width: 11cm; "> Decisions concerning avalanche hazard were well discussed in the group </td>
+   <td style="text-align:right;"> 114 </td>
+   <td style="text-align:right;"> 0 </td>
+   <td style="text-align:right;"> 0 </td>
+   <td style="text-align:right;"> 4.0 </td>
+   <td style="text-align:right;"> 4.0 </td>
+   <td style="text-align:right;"> 1.0 </td>
+   <td style="text-align:right;"> 4.0 ~ 5.0 </td>
+  </tr>
+  <tr>
+   <td style="text-align:left;width: 1.5cm; "> i_comm2 </td>
+   <td style="text-align:left;width: 11cm; "> Everyone in the group understood the decisions that were made </td>
+   <td style="text-align:right;"> 114 </td>
+   <td style="text-align:right;"> 1 </td>
+   <td style="text-align:right;"> 0 </td>
+   <td style="text-align:right;"> 4.3 </td>
+   <td style="text-align:right;"> 5.0 </td>
+   <td style="text-align:right;"> 0.9 </td>
+   <td style="text-align:right;"> 4.0 ~ 5.0 </td>
+  </tr>
+  <tr>
+   <td style="text-align:left;width: 1.5cm; "> i_comm3 </td>
+   <td style="text-align:left;width: 11cm; "> Everyone voiced their concerns whenever they felt necessary </td>
+   <td style="text-align:right;"> 114 </td>
+   <td style="text-align:right;"> 6 </td>
+   <td style="text-align:right;"> 0 </td>
+   <td style="text-align:right;"> 4.3 </td>
+   <td style="text-align:right;"> 4.0 </td>
+   <td style="text-align:right;"> 1.0 </td>
+   <td style="text-align:right;"> 4.0 ~ 5.0 </td>
+  </tr>
+  <tr>
+   <td style="text-align:left;width: 1.5cm; "> i_iden1 </td>
+   <td style="text-align:left;width: 11cm; "> There were clear expectations of each group member </td>
+   <td style="text-align:right;"> 114 </td>
+   <td style="text-align:right;"> 0 </td>
+   <td style="text-align:right;"> 0 </td>
+   <td style="text-align:right;"> 3.6 </td>
+   <td style="text-align:right;"> 4.0 </td>
+   <td style="text-align:right;"> 1.0 </td>
+   <td style="text-align:right;"> 3.0 ~ 4.0 </td>
+  </tr>
+  <tr>
+   <td style="text-align:left;width: 1.5cm; "> i_iden2 </td>
+   <td style="text-align:left;width: 11cm; "> A reasonable alternative trip existed in case of disagreements </td>
+   <td style="text-align:right;"> 114 </td>
+   <td style="text-align:right;"> 1 </td>
+   <td style="text-align:right;"> 0 </td>
+   <td style="text-align:right;"> 3.9 </td>
+   <td style="text-align:right;"> 4.0 </td>
+   <td style="text-align:right;"> 1.1 </td>
+   <td style="text-align:right;"> 3.0 ~ 5.0 </td>
+  </tr>
+  <tr>
+   <td style="text-align:left;width: 1.5cm; "> i_iden3 </td>
+   <td style="text-align:left;width: 11cm; "> Everyone was happy with the decisions that were made </td>
+   <td style="text-align:right;"> 114 </td>
+   <td style="text-align:right;"> 1 </td>
+   <td style="text-align:right;"> 0 </td>
+   <td style="text-align:right;"> 4.4 </td>
+   <td style="text-align:right;"> 5.0 </td>
+   <td style="text-align:right;"> 0.8 </td>
+   <td style="text-align:right;"> 4.0 ~ 5.0 </td>
+  </tr>
+  <tr>
+   <td style="text-align:left;width: 1.5cm; "> i_anom1 </td>
+   <td style="text-align:left;width: 11cm; "> The group decisions at the decision points were unanimous </td>
+   <td style="text-align:right;"> 114 </td>
+   <td style="text-align:right;"> 7 </td>
+   <td style="text-align:right;"> 0 </td>
+   <td style="text-align:right;"> 4.2 </td>
+   <td style="text-align:right;"> 4.0 </td>
+   <td style="text-align:right;"> 1.1 </td>
+   <td style="text-align:right;"> 4.0 ~ 5.0 </td>
+  </tr>
+  <tr>
+   <td style="text-align:left;width: 1.5cm; "> i_anom2 </td>
+   <td style="text-align:left;width: 11cm; "> Someone tried to impress others. </td>
+   <td style="text-align:right;"> 114 </td>
+   <td style="text-align:right;"> 2 </td>
+   <td style="text-align:right;"> 0 </td>
+   <td style="text-align:right;"> 4.2 </td>
+   <td style="text-align:right;"> 4.0 </td>
+   <td style="text-align:right;"> 1.1 </td>
+   <td style="text-align:right;"> 4.0 ~ 5.0 </td>
+  </tr>
+  <tr>
+   <td style="text-align:left;width: 1.5cm; "> i_anom3 </td>
+   <td style="text-align:left;width: 11cm; "> Love stories were going on in the group </td>
+   <td style="text-align:right;"> 114 </td>
+   <td style="text-align:right;"> 2 </td>
+   <td style="text-align:right;"> 0 </td>
+   <td style="text-align:right;"> 4.3 </td>
+   <td style="text-align:right;"> 5.0 </td>
+   <td style="text-align:right;"> 1.2 </td>
+   <td style="text-align:right;"> 4.0 ~ 5.0 </td>
+  </tr>
+  <tr>
+   <td style="text-align:left;width: 1.5cm; "> i_anom4 </td>
+   <td style="text-align:left;width: 11cm; "> The presence of other groups impacted my group’s decision making </td>
+   <td style="text-align:right;"> 114 </td>
+   <td style="text-align:right;"> 1 </td>
+   <td style="text-align:right;"> 0 </td>
+   <td style="text-align:right;"> 3.8 </td>
+   <td style="text-align:right;"> 4.0 </td>
+   <td style="text-align:right;"> 1.4 </td>
+   <td style="text-align:right;"> 2.0 ~ 5.0 </td>
+  </tr>
+</tbody>
+<tfoot>
+<tr><td style="padding: 0; " colspan="100%">
+<sup>*</sup> number of cases minus number of NA</td></tr>
+<tr><td style="padding: 0; " colspan="100%">
+<sup>†</sup> IDN: Don't know</td></tr>
+</tfoot>
+</table>
+
+</div>
+<div class="cell-output-display">
+
+<table class="table" style="margin-left: auto; margin-right: auto;border-bottom: 0;">
+<caption>Descriptive statistics for with-leader group (short)</caption>
+ <thead>
+<tr>
+<th style="empty-cells: hide;border-bottom:hidden;" colspan="5"></th>
+<th style="border-bottom:hidden;padding-bottom:0; padding-left:3px;padding-right:3px;text-align: center; " colspan="2"><div style="border-bottom: 1px solid #ddd; padding-bottom: 5px; ">Central tendency</div></th>
+<th style="border-bottom:hidden;padding-bottom:0; padding-left:3px;padding-right:3px;text-align: center; " colspan="2"><div style="border-bottom: 1px solid #ddd; padding-bottom: 5px; ">Dispersion tendency</div></th>
+</tr>
+  <tr>
+   <th style="text-align:left;"> var </th>
+   <th style="text-align:left;"> Question </th>
+   <th style="text-align:right;"> n* </th>
+   <th style="text-align:right;"> n of IDN† </th>
+   <th style="text-align:right;"> n of NA </th>
+   <th style="text-align:right;"> Mean </th>
+   <th style="text-align:right;"> Median </th>
+   <th style="text-align:right;"> SD </th>
+   <th style="text-align:right;"> Q1~Q3 </th>
+  </tr>
+ </thead>
+<tbody>
+  <tr>
+   <td style="text-align:left;width: 1.5cm; "> i_skill0 </td>
+   <td style="text-align:left;width: 11cm; "> The level of avalanche assessment and rescue skills differed greatly across the group. </td>
+   <td style="text-align:right;"> 101 </td>
+   <td style="text-align:right;"> 2 </td>
+   <td style="text-align:right;"> 0 </td>
+   <td style="text-align:right;"> 2.7 </td>
+   <td style="text-align:right;"> 2.0 </td>
+   <td style="text-align:right;"> 1.4 </td>
+   <td style="text-align:right;"> 2.0 ~ 4.0 </td>
+  </tr>
+  <tr>
+   <td style="text-align:left;width: 1.5cm; "> i_orga0 </td>
+   <td style="text-align:left;width: 11cm; "> The group was well-set up and organized for this trip </td>
+   <td style="text-align:right;"> 101 </td>
+   <td style="text-align:right;"> 0 </td>
+   <td style="text-align:right;"> 0 </td>
+   <td style="text-align:right;"> 3.9 </td>
+   <td style="text-align:right;"> 4.0 </td>
+   <td style="text-align:right;"> 0.9 </td>
+   <td style="text-align:right;"> 3.0 ~ 4.0 </td>
+  </tr>
+  <tr>
+   <td style="text-align:left;width: 1.5cm; "> i_comm0 </td>
+   <td style="text-align:left;width: 11cm; "> The communication in the group was good </td>
+   <td style="text-align:right;"> 101 </td>
+   <td style="text-align:right;"> 1 </td>
+   <td style="text-align:right;"> 0 </td>
+   <td style="text-align:right;"> 4.4 </td>
+   <td style="text-align:right;"> 4.0 </td>
+   <td style="text-align:right;"> 0.7 </td>
+   <td style="text-align:right;"> 4.0 ~ 5.0 </td>
+  </tr>
+  <tr>
+   <td style="text-align:left;width: 1.5cm; "> i_iden0 </td>
+   <td style="text-align:left;width: 11cm; "> The group was cohesive and had a shared vision </td>
+   <td style="text-align:right;"> 100 </td>
+   <td style="text-align:right;"> 1 </td>
+   <td style="text-align:right;"> 1 </td>
+   <td style="text-align:right;"> 4.2 </td>
+   <td style="text-align:right;"> 4.0 </td>
+   <td style="text-align:right;"> 0.8 </td>
+   <td style="text-align:right;"> 4.0 ~ 5.0 </td>
+  </tr>
+  <tr>
+   <td style="text-align:left;width: 1.5cm; "> i_anom0 </td>
+   <td style="text-align:left;width: 11cm; "> Social interactions in the group negatively impacted decision </td>
+   <td style="text-align:right;"> 101 </td>
+   <td style="text-align:right;"> 3 </td>
+   <td style="text-align:right;"> 0 </td>
+   <td style="text-align:right;"> 4.4 </td>
+   <td style="text-align:right;"> 5.0 </td>
+   <td style="text-align:right;"> 1.0 </td>
+   <td style="text-align:right;"> 4.0 ~ 5.0 </td>
+  </tr>
+</tbody>
+<tfoot>
+<tr><td style="padding: 0; " colspan="100%">
+<sup>*</sup> number of cases minus number of NA</td></tr>
+<tr><td style="padding: 0; " colspan="100%">
+<sup>†</sup> IDN: Don't know</td></tr>
+</tfoot>
+</table>
+
+</div>
+<div class="cell-output-display">
+
+<table class="table" style="margin-left: auto; margin-right: auto;border-bottom: 0;">
+<caption>Descriptive statistics for without-leader group (short)</caption>
+ <thead>
+<tr>
+<th style="empty-cells: hide;border-bottom:hidden;" colspan="5"></th>
+<th style="border-bottom:hidden;padding-bottom:0; padding-left:3px;padding-right:3px;text-align: center; " colspan="2"><div style="border-bottom: 1px solid #ddd; padding-bottom: 5px; ">Central tendency</div></th>
+<th style="border-bottom:hidden;padding-bottom:0; padding-left:3px;padding-right:3px;text-align: center; " colspan="2"><div style="border-bottom: 1px solid #ddd; padding-bottom: 5px; ">Dispersion tendency</div></th>
+</tr>
+  <tr>
+   <th style="text-align:left;"> var </th>
+   <th style="text-align:left;"> Question </th>
+   <th style="text-align:right;"> n* </th>
+   <th style="text-align:right;"> n of IDN† </th>
+   <th style="text-align:right;"> n of NA </th>
+   <th style="text-align:right;"> Mean </th>
+   <th style="text-align:right;"> Median </th>
+   <th style="text-align:right;"> SD </th>
+   <th style="text-align:right;"> Q1~Q3 </th>
+  </tr>
+ </thead>
+<tbody>
+  <tr>
+   <td style="text-align:left;width: 1.5cm; "> i_orga0 </td>
+   <td style="text-align:left;width: 11cm; "> The group was well-set up and organized for this trip </td>
+   <td style="text-align:right;"> 114 </td>
+   <td style="text-align:right;"> 0 </td>
+   <td style="text-align:right;"> 0 </td>
+   <td style="text-align:right;"> 4.1 </td>
+   <td style="text-align:right;"> 4.0 </td>
+   <td style="text-align:right;"> 0.9 </td>
+   <td style="text-align:right;"> 4.0 ~ 5.0 </td>
+  </tr>
+  <tr>
+   <td style="text-align:left;width: 1.5cm; "> i_comm0 </td>
+   <td style="text-align:left;width: 11cm; "> The communication in the group was good </td>
+   <td style="text-align:right;"> 114 </td>
+   <td style="text-align:right;"> 0 </td>
+   <td style="text-align:right;"> 0 </td>
+   <td style="text-align:right;"> 4.3 </td>
+   <td style="text-align:right;"> 5.0 </td>
+   <td style="text-align:right;"> 1.0 </td>
+   <td style="text-align:right;"> 4.0 ~ 5.0 </td>
+  </tr>
+  <tr>
+   <td style="text-align:left;width: 1.5cm; "> i_iden0 </td>
+   <td style="text-align:left;width: 11cm; "> The group was cohesive and had a shared vision </td>
+   <td style="text-align:right;"> 114 </td>
+   <td style="text-align:right;"> 0 </td>
+   <td style="text-align:right;"> 0 </td>
+   <td style="text-align:right;"> 4.2 </td>
+   <td style="text-align:right;"> 4.0 </td>
+   <td style="text-align:right;"> 0.8 </td>
+   <td style="text-align:right;"> 4.0 ~ 5.0 </td>
+  </tr>
+  <tr>
+   <td style="text-align:left;width: 1.5cm; "> i_anom0 </td>
+   <td style="text-align:left;width: 11cm; "> Social interactions in the group negatively impacted decision </td>
+   <td style="text-align:right;"> 113 </td>
+   <td style="text-align:right;"> 3 </td>
+   <td style="text-align:right;"> 1 </td>
+   <td style="text-align:right;"> 4.3 </td>
+   <td style="text-align:right;"> 5.0 </td>
+   <td style="text-align:right;"> 1.0 </td>
+   <td style="text-align:right;"> 4.0 ~ 5.0 </td>
+  </tr>
+</tbody>
+<tfoot>
+<tr><td style="padding: 0; " colspan="100%">
+<sup>*</sup> number of cases minus number of NA</td></tr>
+<tr><td style="padding: 0; " colspan="100%">
+<sup>†</sup> IDN: Don't know</td></tr>
+</tfoot>
+</table>
+
+</div>
+</div>
+</section>
+<section id="adress-na-and-idn-casewise" class="level2">
+<h2 class="anchored" data-anchor-id="adress-na-and-idn-casewise">Adress NA and IDN casewise</h2>
+<p>The number of NAs and IDNs were few in number comparing with the sample size for each data set. Hence, the NAs and IDNs were checked case-wise, and decisions for each case were made accordingly. Please go to file “NA_and_IDN.md” for full description. A quck summary here: case #82 (in without group) were removed due to high proportion of IDNs, while other cases with NAs/IDNs does not show much logical issue. These NAs/IDNs will be imputed by within-subgroup median.</p>
+<div class="cell" data-layout-align="center">
+
+</div>
+<div class="cell" data-layout-align="center">
+
+</div>
+<div class="cell" data-layout-align="center">
+
+</div>
+<div class="cell" data-layout-align="center">
+
+</div>
+<div class="cell" data-layout-align="center">
+
+</div>
+</section>
+<section id="sumarize-data-clensing" class="level2">
+<h2 class="anchored" data-anchor-id="sumarize-data-clensing">Sumarize data clensing</h2>
+<p>The full processes of data cleansing were summarized in the following flowchart.</p>
+<div class="quarto-figure quarto-figure-center">
+<figure class="figure">
+<p><img src="data/data_cleansing_flowchart.png" class="img-fluid figure-img"></p>
+<p></p><figcaption class="figure-caption">Flowchart for data cleansing</figcaption><p></p>
+</figure>
+</div>
+</section>
+</section>
+<section id="visualization" class="level1">
+<h1>Visualization</h1>
+<section id="distribution" class="level2">
+<h2 class="anchored" data-anchor-id="distribution">Distribution</h2>
+<p>Since the data were collected from Likert scale, which usually skewed towards an end, I do not seek normality from these graphs. Instead, I scanned through the distributions to get a sense of the features of each item, such as left skewness (e.g.&nbsp;i_anom3), right skewness (e.g.&nbsp;i_skill4), kurtosis (e.g.&nbsp;i_orga3), polarization (e.g.&nbsp;i_skill3). These also shed light on skiers’ overall performance pattern across sub-groups. To illustrate, it could be interesting to find that the organization of without-leader group wasn’t rated notably lower than that of with-leader group. However, the skills were rated higher in without-leader group. This indicates people who ski without a leader are more confident in his and his teammates skiing/avalanche-forecasting skills. Of course, I hope for a normal distribution from the factor scores obtained by the following factor analysis.</p>
+<div class="cell" data-layout-align="center">
+
+</div>
+<div class="cell" data-layout-align="center">
+<div class="cell-output-display">
+<div class="quarto-figure quarto-figure-center">
+<figure class="figure">
+<p><img src="SOQUO_files/figure-html/unnamed-chunk-44-1.png" class="img-fluid figure-img" width="576"></p>
+</figure>
+</div>
+</div>
+</div>
+<div class="cell" data-layout-align="center">
+<div class="cell-output-display">
+<div class="quarto-figure quarto-figure-center">
+<figure class="figure">
+<p><img src="SOQUO_files/figure-html/unnamed-chunk-45-1.png" class="img-fluid figure-img" width="576"></p>
+</figure>
+</div>
+</div>
+</div>
+<div class="cell" data-layout-align="center">
+<div class="cell-output-display">
+<div class="quarto-figure quarto-figure-center">
+<figure class="figure">
+<p><img src="SOQUO_files/figure-html/unnamed-chunk-46-1.png" class="img-fluid figure-img" width="480"></p>
+</figure>
+</div>
+</div>
+</div>
+<div class="cell" data-layout-align="center">
+<div class="cell-output-display">
+<div class="quarto-figure quarto-figure-center">
+<figure class="figure">
+<p><img src="SOQUO_files/figure-html/unnamed-chunk-47-1.png" class="img-fluid figure-img" width="480"></p>
+</figure>
+</div>
+</div>
+</div>
+</section>
+<section id="correlation-matrix" class="level2">
+<h2 class="anchored" data-anchor-id="correlation-matrix">Correlation matrix</h2>
+<p>Correlation matrix was created for each of the four scales (2 long and 2 short). Pearson correlation coefficients were reported. Any coefficients ≥ 0.3 were highlighted in green circle; any coefficients ≥ 0.3 were highlighted in read circle.</p>
+<p>There are several well-recognized criteria for checking factorability, including correlation matrix, KMO test, and Bartlett sphericity test. Here I checked the correlation. Other criteria were checked in the following section. We hope that the majority of the items have a correlation coefficient ≥ 0.3 with at least one other item, which suggest good factorability.</p>
+<div class="cell" data-layout-align="center">
+
+</div>
+<p>For with-leader group (long), it was observed that 18 of the 20 items correlated at least .3 with at least one other item, suggesting reasonable factorability. See figure 6.</p>
+<div class="cell" data-layout-align="center">
+<div class="cell-output-display">
+<div class="quarto-figure quarto-figure-center">
+<figure class="figure">
+<p><img src="SOQUO_files/figure-html/unnamed-chunk-49-1.png" class="img-fluid figure-img" width="672"></p>
+</figure>
+</div>
+</div>
+</div>
+<p>For without-leader group (long), it was observed that 16 of the 17 items correlated at least .3 with at least one other item, suggesting reasonable factorability. See figure 7.</p>
+<div class="cell" data-layout-align="center">
+<div class="cell-output-display">
+<div class="quarto-figure quarto-figure-center">
+<figure class="figure">
+<p><img src="SOQUO_files/figure-html/unnamed-chunk-50-1.png" class="img-fluid figure-img" width="672"></p>
+</figure>
+</div>
+</div>
+</div>
+<p>For with-leader group (short), it was observed that 6 of the 6 items correlated at least .3 with at least one other item, suggesting reasonable factorability. See figure 8.</p>
+<div class="cell" data-layout-align="center">
+<div class="cell-output-display">
+<div class="quarto-figure quarto-figure-center">
+<figure class="figure">
+<p><img src="SOQUO_files/figure-html/unnamed-chunk-51-1.png" class="img-fluid figure-img" width="480"></p>
+</figure>
+</div>
+</div>
+</div>
+<p>For without-leader group (short), it was observed that 6 of the 6 items correlated at least .3 with at least one other item, suggesting reasonable factorability. See figure 9.</p>
+<div class="cell" data-layout-align="center">
+<div class="cell-output-display">
+<div class="quarto-figure quarto-figure-center">
+<figure class="figure">
+<p><img src="SOQUO_files/figure-html/unnamed-chunk-52-1.png" class="img-fluid figure-img" width="480"></p>
+</figure>
+</div>
+</div>
+</div>
+</section>
+</section>
+<section id="factor-analysis-for-with-leader-group-long" class="level1">
+<h1>Factor analysis for with-leader group (long)</h1>
+<section id="check-factoribility" class="level2">
+<h2 class="anchored" data-anchor-id="check-factoribility">Check factoribility</h2>
+<div class="cell" data-layout-align="center">
+
+</div>
+<div id="tbl-anonymous-5236828" class="cell tbl-parent quarto-layout-panel anchored">
+<div class="panel-caption table-caption">
+<p>Results of KMO test of sampling adequacy for with-leader group (long)</p>
+</div>
+<div class="quarto-layout-row quarto-layout-valign-top">
+<div id="tbl-anonymous-5236828-1" class="quarto-layout-cell quarto-layout-cell-subref anchored" data-ref-parent="tbl-anonymous-5236828" style="flex-basis: 50.0%;justify-content: center;">
+
+<table class="table" style="margin-left: auto; margin-right: auto;">
+<caption>Full items </caption>
+ <thead>
+  <tr>
+   <th style="text-align:left;">   </th>
+   <th style="text-align:right;"> KMO </th>
+  </tr>
+ </thead>
+<tbody>
+  <tr>
+   <td style="text-align:left;"> i_leader1 </td>
+   <td style="text-align:right;"> 0.633 </td>
+  </tr>
+  <tr>
+   <td style="text-align:left;"> i_leader2 </td>
+   <td style="text-align:right;"> 0.707 </td>
+  </tr>
+  <tr>
+   <td style="text-align:left;"> i_leader3 </td>
+   <td style="text-align:right;"> 0.751 </td>
+  </tr>
+  <tr>
+   <td style="text-align:left;"> i_skill1 </td>
+   <td style="text-align:right;"> 0.661 </td>
+  </tr>
+  <tr>
+   <td style="text-align:left;"> i_skill2 </td>
+   <td style="text-align:right;"> 0.697 </td>
+  </tr>
+  <tr>
+   <td style="text-align:left;"> i_skill3 </td>
+   <td style="text-align:right;"> 0.730 </td>
+  </tr>
+  <tr>
+   <td style="text-align:left;"> i_skill4 </td>
+   <td style="text-align:right;"> 0.762 </td>
+  </tr>
+  <tr>
+   <td style="text-align:left;"> i_orga1 </td>
+   <td style="text-align:right;"> 0.580 </td>
+  </tr>
+  <tr>
+   <td style="text-align:left;"> i_orga2 </td>
+   <td style="text-align:right;"> 0.521 </td>
+  </tr>
+  <tr>
+   <td style="text-align:left;"> i_orga3 </td>
+   <td style="text-align:right;"> 0.533 </td>
+  </tr>
+  <tr>
+   <td style="text-align:left;"> i_comm1 </td>
+   <td style="text-align:right;"> 0.807 </td>
+  </tr>
+  <tr>
+   <td style="text-align:left;"> i_comm2 </td>
+   <td style="text-align:right;"> 0.722 </td>
+  </tr>
+  <tr>
+   <td style="text-align:left;"> i_comm3 </td>
+   <td style="text-align:right;"> 0.809 </td>
+  </tr>
+  <tr>
+   <td style="text-align:left;"> i_iden1 </td>
+   <td style="text-align:right;"> 0.632 </td>
+  </tr>
+  <tr>
+   <td style="text-align:left;"> i_iden2 </td>
+   <td style="text-align:right;"> 0.608 </td>
+  </tr>
+  <tr>
+   <td style="text-align:left;"> i_iden3 </td>
+   <td style="text-align:right;"> 0.706 </td>
+  </tr>
+  <tr>
+   <td style="text-align:left;"> i_anom1 </td>
+   <td style="text-align:right;"> 0.732 </td>
+  </tr>
+  <tr>
+   <td style="text-align:left;"> i_anom2 </td>
+   <td style="text-align:right;"> 0.810 </td>
+  </tr>
+  <tr>
+   <td style="text-align:left;"> i_anom3 </td>
+   <td style="text-align:right;"> 0.364 </td>
+  </tr>
+  <tr>
+   <td style="text-align:left;"> i_anom4 </td>
+   <td style="text-align:right;"> 0.546 </td>
+  </tr>
+  <tr>
+   <td style="text-align:left;"> Overall </td>
+   <td style="text-align:right;"> 0.687 </td>
+  </tr>
+</tbody>
+</table>
+
+</div>
+<div id="tbl-anonymous-5236828-2" class="quarto-layout-cell quarto-layout-cell-subref anchored" data-ref-parent="tbl-anonymous-5236828" style="flex-basis: 50.0%;justify-content: center;">
+
+<table class="table" style="margin-left: auto; margin-right: auto;">
+<caption>Excluding two items with low correlation coefficient </caption>
+ <thead>
+  <tr>
+   <th style="text-align:left;">   </th>
+   <th style="text-align:right;"> KMO </th>
+  </tr>
+ </thead>
+<tbody>
+  <tr>
+   <td style="text-align:left;"> i_leader1 </td>
+   <td style="text-align:right;"> 0.622 </td>
+  </tr>
+  <tr>
+   <td style="text-align:left;"> i_leader2 </td>
+   <td style="text-align:right;"> 0.720 </td>
+  </tr>
+  <tr>
+   <td style="text-align:left;"> i_leader3 </td>
+   <td style="text-align:right;"> 0.787 </td>
+  </tr>
+  <tr>
+   <td style="text-align:left;"> i_skill1 </td>
+   <td style="text-align:right;"> 0.659 </td>
+  </tr>
+  <tr>
+   <td style="text-align:left;"> i_skill2 </td>
+   <td style="text-align:right;"> 0.735 </td>
+  </tr>
+  <tr>
+   <td style="text-align:left;"> i_skill3 </td>
+   <td style="text-align:right;"> 0.750 </td>
+  </tr>
+  <tr>
+   <td style="text-align:left;"> i_skill4 </td>
+   <td style="text-align:right;"> 0.769 </td>
+  </tr>
+  <tr>
+   <td style="text-align:left;"> i_orga1 </td>
+   <td style="text-align:right;"> 0.635 </td>
+  </tr>
+  <tr>
+   <td style="text-align:left;"> i_orga2 </td>
+   <td style="text-align:right;"> 0.540 </td>
+  </tr>
+  <tr>
+   <td style="text-align:left;"> i_orga3 </td>
+   <td style="text-align:right;"> 0.520 </td>
+  </tr>
+  <tr>
+   <td style="text-align:left;"> i_comm1 </td>
+   <td style="text-align:right;"> 0.811 </td>
+  </tr>
+  <tr>
+   <td style="text-align:left;"> i_comm2 </td>
+   <td style="text-align:right;"> 0.786 </td>
+  </tr>
+  <tr>
+   <td style="text-align:left;"> i_comm3 </td>
+   <td style="text-align:right;"> 0.806 </td>
+  </tr>
+  <tr>
+   <td style="text-align:left;"> i_iden1 </td>
+   <td style="text-align:right;"> 0.633 </td>
+  </tr>
+  <tr>
+   <td style="text-align:left;"> i_iden2 </td>
+   <td style="text-align:right;"> 0.643 </td>
+  </tr>
+  <tr>
+   <td style="text-align:left;"> i_iden3 </td>
+   <td style="text-align:right;"> 0.719 </td>
+  </tr>
+  <tr>
+   <td style="text-align:left;"> i_anom1 </td>
+   <td style="text-align:right;"> 0.716 </td>
+  </tr>
+  <tr>
+   <td style="text-align:left;"> i_anom2 </td>
+   <td style="text-align:right;"> 0.832 </td>
+  </tr>
+  <tr>
+   <td style="text-align:left;"> Overall </td>
+   <td style="text-align:right;"> 0.713 </td>
+  </tr>
+</tbody>
+</table>
+
+</div>
+</div>
+</div>
+<div class="cell" data-layout-align="center">
+<div class="cell-output-display">
+
+<table>
+<caption>Results of bartlett test for with-leader group (long)</caption>
+ <thead>
+  <tr>
+   <th style="text-align:right;"> Chi-square </th>
+   <th style="text-align:left;"> p-value </th>
+   <th style="text-align:right;"> DF </th>
+  </tr>
+ </thead>
+<tbody>
+  <tr>
+   <td style="text-align:right;"> 518.942 </td>
+   <td style="text-align:left;"> &lt;0.001 </td>
+   <td style="text-align:right;"> 190 </td>
+  </tr>
+</tbody>
+</table>
+
+</div>
+</div>
+</section>
+<section id="explore-number-of-factors" class="level2">
+<h2 class="anchored" data-anchor-id="explore-number-of-factors">Explore number of factors</h2>
+<div class="cell" data-layout-align="center">
+<div class="cell-output-display">
+<div class="quarto-figure quarto-figure-center">
+<figure class="figure">
+<p><img src="SOQUO_files/figure-html/unnamed-chunk-56-1.png" class="img-fluid figure-img" width="960"></p>
+</figure>
+</div>
+</div>
+<div class="cell-output cell-output-stdout">
+<pre><code>Parallel analysis suggests that the number of factors =  3  and the number of components =  NA </code></pre>
+</div>
+<div class="cell-output-display">
+<div class="quarto-figure quarto-figure-center">
+<figure class="figure">
+<p><img src="SOQUO_files/figure-html/unnamed-chunk-56-2.png" class="img-fluid figure-img" width="960"></p>
+</figure>
+</div>
+</div>
+<div class="cell-output cell-output-stdout">
+<pre><code>
+Number of factors
+Call: vss(x = x, n = n, rotate = rotate, diagonal = diagonal, fm = fm, 
+    n.obs = n.obs, plot = FALSE, title = title, use = use, cor = cor)
+VSS complexity 1 achieves a maximimum of 0.49  with  1  factors
+VSS complexity 2 achieves a maximimum of 0.63  with  3  factors
+The Velicer MAP achieves a minimum of 0.02  with  2  factors 
+Empirical BIC achieves a minimum of  -449.58  with  2  factors
+Sample Size adjusted BIC achieves a minimum of  -38.79  with  5  factors
+
+Statistics by number of factors 
+  vss1 vss2   map dof chisq    prob sqresid  fit RMSEA  BIC SABIC complex
+1 0.49 0.00 0.022 170   302 1.8e-09    18.5 0.49 0.088 -481    56     1.0
+2 0.43 0.61 0.020 151   200 4.9e-03    14.1 0.61 0.056 -496   -19     1.4
+3 0.41 0.63 0.022 133   159 6.0e-02    11.7 0.68 0.043 -453   -33     1.7
+4 0.39 0.59 0.026 116   136 1.0e-01    10.6 0.71 0.040 -398   -32     2.0
+5 0.38 0.58 0.030 100   106 3.2e-01     9.4 0.74 0.022 -355   -39     2.1
+  eChisq  SRMR eCRMS eBIC
+1    464 0.111 0.117 -319
+2    246 0.080 0.090 -450
+3    164 0.066 0.078 -449
+4    137 0.060 0.077 -397
+5    106 0.053 0.073 -355</code></pre>
+</div>
+</div>
+</section>
+<section id="explore-factor-solutions" class="level2">
+<h2 class="anchored" data-anchor-id="explore-factor-solutions">Explore factor solutions</h2>
+<section id="explore-5-factor-solution" class="level3">
+<h3 class="anchored" data-anchor-id="explore-5-factor-solution">Explore 5-factor solution</h3>
+<div class="cell" data-layout-align="center">
+<div class="cell-output-display">
+<div class="quarto-figure quarto-figure-center">
+<figure class="figure">
+<p><img src="SOQUO_files/figure-html/unnamed-chunk-57-1.png" class="img-fluid figure-img" width="960"></p>
+</figure>
+</div>
+</div>
+<div class="cell-output-display">
+
+<table class="table" style="margin-left: auto; margin-right: auto;">
+<caption>Factor loadings of the 5-factor solution for with-leader group (long)</caption>
+ <thead>
+  <tr>
+   <th style="text-align:left;"> Item </th>
+   <th style="text-align:right;"> ML2 </th>
+   <th style="text-align:right;"> ML4 </th>
+   <th style="text-align:right;"> ML3 </th>
+   <th style="text-align:right;"> ML5 </th>
+   <th style="text-align:right;"> ML1 </th>
+  </tr>
+ </thead>
+<tbody>
+  <tr>
+   <td style="text-align:left;"> i_leader1 </td>
+   <td style="text-align:right;"> -0.448 </td>
+   <td style="text-align:right;">  </td>
+   <td style="text-align:right;"> 0.407 </td>
+   <td style="text-align:right;">  </td>
+   <td style="text-align:right;">  </td>
+  </tr>
+  <tr>
+   <td style="text-align:left;"> i_leader2 </td>
+   <td style="text-align:right;">  </td>
+   <td style="text-align:right;">  </td>
+   <td style="text-align:right;"> 0.747 </td>
+   <td style="text-align:right;">  </td>
+   <td style="text-align:right;">  </td>
+  </tr>
+  <tr>
+   <td style="text-align:left;"> i_leader3 </td>
+   <td style="text-align:right;">  </td>
+   <td style="text-align:right;"> 0.556 </td>
+   <td style="text-align:right;">  </td>
+   <td style="text-align:right;">  </td>
+   <td style="text-align:right;">  </td>
+  </tr>
+  <tr>
+   <td style="text-align:left;"> i_skill1 </td>
+   <td style="text-align:right;"> 0.88 </td>
+   <td style="text-align:right;">  </td>
+   <td style="text-align:right;">  </td>
+   <td style="text-align:right;">  </td>
+   <td style="text-align:right;">  </td>
+  </tr>
+  <tr>
+   <td style="text-align:left;"> i_skill2 </td>
+   <td style="text-align:right;"> 0.665 </td>
+   <td style="text-align:right;">  </td>
+   <td style="text-align:right;">  </td>
+   <td style="text-align:right;">  </td>
+   <td style="text-align:right;">  </td>
+  </tr>
+  <tr>
+   <td style="text-align:left;"> i_skill3 </td>
+   <td style="text-align:right;"> 0.327 </td>
+   <td style="text-align:right;"> 0.321 </td>
+   <td style="text-align:right;">  </td>
+   <td style="text-align:right;">  </td>
+   <td style="text-align:right;">  </td>
+  </tr>
+  <tr>
+   <td style="text-align:left;"> i_skill4 </td>
+   <td style="text-align:right;"> 0.333 </td>
+   <td style="text-align:right;">  </td>
+   <td style="text-align:right;">  </td>
+   <td style="text-align:right;">  </td>
+   <td style="text-align:right;">  </td>
+  </tr>
+  <tr>
+   <td style="text-align:left;"> i_orga1 </td>
+   <td style="text-align:right;">  </td>
+   <td style="text-align:right;"> 0.527 </td>
+   <td style="text-align:right;">  </td>
+   <td style="text-align:right;">  </td>
+   <td style="text-align:right;">  </td>
+  </tr>
+  <tr>
+   <td style="text-align:left;"> i_orga2 </td>
+   <td style="text-align:right;">  </td>
+   <td style="text-align:right;">  </td>
+   <td style="text-align:right;">  </td>
+   <td style="text-align:right;">  </td>
+   <td style="text-align:right;">  </td>
+  </tr>
+  <tr>
+   <td style="text-align:left;"> i_orga3 </td>
+   <td style="text-align:right;">  </td>
+   <td style="text-align:right;"> 0.368 </td>
+   <td style="text-align:right;">  </td>
+   <td style="text-align:right;">  </td>
+   <td style="text-align:right;">  </td>
+  </tr>
+  <tr>
+   <td style="text-align:left;"> i_comm1 </td>
+   <td style="text-align:right;">  </td>
+   <td style="text-align:right;">  </td>
+   <td style="text-align:right;"> 0.511 </td>
+   <td style="text-align:right;">  </td>
+   <td style="text-align:right;">  </td>
+  </tr>
+  <tr>
+   <td style="text-align:left;"> i_comm2 </td>
+   <td style="text-align:right;"> 0.385 </td>
+   <td style="text-align:right;"> 0.303 </td>
+   <td style="text-align:right;">  </td>
+   <td style="text-align:right;">  </td>
+   <td style="text-align:right;"> 0.833 </td>
+  </tr>
+  <tr>
+   <td style="text-align:left;"> i_comm3 </td>
+   <td style="text-align:right;">  </td>
+   <td style="text-align:right;"> 0.649 </td>
+   <td style="text-align:right;">  </td>
+   <td style="text-align:right;">  </td>
+   <td style="text-align:right;">  </td>
+  </tr>
+  <tr>
+   <td style="text-align:left;"> i_iden1 </td>
+   <td style="text-align:right;">  </td>
+   <td style="text-align:right;">  </td>
+   <td style="text-align:right;">  </td>
+   <td style="text-align:right;">  </td>
+   <td style="text-align:right;">  </td>
+  </tr>
+  <tr>
+   <td style="text-align:left;"> i_iden2 </td>
+   <td style="text-align:right;">  </td>
+   <td style="text-align:right;">  </td>
+   <td style="text-align:right;">  </td>
+   <td style="text-align:right;">  </td>
+   <td style="text-align:right;">  </td>
+  </tr>
+  <tr>
+   <td style="text-align:left;"> i_iden3 </td>
+   <td style="text-align:right;">  </td>
+   <td style="text-align:right;">  </td>
+   <td style="text-align:right;">  </td>
+   <td style="text-align:right;"> 0.549 </td>
+   <td style="text-align:right;">  </td>
+  </tr>
+  <tr>
+   <td style="text-align:left;"> i_anom1 </td>
+   <td style="text-align:right;">  </td>
+   <td style="text-align:right;">  </td>
+   <td style="text-align:right;">  </td>
+   <td style="text-align:right;"> 0.704 </td>
+   <td style="text-align:right;">  </td>
+  </tr>
+  <tr>
+   <td style="text-align:left;"> i_anom2 </td>
+   <td style="text-align:right;">  </td>
+   <td style="text-align:right;"> 0.413 </td>
+   <td style="text-align:right;"> 0.323 </td>
+   <td style="text-align:right;">  </td>
+   <td style="text-align:right;">  </td>
+  </tr>
+  <tr>
+   <td style="text-align:left;"> i_anom3 </td>
+   <td style="text-align:right;">  </td>
+   <td style="text-align:right;">  </td>
+   <td style="text-align:right;">  </td>
+   <td style="text-align:right;"> 0.345 </td>
+   <td style="text-align:right;">  </td>
+  </tr>
+  <tr>
+   <td style="text-align:left;"> i_anom4 </td>
+   <td style="text-align:right;">  </td>
+   <td style="text-align:right;">  </td>
+   <td style="text-align:right;">  </td>
+   <td style="text-align:right;">  </td>
+   <td style="text-align:right;">  </td>
+  </tr>
+</tbody>
+</table>
+
+</div>
+</div>
+</section>
+<section id="explore-4-factor-solution" class="level3">
+<h3 class="anchored" data-anchor-id="explore-4-factor-solution">Explore 4-factor solution</h3>
+<div class="cell" data-layout-align="center">
+<div class="cell-output-display">
+<div class="quarto-figure quarto-figure-center">
+<figure class="figure">
+<p><img src="SOQUO_files/figure-html/unnamed-chunk-58-1.png" class="img-fluid figure-img" width="960"></p>
+</figure>
+</div>
+</div>
+<div class="cell-output-display">
+
+<table class="table" style="margin-left: auto; margin-right: auto;">
+<caption>Factor loadings of the 4-factor solution for with-leader group (long)</caption>
+ <thead>
+  <tr>
+   <th style="text-align:left;"> Item </th>
+   <th style="text-align:right;"> ML1 </th>
+   <th style="text-align:right;"> ML3 </th>
+   <th style="text-align:right;"> ML2 </th>
+   <th style="text-align:right;"> ML4 </th>
+  </tr>
+ </thead>
+<tbody>
+  <tr>
+   <td style="text-align:left;"> i_leader1 </td>
+   <td style="text-align:right;"> -0.4 </td>
+   <td style="text-align:right;">  </td>
+   <td style="text-align:right;"> 0.42 </td>
+   <td style="text-align:right;"> 0.334 </td>
+  </tr>
+  <tr>
+   <td style="text-align:left;"> i_leader2 </td>
+   <td style="text-align:right;">  </td>
+   <td style="text-align:right;">  </td>
+   <td style="text-align:right;"> 0.768 </td>
+   <td style="text-align:right;">  </td>
+  </tr>
+  <tr>
+   <td style="text-align:left;"> i_leader3 </td>
+   <td style="text-align:right;">  </td>
+   <td style="text-align:right;"> 0.598 </td>
+   <td style="text-align:right;">  </td>
+   <td style="text-align:right;">  </td>
+  </tr>
+  <tr>
+   <td style="text-align:left;"> i_skill1 </td>
+   <td style="text-align:right;"> 0.93 </td>
+   <td style="text-align:right;">  </td>
+   <td style="text-align:right;">  </td>
+   <td style="text-align:right;">  </td>
+  </tr>
+  <tr>
+   <td style="text-align:left;"> i_skill2 </td>
+   <td style="text-align:right;"> 0.653 </td>
+   <td style="text-align:right;">  </td>
+   <td style="text-align:right;">  </td>
+   <td style="text-align:right;">  </td>
+  </tr>
+  <tr>
+   <td style="text-align:left;"> i_skill3 </td>
+   <td style="text-align:right;"> 0.348 </td>
+   <td style="text-align:right;">  </td>
+   <td style="text-align:right;">  </td>
+   <td style="text-align:right;">  </td>
+  </tr>
+  <tr>
+   <td style="text-align:left;"> i_skill4 </td>
+   <td style="text-align:right;"> 0.338 </td>
+   <td style="text-align:right;">  </td>
+   <td style="text-align:right;">  </td>
+   <td style="text-align:right;">  </td>
+  </tr>
+  <tr>
+   <td style="text-align:left;"> i_orga1 </td>
+   <td style="text-align:right;">  </td>
+   <td style="text-align:right;"> 0.542 </td>
+   <td style="text-align:right;">  </td>
+   <td style="text-align:right;">  </td>
+  </tr>
+  <tr>
+   <td style="text-align:left;"> i_orga2 </td>
+   <td style="text-align:right;">  </td>
+   <td style="text-align:right;">  </td>
+   <td style="text-align:right;">  </td>
+   <td style="text-align:right;">  </td>
+  </tr>
+  <tr>
+   <td style="text-align:left;"> i_orga3 </td>
+   <td style="text-align:right;">  </td>
+   <td style="text-align:right;"> 0.389 </td>
+   <td style="text-align:right;">  </td>
+   <td style="text-align:right;">  </td>
+  </tr>
+  <tr>
+   <td style="text-align:left;"> i_comm1 </td>
+   <td style="text-align:right;">  </td>
+   <td style="text-align:right;">  </td>
+   <td style="text-align:right;"> 0.5 </td>
+   <td style="text-align:right;">  </td>
+  </tr>
+  <tr>
+   <td style="text-align:left;"> i_comm2 </td>
+   <td style="text-align:right;"> 0.363 </td>
+   <td style="text-align:right;"> 0.382 </td>
+   <td style="text-align:right;">  </td>
+   <td style="text-align:right;"> 0.374 </td>
+  </tr>
+  <tr>
+   <td style="text-align:left;"> i_comm3 </td>
+   <td style="text-align:right;">  </td>
+   <td style="text-align:right;"> 0.616 </td>
+   <td style="text-align:right;">  </td>
+   <td style="text-align:right;">  </td>
+  </tr>
+  <tr>
+   <td style="text-align:left;"> i_iden1 </td>
+   <td style="text-align:right;">  </td>
+   <td style="text-align:right;">  </td>
+   <td style="text-align:right;">  </td>
+   <td style="text-align:right;">  </td>
+  </tr>
+  <tr>
+   <td style="text-align:left;"> i_iden2 </td>
+   <td style="text-align:right;">  </td>
+   <td style="text-align:right;">  </td>
+   <td style="text-align:right;">  </td>
+   <td style="text-align:right;">  </td>
+  </tr>
+  <tr>
+   <td style="text-align:left;"> i_iden3 </td>
+   <td style="text-align:right;">  </td>
+   <td style="text-align:right;"> 0.342 </td>
+   <td style="text-align:right;">  </td>
+   <td style="text-align:right;"> 0.656 </td>
+  </tr>
+  <tr>
+   <td style="text-align:left;"> i_anom1 </td>
+   <td style="text-align:right;">  </td>
+   <td style="text-align:right;">  </td>
+   <td style="text-align:right;">  </td>
+   <td style="text-align:right;"> 0.627 </td>
+  </tr>
+  <tr>
+   <td style="text-align:left;"> i_anom2 </td>
+   <td style="text-align:right;">  </td>
+   <td style="text-align:right;"> 0.41 </td>
+   <td style="text-align:right;"> 0.303 </td>
+   <td style="text-align:right;">  </td>
+  </tr>
+  <tr>
+   <td style="text-align:left;"> i_anom3 </td>
+   <td style="text-align:right;">  </td>
+   <td style="text-align:right;">  </td>
+   <td style="text-align:right;">  </td>
+   <td style="text-align:right;">  </td>
+  </tr>
+  <tr>
+   <td style="text-align:left;"> i_anom4 </td>
+   <td style="text-align:right;">  </td>
+   <td style="text-align:right;">  </td>
+   <td style="text-align:right;">  </td>
+   <td style="text-align:right;">  </td>
+  </tr>
+</tbody>
+</table>
+
+</div>
+</div>
+</section>
+<section id="explore-3-factor-solution" class="level3">
+<h3 class="anchored" data-anchor-id="explore-3-factor-solution">Explore 3-factor solution</h3>
+<div class="cell" data-layout-align="center">
+<div class="cell-output-display">
+<div class="quarto-figure quarto-figure-center">
+<figure class="figure">
+<p><img src="SOQUO_files/figure-html/unnamed-chunk-59-1.png" class="img-fluid figure-img" width="960"></p>
+</figure>
+</div>
+</div>
+<div class="cell-output-display">
+
+<table class="table" style="margin-left: auto; margin-right: auto;">
+<caption>Factor loadings of the 3-factor solution for with-leader group (long)</caption>
+ <thead>
+  <tr>
+   <th style="text-align:left;"> Item </th>
+   <th style="text-align:right;"> ML1 </th>
+   <th style="text-align:right;"> ML3 </th>
+   <th style="text-align:right;"> ML2 </th>
+  </tr>
+ </thead>
+<tbody>
+  <tr>
+   <td style="text-align:left;"> i_leader1 </td>
+   <td style="text-align:right;">  </td>
+   <td style="text-align:right;">  </td>
+   <td style="text-align:right;"> 0.615 </td>
+  </tr>
+  <tr>
+   <td style="text-align:left;"> i_leader2 </td>
+   <td style="text-align:right;">  </td>
+   <td style="text-align:right;">  </td>
+   <td style="text-align:right;"> 0.689 </td>
+  </tr>
+  <tr>
+   <td style="text-align:left;"> i_leader3 </td>
+   <td style="text-align:right;">  </td>
+   <td style="text-align:right;"> 0.556 </td>
+   <td style="text-align:right;"> 0.322 </td>
+  </tr>
+  <tr>
+   <td style="text-align:left;"> i_skill1 </td>
+   <td style="text-align:right;"> 0.929 </td>
+   <td style="text-align:right;">  </td>
+   <td style="text-align:right;">  </td>
+  </tr>
+  <tr>
+   <td style="text-align:left;"> i_skill2 </td>
+   <td style="text-align:right;"> 0.638 </td>
+   <td style="text-align:right;">  </td>
+   <td style="text-align:right;">  </td>
+  </tr>
+  <tr>
+   <td style="text-align:left;"> i_skill3 </td>
+   <td style="text-align:right;"> 0.369 </td>
+   <td style="text-align:right;">  </td>
+   <td style="text-align:right;">  </td>
+  </tr>
+  <tr>
+   <td style="text-align:left;"> i_skill4 </td>
+   <td style="text-align:right;"> 0.392 </td>
+   <td style="text-align:right;">  </td>
+   <td style="text-align:right;">  </td>
+  </tr>
+  <tr>
+   <td style="text-align:left;"> i_orga1 </td>
+   <td style="text-align:right;">  </td>
+   <td style="text-align:right;"> 0.518 </td>
+   <td style="text-align:right;">  </td>
+  </tr>
+  <tr>
+   <td style="text-align:left;"> i_orga2 </td>
+   <td style="text-align:right;">  </td>
+   <td style="text-align:right;"> 0.301 </td>
+   <td style="text-align:right;">  </td>
+  </tr>
+  <tr>
+   <td style="text-align:left;"> i_orga3 </td>
+   <td style="text-align:right;">  </td>
+   <td style="text-align:right;"> 0.445 </td>
+   <td style="text-align:right;">  </td>
+  </tr>
+  <tr>
+   <td style="text-align:left;"> i_comm1 </td>
+   <td style="text-align:right;"> 0.358 </td>
+   <td style="text-align:right;">  </td>
+   <td style="text-align:right;"> 0.384 </td>
+  </tr>
+  <tr>
+   <td style="text-align:left;"> i_comm2 </td>
+   <td style="text-align:right;"> 0.403 </td>
+   <td style="text-align:right;"> 0.471 </td>
+   <td style="text-align:right;"> 0.31 </td>
+  </tr>
+  <tr>
+   <td style="text-align:left;"> i_comm3 </td>
+   <td style="text-align:right;">  </td>
+   <td style="text-align:right;"> 0.494 </td>
+   <td style="text-align:right;">  </td>
+  </tr>
+  <tr>
+   <td style="text-align:left;"> i_iden1 </td>
+   <td style="text-align:right;">  </td>
+   <td style="text-align:right;"> 0.378 </td>
+   <td style="text-align:right;">  </td>
+  </tr>
+  <tr>
+   <td style="text-align:left;"> i_iden2 </td>
+   <td style="text-align:right;">  </td>
+   <td style="text-align:right;">  </td>
+   <td style="text-align:right;">  </td>
+  </tr>
+  <tr>
+   <td style="text-align:left;"> i_iden3 </td>
+   <td style="text-align:right;">  </td>
+   <td style="text-align:right;"> 0.484 </td>
+   <td style="text-align:right;"> 0.37 </td>
+  </tr>
+  <tr>
+   <td style="text-align:left;"> i_anom1 </td>
+   <td style="text-align:right;">  </td>
+   <td style="text-align:right;">  </td>
+   <td style="text-align:right;"> 0.435 </td>
+  </tr>
+  <tr>
+   <td style="text-align:left;"> i_anom2 </td>
+   <td style="text-align:right;">  </td>
+   <td style="text-align:right;"> 0.398 </td>
+   <td style="text-align:right;"> 0.387 </td>
+  </tr>
+  <tr>
+   <td style="text-align:left;"> i_anom3 </td>
+   <td style="text-align:right;">  </td>
+   <td style="text-align:right;">  </td>
+   <td style="text-align:right;">  </td>
+  </tr>
+  <tr>
+   <td style="text-align:left;"> i_anom4 </td>
+   <td style="text-align:right;">  </td>
+   <td style="text-align:right;">  </td>
+   <td style="text-align:right;">  </td>
+  </tr>
+</tbody>
+</table>
+
+</div>
+</div>
+</section>
+<section id="finetune-3-factor-solution" class="level3">
+<h3 class="anchored" data-anchor-id="finetune-3-factor-solution">Finetune 3-factor solution</h3>
+<div class="cell" data-layout-align="center">
+<div class="cell-output-display">
+<div class="quarto-figure quarto-figure-center">
+<figure class="figure">
+<p><img src="SOQUO_files/figure-html/unnamed-chunk-60-1.png" class="img-fluid figure-img" width="960"></p>
+</figure>
+</div>
+</div>
+<div class="cell-output-display">
+
+<table class="table" style="margin-left: auto; margin-right: auto;">
+<caption>Factor loadings of the 3-factor solution for with-leader group (long)</caption>
+ <thead>
+  <tr>
+   <th style="text-align:left;"> Item </th>
+   <th style="text-align:right;"> ML2 </th>
+   <th style="text-align:right;"> ML1 </th>
+   <th style="text-align:right;"> ML3 </th>
+  </tr>
+ </thead>
+<tbody>
+  <tr>
+   <td style="text-align:left;"> i_leader1 </td>
+   <td style="text-align:right;"> 0.614 </td>
+   <td style="text-align:right;"> -0.356 </td>
+   <td style="text-align:right;">  </td>
+  </tr>
+  <tr>
+   <td style="text-align:left;"> i_leader2 </td>
+   <td style="text-align:right;"> 0.613 </td>
+   <td style="text-align:right;">  </td>
+   <td style="text-align:right;">  </td>
+  </tr>
+  <tr>
+   <td style="text-align:left;"> i_leader3 </td>
+   <td style="text-align:right;"> 0.344 </td>
+   <td style="text-align:right;">  </td>
+   <td style="text-align:right;"> 0.589 </td>
+  </tr>
+  <tr>
+   <td style="text-align:left;"> i_skill1 </td>
+   <td style="text-align:right;">  </td>
+   <td style="text-align:right;"> 0.925 </td>
+   <td style="text-align:right;">  </td>
+  </tr>
+  <tr>
+   <td style="text-align:left;"> i_skill2 </td>
+   <td style="text-align:right;">  </td>
+   <td style="text-align:right;"> 0.651 </td>
+   <td style="text-align:right;">  </td>
+  </tr>
+  <tr>
+   <td style="text-align:left;"> i_skill4 </td>
+   <td style="text-align:right;">  </td>
+   <td style="text-align:right;"> 0.355 </td>
+   <td style="text-align:right;">  </td>
+  </tr>
+  <tr>
+   <td style="text-align:left;"> i_orga1 </td>
+   <td style="text-align:right;">  </td>
+   <td style="text-align:right;">  </td>
+   <td style="text-align:right;"> 0.598 </td>
+  </tr>
+  <tr>
+   <td style="text-align:left;"> i_comm3 </td>
+   <td style="text-align:right;">  </td>
+   <td style="text-align:right;">  </td>
+   <td style="text-align:right;"> 0.596 </td>
+  </tr>
+  <tr>
+   <td style="text-align:left;"> i_iden2 </td>
+   <td style="text-align:right;"> 0.332 </td>
+   <td style="text-align:right;">  </td>
+   <td style="text-align:right;">  </td>
+  </tr>
+  <tr>
+   <td style="text-align:left;"> i_iden3 </td>
+   <td style="text-align:right;"> 0.46 </td>
+   <td style="text-align:right;">  </td>
+   <td style="text-align:right;"> 0.388 </td>
+  </tr>
+  <tr>
+   <td style="text-align:left;"> i_anom1 </td>
+   <td style="text-align:right;"> 0.515 </td>
+   <td style="text-align:right;">  </td>
+   <td style="text-align:right;">  </td>
+  </tr>
+  <tr>
+   <td style="text-align:left;"> i_anom2 </td>
+   <td style="text-align:right;"> 0.414 </td>
+   <td style="text-align:right;">  </td>
+   <td style="text-align:right;"> 0.402 </td>
+  </tr>
+</tbody>
+</table>
+
+</div>
+</div>
+</section>
+<section id="explore-2-factor-solution" class="level3">
+<h3 class="anchored" data-anchor-id="explore-2-factor-solution">Explore 2-factor solution</h3>
+<div class="cell" data-layout-align="center">
+<div class="cell-output-display">
+<div class="quarto-figure quarto-figure-center">
+<figure class="figure">
+<p><img src="SOQUO_files/figure-html/unnamed-chunk-61-1.png" class="img-fluid figure-img" width="960"></p>
+</figure>
+</div>
+</div>
+<div class="cell-output-display">
+
+<table class="table" style="margin-left: auto; margin-right: auto;">
+<caption>Factor loadings of the 2-factor solution for with-leader group (long)</caption>
+ <thead>
+  <tr>
+   <th style="text-align:left;"> Item </th>
+   <th style="text-align:right;"> ML2 </th>
+   <th style="text-align:right;"> ML1 </th>
+  </tr>
+ </thead>
+<tbody>
+  <tr>
+   <td style="text-align:left;"> i_leader1 </td>
+   <td style="text-align:right;"> 0.528 </td>
+   <td style="text-align:right;">  </td>
+  </tr>
+  <tr>
+   <td style="text-align:left;"> i_leader2 </td>
+   <td style="text-align:right;"> 0.385 </td>
+   <td style="text-align:right;">  </td>
+  </tr>
+  <tr>
+   <td style="text-align:left;"> i_leader3 </td>
+   <td style="text-align:right;"> 0.581 </td>
+   <td style="text-align:right;">  </td>
+  </tr>
+  <tr>
+   <td style="text-align:left;"> i_skill1 </td>
+   <td style="text-align:right;">  </td>
+   <td style="text-align:right;"> 0.957 </td>
+  </tr>
+  <tr>
+   <td style="text-align:left;"> i_skill2 </td>
+   <td style="text-align:right;">  </td>
+   <td style="text-align:right;"> 0.635 </td>
+  </tr>
+  <tr>
+   <td style="text-align:left;"> i_skill3 </td>
+   <td style="text-align:right;">  </td>
+   <td style="text-align:right;"> 0.416 </td>
+  </tr>
+  <tr>
+   <td style="text-align:left;"> i_skill4 </td>
+   <td style="text-align:right;">  </td>
+   <td style="text-align:right;"> 0.374 </td>
+  </tr>
+  <tr>
+   <td style="text-align:left;"> i_orga1 </td>
+   <td style="text-align:right;">  </td>
+   <td style="text-align:right;">  </td>
+  </tr>
+  <tr>
+   <td style="text-align:left;"> i_orga2 </td>
+   <td style="text-align:right;">  </td>
+   <td style="text-align:right;"> 0.322 </td>
+  </tr>
+  <tr>
+   <td style="text-align:left;"> i_orga3 </td>
+   <td style="text-align:right;"> 0.397 </td>
+   <td style="text-align:right;">  </td>
+  </tr>
+  <tr>
+   <td style="text-align:left;"> i_comm1 </td>
+   <td style="text-align:right;">  </td>
+   <td style="text-align:right;"> 0.348 </td>
+  </tr>
+  <tr>
+   <td style="text-align:left;"> i_comm2 </td>
+   <td style="text-align:right;"> 0.467 </td>
+   <td style="text-align:right;"> 0.509 </td>
+  </tr>
+  <tr>
+   <td style="text-align:left;"> i_comm3 </td>
+   <td style="text-align:right;"> 0.47 </td>
+   <td style="text-align:right;">  </td>
+  </tr>
+  <tr>
+   <td style="text-align:left;"> i_iden1 </td>
+   <td style="text-align:right;"> 0.324 </td>
+   <td style="text-align:right;">  </td>
+  </tr>
+  <tr>
+   <td style="text-align:left;"> i_iden2 </td>
+   <td style="text-align:right;"> 0.313 </td>
+   <td style="text-align:right;">  </td>
+  </tr>
+  <tr>
+   <td style="text-align:left;"> i_iden3 </td>
+   <td style="text-align:right;"> 0.591 </td>
+   <td style="text-align:right;">  </td>
+  </tr>
+  <tr>
+   <td style="text-align:left;"> i_anom1 </td>
+   <td style="text-align:right;"> 0.477 </td>
+   <td style="text-align:right;"> 0.318 </td>
+  </tr>
+  <tr>
+   <td style="text-align:left;"> i_anom2 </td>
+   <td style="text-align:right;"> 0.537 </td>
+   <td style="text-align:right;">  </td>
+  </tr>
+  <tr>
+   <td style="text-align:left;"> i_anom3 </td>
+   <td style="text-align:right;">  </td>
+   <td style="text-align:right;">  </td>
+  </tr>
+  <tr>
+   <td style="text-align:left;"> i_anom4 </td>
+   <td style="text-align:right;">  </td>
+   <td style="text-align:right;">  </td>
+  </tr>
+</tbody>
+</table>
+
+</div>
+</div>
+</section>
+<section id="finetune-2-factor-solution" class="level3">
+<h3 class="anchored" data-anchor-id="finetune-2-factor-solution">Finetune 2-factor solution</h3>
+<div class="cell" data-layout-align="center">
+<div class="cell-output-display">
+<div class="quarto-figure quarto-figure-center">
+<figure class="figure">
+<p><img src="SOQUO_files/figure-html/unnamed-chunk-62-1.png" class="img-fluid figure-img" width="960"></p>
+</figure>
+</div>
+</div>
+<div class="cell-output-display">
+
+<table class="table" style="margin-left: auto; margin-right: auto;">
+<caption>Factor loadings of the 3-factor solution for with-leader group (long)</caption>
+ <thead>
+  <tr>
+   <th style="text-align:left;"> Item </th>
+   <th style="text-align:right;"> ML2 </th>
+   <th style="text-align:right;"> ML1 </th>
+  </tr>
+ </thead>
+<tbody>
+  <tr>
+   <td style="text-align:left;"> i_leader2 </td>
+   <td style="text-align:right;"> 0.361 </td>
+   <td style="text-align:right;">  </td>
+  </tr>
+  <tr>
+   <td style="text-align:left;"> i_leader3 </td>
+   <td style="text-align:right;"> 0.755 </td>
+   <td style="text-align:right;">  </td>
+  </tr>
+  <tr>
+   <td style="text-align:left;"> i_skill1 </td>
+   <td style="text-align:right;">  </td>
+   <td style="text-align:right;"> 0.898 </td>
+  </tr>
+  <tr>
+   <td style="text-align:left;"> i_skill2 </td>
+   <td style="text-align:right;">  </td>
+   <td style="text-align:right;"> 0.671 </td>
+  </tr>
+  <tr>
+   <td style="text-align:left;"> i_skill3 </td>
+   <td style="text-align:right;">  </td>
+   <td style="text-align:right;"> 0.37 </td>
+  </tr>
+  <tr>
+   <td style="text-align:left;"> i_orga1 </td>
+   <td style="text-align:right;"> 0.312 </td>
+   <td style="text-align:right;">  </td>
+  </tr>
+  <tr>
+   <td style="text-align:left;"> i_comm1 </td>
+   <td style="text-align:right;"> 0.332 </td>
+   <td style="text-align:right;">  </td>
+  </tr>
+  <tr>
+   <td style="text-align:left;"> i_comm2 </td>
+   <td style="text-align:right;"> 0.559 </td>
+   <td style="text-align:right;"> 0.382 </td>
+  </tr>
+  <tr>
+   <td style="text-align:left;"> i_comm3 </td>
+   <td style="text-align:right;"> 0.593 </td>
+   <td style="text-align:right;">  </td>
+  </tr>
+  <tr>
+   <td style="text-align:left;"> i_iden2 </td>
+   <td style="text-align:right;">  </td>
+   <td style="text-align:right;">  </td>
+  </tr>
+  <tr>
+   <td style="text-align:left;"> i_anom1 </td>
+   <td style="text-align:right;"> 0.386 </td>
+   <td style="text-align:right;">  </td>
+  </tr>
+</tbody>
+</table>
+
+</div>
+</div>
+</section>
+</section>
+<section id="comparison-between-factor-solutions-with-leader-long" class="level2">
+<h2 class="anchored" data-anchor-id="comparison-between-factor-solutions-with-leader-long">Comparison between factor solutions, with-leader (long)</h2>
+<div class="cell" data-layout-align="center">
+<div class="cell-output-display">
+
+<table>
+<caption>Comparison between factor solutions, with-leader (long)</caption>
+ <thead>
+  <tr>
+   <th style="text-align:left;">   </th>
+   <th style="text-align:right;"> CumulativeVariance </th>
+  </tr>
+ </thead>
+<tbody>
+  <tr>
+   <td style="text-align:left;"> 2-factor(tuned) </td>
+   <td style="text-align:right;"> 0.329 </td>
+  </tr>
+  <tr>
+   <td style="text-align:left;"> 2-factor </td>
+   <td style="text-align:right;"> 0.265 </td>
+  </tr>
+  <tr>
+   <td style="text-align:left;"> 3-factor(tuned) </td>
+   <td style="text-align:right;"> 0.403 </td>
+  </tr>
+  <tr>
+   <td style="text-align:left;"> 3-factor </td>
+   <td style="text-align:right;"> 0.317 </td>
+  </tr>
+  <tr>
+   <td style="text-align:left;"> 4-factor </td>
+   <td style="text-align:right;"> 0.352 </td>
+  </tr>
+  <tr>
+   <td style="text-align:left;"> 5-factor </td>
+   <td style="text-align:right;"> 0.396 </td>
+  </tr>
+</tbody>
+</table>
+
+</div>
+</div>
+<section id="check-the-factor-connotation-for-3-factor-solution-fine-tuned" class="level3">
+<h3 class="anchored" data-anchor-id="check-the-factor-connotation-for-3-factor-solution-fine-tuned">Check the factor connotation for 3-factor solution (fine-tuned)</h3>
+<div class="cell" data-layout-align="center">
+<div class="cell-output-display">
+
+<table class="table" style="margin-left: auto; margin-right: auto;">
+<caption>Final items for 3 factor solution, with-leader group (long)</caption>
+ <thead>
+  <tr>
+   <th style="text-align:left;">   </th>
+   <th style="text-align:left;"> Item </th>
+  </tr>
+ </thead>
+<tbody>
+  <tr grouplength="7"><td colspan="2" style="background-color: #666; color: #fff;"><strong>ML2: Leadership Quality</strong></td></tr>
+<tr>
+   <td style="text-align:left;padding-left: 2em;" indentlevel="1"> i_iden2 </td>
+   <td style="text-align:left;width: 12cm; "> A reasonable alternative trip existed in case of disagreements </td>
+  </tr>
+  <tr>
+   <td style="text-align:left;padding-left: 2em;" indentlevel="1"> i_leader3 </td>
+   <td style="text-align:left;width: 12cm; "> Everyone could voice their concerns to the leader (formal or informal) </td>
+  </tr>
+  <tr>
+   <td style="text-align:left;padding-left: 2em;" indentlevel="1"> i_anom1 </td>
+   <td style="text-align:left;width: 12cm; "> The group decisions at the decision points were unanimous </td>
+  </tr>
+  <tr>
+   <td style="text-align:left;padding-left: 2em;" indentlevel="1"> i_leader1 </td>
+   <td style="text-align:left;width: 12cm; "> The leader (formal or informal) was the best suited person in the group to make the decisions. </td>
+  </tr>
+  <tr>
+   <td style="text-align:left;padding-left: 2em;" indentlevel="1"> i_leader2 </td>
+   <td style="text-align:left;width: 12cm; "> The leader (formal or informal) communicated openly and clearly </td>
+  </tr>
+  <tr>
+   <td style="text-align:left;padding-left: 2em;" indentlevel="1"> i_comm3 </td>
+   <td style="text-align:left;width: 12cm; "> Everyone voiced their concerns whenever they felt necessary </td>
+  </tr>
+  <tr>
+   <td style="text-align:left;padding-left: 2em;" indentlevel="1"> i_comm2 </td>
+   <td style="text-align:left;width: 12cm; "> Everyone in the group understood the decisions that were made </td>
+  </tr>
+  <tr grouplength="2"><td colspan="2" style="background-color: #666; color: #fff;"><strong>ML3: Planning</strong></td></tr>
+<tr>
+   <td style="text-align:left;padding-left: 2em;" indentlevel="1"> i_orga1 </td>
+   <td style="text-align:left;width: 12cm; "> The group members knew each other well </td>
+  </tr>
+  <tr>
+   <td style="text-align:left;padding-left: 2em;" indentlevel="1"> i_skill1 </td>
+   <td style="text-align:left;width: 12cm; "> The least knowledgeable group member could conduct satisfactory avalanche assessments for this trip </td>
+  </tr>
+  <tr grouplength="2"><td colspan="2" style="background-color: #666; color: #fff;"><strong>ML1: Skill</strong></td></tr>
+<tr>
+   <td style="text-align:left;padding-left: 2em;" indentlevel="1"> i_skill2 </td>
+   <td style="text-align:left;width: 12cm; "> There was no large gap in avalanche assessment skills between the group members </td>
+  </tr>
+  <tr>
+   <td style="text-align:left;padding-left: 2em;" indentlevel="1"> i_skill4 </td>
+   <td style="text-align:left;width: 12cm; "> All group members were equipped with standard avalanche safety equipment (beacon, shovel, probe) and trained in the use of it </td>
+  </tr>
+</tbody>
+</table>
+
+</div>
+</div>
+</section>
+</section>
+</section>
+<section id="factor-analysis-for-with-leader-group-short" class="level1">
+<h1>Factor analysis for with-leader group (short)</h1>
+<section id="check-factoribility-1" class="level2">
+<h2 class="anchored" data-anchor-id="check-factoribility-1">Check factoribility</h2>
+<div class="cell" data-layout-align="center">
+<div class="cell-output-display">
+
+<table>
+<caption>Results of KMO test of sampling adequacy for with-leader group (short)</caption>
+ <thead>
+  <tr>
+   <th style="text-align:left;">   </th>
+   <th style="text-align:right;"> KMO </th>
+  </tr>
+ </thead>
+<tbody>
+  <tr>
+   <td style="text-align:left;"> i_leader0 </td>
+   <td style="text-align:right;"> 0.808 </td>
+  </tr>
+  <tr>
+   <td style="text-align:left;"> i_skill0 </td>
+   <td style="text-align:right;"> 0.639 </td>
+  </tr>
+  <tr>
+   <td style="text-align:left;"> i_orga0 </td>
+   <td style="text-align:right;"> 0.727 </td>
+  </tr>
+  <tr>
+   <td style="text-align:left;"> i_comm0 </td>
+   <td style="text-align:right;"> 0.755 </td>
+  </tr>
+  <tr>
+   <td style="text-align:left;"> i_iden0 </td>
+   <td style="text-align:right;"> 0.700 </td>
+  </tr>
+  <tr>
+   <td style="text-align:left;"> i_anom0 </td>
+   <td style="text-align:right;"> 0.783 </td>
+  </tr>
+  <tr>
+   <td style="text-align:left;"> Overall </td>
+   <td style="text-align:right;"> 0.735 </td>
+  </tr>
+</tbody>
+</table>
+
+</div>
+</div>
+<div class="cell" data-layout-align="center">
+<div class="cell-output-display">
+
+<table>
+<caption>Results of bartlett test for with-leader group (short)</caption>
+ <thead>
+  <tr>
+   <th style="text-align:right;"> Chi-square </th>
+   <th style="text-align:left;"> p-value </th>
+   <th style="text-align:right;"> DF </th>
+  </tr>
+ </thead>
+<tbody>
+  <tr>
+   <td style="text-align:right;"> 94.2 </td>
+   <td style="text-align:left;"> &lt;0.001 </td>
+   <td style="text-align:right;"> 15 </td>
+  </tr>
+</tbody>
+</table>
+
+</div>
+</div>
+</section>
+<section id="explore-number-of-factors-1" class="level2">
+<h2 class="anchored" data-anchor-id="explore-number-of-factors-1">Explore number of factors</h2>
+<div class="cell" data-layout-align="center">
+<div class="cell-output-display">
+<div class="quarto-figure quarto-figure-center">
+<figure class="figure">
+<p><img src="SOQUO_files/figure-html/unnamed-chunk-67-1.png" class="img-fluid figure-img" width="672"></p>
+</figure>
+</div>
+</div>
+<div class="cell-output cell-output-stdout">
+<pre><code>Parallel analysis suggests that the number of factors =  1  and the number of components =  NA </code></pre>
+</div>
+<div class="cell-output-display">
+<div class="quarto-figure quarto-figure-center">
+<figure class="figure">
+<p><img src="SOQUO_files/figure-html/unnamed-chunk-67-2.png" class="img-fluid figure-img" width="672"></p>
+</figure>
+</div>
+</div>
+<div class="cell-output cell-output-stdout">
+<pre><code>
+Number of factors
+Call: vss(x = x, n = n, rotate = rotate, diagonal = diagonal, fm = fm, 
+    n.obs = n.obs, plot = FALSE, title = title, use = use, cor = cor)
+VSS complexity 1 achieves a maximimum of 0.69  with  2  factors
+VSS complexity 2 achieves a maximimum of 0.73  with  2  factors
+The Velicer MAP achieves a minimum of 0.05  with  1  factors 
+Empirical BIC achieves a minimum of  -32.85  with  1  factors
+Sample Size adjusted BIC achieves a minimum of  -5.89  with  1  factors
+
+Statistics by number of factors 
+  vss1 vss2   map dof   chisq prob sqresid  fit RMSEA BIC SABIC complex  eChisq
+1 0.61 0.00 0.047   9 7.1e+00 0.62     3.3 0.61     0 -34  -5.9     1.0 8.6e+00
+2 0.69 0.73 0.119   4 1.6e+00 0.81     2.3 0.73     0 -17  -4.2     1.1 1.8e+00
+3 0.53 0.70 0.233   0 9.6e-02   NA     2.1 0.76    NA  NA    NA     1.4 1.2e-01
+4 0.48 0.68 0.431  -3 5.0e-11   NA     1.8 0.79    NA  NA    NA     1.6 6.8e-11
+5 0.45 0.61 1.000  -5 0.0e+00   NA     1.6 0.81    NA  NA    NA     1.8 5.3e-16
+6 0.44 0.60    NA  -6 4.8e+00   NA     2.9 0.65    NA  NA    NA     1.8 5.2e+00
+     SRMR eCRMS eBIC
+1 5.4e-02 0.069  -33
+2 2.5e-02 0.048  -17
+3 6.3e-03    NA   NA
+4 1.5e-07    NA   NA
+5 4.2e-10    NA   NA
+6 4.1e-02    NA   NA</code></pre>
+</div>
+</div>
+<section id="explore-2-factor-solution-1" class="level3">
+<h3 class="anchored" data-anchor-id="explore-2-factor-solution-1">Explore 2-factor solution</h3>
+<div class="cell" data-layout-align="center">
+<div class="cell-output-display">
+<div class="quarto-figure quarto-figure-center">
+<figure class="figure">
+<p><img src="SOQUO_files/figure-html/unnamed-chunk-68-1.png" class="img-fluid figure-img" width="960"></p>
+</figure>
+</div>
+</div>
+<div class="cell-output-display">
+
+<table class="table" style="margin-left: auto; margin-right: auto;">
+<caption>Figure 16. Factor loadings of the 5-factor solution for with-leader group (short)</caption>
+ <thead>
+  <tr>
+   <th style="text-align:left;"> Item </th>
+   <th style="text-align:left;"> ML2 </th>
+   <th style="text-align:left;"> ML1 </th>
+  </tr>
+ </thead>
+<tbody>
+  <tr>
+   <td style="text-align:left;"> i_leader0 </td>
+   <td style="text-align:left;"> 0.485 </td>
+   <td style="text-align:left;">  </td>
+  </tr>
+  <tr>
+   <td style="text-align:left;"> i_skill0 </td>
+   <td style="text-align:left;">  </td>
+   <td style="text-align:left;"> 0.993 </td>
+  </tr>
+  <tr>
+   <td style="text-align:left;"> i_orga0 </td>
+   <td style="text-align:left;"> 0.566 </td>
+   <td style="text-align:left;">  </td>
+  </tr>
+  <tr>
+   <td style="text-align:left;"> i_comm0 </td>
+   <td style="text-align:left;"> 0.504 </td>
+   <td style="text-align:left;">  </td>
+  </tr>
+  <tr>
+   <td style="text-align:left;"> i_iden0 </td>
+   <td style="text-align:left;"> 0.855 </td>
+   <td style="text-align:left;">  </td>
+  </tr>
+  <tr>
+   <td style="text-align:left;"> i_anom0 </td>
+   <td style="text-align:left;"> 0.421 </td>
+   <td style="text-align:left;">  </td>
+  </tr>
+</tbody>
+</table>
+
+</div>
+</div>
+</section>
+<section id="fine-tune-2-factor-solution" class="level3">
+<h3 class="anchored" data-anchor-id="fine-tune-2-factor-solution">fine-tune 2-factor solution</h3>
+<div class="cell" data-layout-align="center">
+<div class="cell-output-display">
+<div class="quarto-figure quarto-figure-center">
+<figure class="figure">
+<p><img src="SOQUO_files/figure-html/unnamed-chunk-69-1.png" class="img-fluid figure-img" width="960"></p>
+</figure>
+</div>
+</div>
+<div class="cell-output-display">
+
+<table class="table" style="margin-left: auto; margin-right: auto;">
+<caption>Factor loadings of the 3-factor solution for with-leader group (long)</caption>
+ <thead>
+  <tr>
+   <th style="text-align:left;"> Item </th>
+   <th style="text-align:right;"> ML2 </th>
+   <th style="text-align:right;"> ML1 </th>
+  </tr>
+ </thead>
+<tbody>
+  <tr>
+   <td style="text-align:left;"> i_iden0 </td>
+   <td style="text-align:right;"> 0.838 </td>
+   <td style="text-align:right;">  </td>
+  </tr>
+  <tr>
+   <td style="text-align:left;"> i_comm0 </td>
+   <td style="text-align:right;"> 0.522 </td>
+   <td style="text-align:right;">  </td>
+  </tr>
+  <tr>
+   <td style="text-align:left;"> i_leader0 </td>
+   <td style="text-align:right;"> 0.483 </td>
+   <td style="text-align:right;">  </td>
+  </tr>
+  <tr>
+   <td style="text-align:left;"> i_orga0 </td>
+   <td style="text-align:right;"> 0.574 </td>
+   <td style="text-align:right;">  </td>
+  </tr>
+  <tr>
+   <td style="text-align:left;"> i_skill0 </td>
+   <td style="text-align:right;">  </td>
+   <td style="text-align:right;"> 0.993 </td>
+  </tr>
+</tbody>
+</table>
+
+</div>
+</div>
+</section>
+<section id="explore-3-factor-solution-1" class="level3">
+<h3 class="anchored" data-anchor-id="explore-3-factor-solution-1">Explore 3-factor solution</h3>
+<div class="cell" data-layout-align="center">
+<div class="cell-output-display">
+<div class="quarto-figure quarto-figure-center">
+<figure class="figure">
+<p><img src="SOQUO_files/figure-html/unnamed-chunk-70-1.png" class="img-fluid figure-img" width="960"></p>
+</figure>
+</div>
+</div>
+<div class="cell-output-display">
+
+<table class="table" style="margin-left: auto; margin-right: auto;">
+<caption>Factor loadings of the 5-factor solution for with-leader group (long)</caption>
+ <thead>
+  <tr>
+   <th style="text-align:left;"> Item </th>
+   <th style="text-align:left;"> ML1 </th>
+   <th style="text-align:left;"> ML3 </th>
+   <th style="text-align:left;"> ML2 </th>
+  </tr>
+ </thead>
+<tbody>
+  <tr>
+   <td style="text-align:left;"> i_leader0 </td>
+   <td style="text-align:left;">  </td>
+   <td style="text-align:left;"> 0.487 </td>
+   <td style="text-align:left;">  </td>
+  </tr>
+  <tr>
+   <td style="text-align:left;"> i_skill0 </td>
+   <td style="text-align:left;">  </td>
+   <td style="text-align:left;">  </td>
+   <td style="text-align:left;">  </td>
+  </tr>
+  <tr>
+   <td style="text-align:left;"> i_orga0 </td>
+   <td style="text-align:left;"> 0.947 </td>
+   <td style="text-align:left;">  </td>
+   <td style="text-align:left;">  </td>
+  </tr>
+  <tr>
+   <td style="text-align:left;"> i_comm0 </td>
+   <td style="text-align:left;">  </td>
+   <td style="text-align:left;">  </td>
+   <td style="text-align:left;"> 0.869 </td>
+  </tr>
+  <tr>
+   <td style="text-align:left;"> i_iden0 </td>
+   <td style="text-align:left;"> 0.311 </td>
+   <td style="text-align:left;"> 0.664 </td>
+   <td style="text-align:left;">  </td>
+  </tr>
+  <tr>
+   <td style="text-align:left;"> i_anom0 </td>
+   <td style="text-align:left;">  </td>
+   <td style="text-align:left;"> 0.478 </td>
+   <td style="text-align:left;">  </td>
+  </tr>
+</tbody>
+</table>
+
+</div>
+</div>
+<div class="cell" data-layout-align="center">
+
+</div>
+<div class="cell" data-layout-align="center">
+
+</div>
+<div class="cell" data-layout-align="center">
+
+</div>
+</section>
+</section>
+</section>
+<section id="factor-analysis-for-without-leader-group-short" class="level1">
+<h1>Factor analysis for without-leader group (short)</h1>
+<section id="check-factoribility-2" class="level2">
+<h2 class="anchored" data-anchor-id="check-factoribility-2">Check factoribility</h2>
+<div class="cell" data-layout-align="center">
+<div class="cell-output-display">
+
+<table>
+<caption>Results of KMO test of sampling adequacy for without-leader group (short)</caption>
+ <thead>
+  <tr>
+   <th style="text-align:left;">   </th>
+   <th style="text-align:right;"> KMO </th>
+  </tr>
+ </thead>
+<tbody>
+  <tr>
+   <td style="text-align:left;"> i_skill0 </td>
+   <td style="text-align:right;"> 0.805 </td>
+  </tr>
+  <tr>
+   <td style="text-align:left;"> i_orga0 </td>
+   <td style="text-align:right;"> 0.808 </td>
+  </tr>
+  <tr>
+   <td style="text-align:left;"> i_comm0 </td>
+   <td style="text-align:right;"> 0.799 </td>
+  </tr>
+  <tr>
+   <td style="text-align:left;"> i_iden0 </td>
+   <td style="text-align:right;"> 0.820 </td>
+  </tr>
+  <tr>
+   <td style="text-align:left;"> i_anom0 </td>
+   <td style="text-align:right;"> 0.793 </td>
+  </tr>
+  <tr>
+   <td style="text-align:left;"> Overall </td>
+   <td style="text-align:right;"> 0.805 </td>
+  </tr>
+</tbody>
+</table>
+
+</div>
+</div>
+<div class="cell" data-layout-align="center">
+<div class="cell-output-display">
+
+<table>
+<caption>Results of bartlett test for with-leader group (short)</caption>
+ <thead>
+  <tr>
+   <th style="text-align:right;"> Chi-square </th>
+   <th style="text-align:left;"> p-value </th>
+   <th style="text-align:right;"> DF </th>
+  </tr>
+ </thead>
+<tbody>
+  <tr>
+   <td style="text-align:right;"> 172.282 </td>
+   <td style="text-align:left;"> &lt;0.001 </td>
+   <td style="text-align:right;"> 10 </td>
+  </tr>
+</tbody>
+</table>
+
+</div>
+</div>
+</section>
+<section id="explore-number-of-factors-2" class="level2">
+<h2 class="anchored" data-anchor-id="explore-number-of-factors-2">Explore number of factors</h2>
+<div class="cell" data-layout-align="center">
+<div class="cell-output-display">
+<div class="quarto-figure quarto-figure-center">
+<figure class="figure">
+<p><img src="SOQUO_files/figure-html/unnamed-chunk-76-1.png" class="img-fluid figure-img" width="672"></p>
+</figure>
+</div>
+</div>
+<div class="cell-output cell-output-stdout">
+<pre><code>Parallel analysis suggests that the number of factors =  1  and the number of components =  NA </code></pre>
+</div>
+<div class="cell-output-display">
+<div class="quarto-figure quarto-figure-center">
+<figure class="figure">
+<p><img src="SOQUO_files/figure-html/unnamed-chunk-76-2.png" class="img-fluid figure-img" width="672"></p>
+</figure>
+</div>
+</div>
+<div class="cell-output cell-output-stdout">
+<pre><code>
+Number of factors
+Call: vss(x = x, n = n, rotate = rotate, diagonal = diagonal, fm = fm, 
+    n.obs = n.obs, plot = FALSE, title = title, use = use, cor = cor)
+VSS complexity 1 achieves a maximimum of 0.83  with  1  factors
+VSS complexity 2 achieves a maximimum of 0.89  with  2  factors
+The Velicer MAP achieves a minimum of 0.08  with  1  factors 
+Empirical BIC achieves a minimum of  -16.67  with  1  factors
+Sample Size adjusted BIC achieves a minimum of  0.44  with  2  factors
+
+Statistics by number of factors 
+  vss1 vss2   map dof   chisq  prob sqresid  fit RMSEA   BIC SABIC complex
+1 0.83 0.00 0.076   5 1.0e+01 0.067    1.55 0.83 0.096 -13.4  2.42     1.0
+2 0.66 0.89 0.188   1 2.0e+00 0.156    1.04 0.89 0.094  -2.7  0.44     1.5
+3 0.46 0.79 0.389  -2 3.1e-12    NA    0.92 0.90    NA    NA    NA     1.9
+   eChisq    SRMR eCRMS  eBIC
+1 7.0e+00 5.5e-02 0.078 -16.7
+2 8.7e-01 2.0e-02 0.062  -3.9
+3 1.2e-12 2.3e-08    NA    NA</code></pre>
+</div>
+</div>
+<section id="explore-2-factor-solution-2" class="level3">
+<h3 class="anchored" data-anchor-id="explore-2-factor-solution-2">Explore 2-factor solution</h3>
+<div class="cell" data-layout-align="center">
+<div class="cell-output-display">
+<div class="quarto-figure quarto-figure-center">
+<figure class="figure">
+<p><img src="SOQUO_files/figure-html/unnamed-chunk-77-1.png" class="img-fluid figure-img" width="960"></p>
+</figure>
+</div>
+</div>
+<div class="cell-output-display">
+
+<table class="table" style="margin-left: auto; margin-right: auto;">
+<caption>Figure  Factor loadings of the 5-factor solution for without-leader group (short)</caption>
+ <thead>
+  <tr>
+   <th style="text-align:left;"> Item </th>
+   <th style="text-align:left;"> ML1 </th>
+   <th style="text-align:left;"> ML2 </th>
+  </tr>
+ </thead>
+<tbody>
+  <tr>
+   <td style="text-align:left;"> i_skill0 </td>
+   <td style="text-align:left;">  </td>
+   <td style="text-align:left;"> 0.72 </td>
+  </tr>
+  <tr>
+   <td style="text-align:left;"> i_orga0 </td>
+   <td style="text-align:left;"> 0.546 </td>
+   <td style="text-align:left;"> 0.513 </td>
+  </tr>
+  <tr>
+   <td style="text-align:left;"> i_comm0 </td>
+   <td style="text-align:left;"> 0.691 </td>
+   <td style="text-align:left;">  </td>
+  </tr>
+  <tr>
+   <td style="text-align:left;"> i_iden0 </td>
+   <td style="text-align:left;"> 0.53 </td>
+   <td style="text-align:left;"> 0.48 </td>
+  </tr>
+  <tr>
+   <td style="text-align:left;"> i_anom0 </td>
+   <td style="text-align:left;"> 0.721 </td>
+   <td style="text-align:left;">  </td>
+  </tr>
+</tbody>
+</table>
+
+</div>
+</div>
+<p>s ### Explore 3-factor solution</p>
+<div class="cell" data-layout-align="center">
+<div class="cell-output-display">
+<div class="quarto-figure quarto-figure-center">
+<figure class="figure">
+<p><img src="SOQUO_files/figure-html/unnamed-chunk-78-1.png" class="img-fluid figure-img" width="960"></p>
+</figure>
+</div>
+</div>
+<div class="cell-output-display">
+
+<table class="table" style="margin-left: auto; margin-right: auto;">
+<caption>Factor loadings of the 5-factor solution for with-leader group (long)</caption>
+ <thead>
+  <tr>
+   <th style="text-align:left;"> Item </th>
+   <th style="text-align:left;"> ML2 </th>
+   <th style="text-align:left;"> ML3 </th>
+   <th style="text-align:left;"> ML1 </th>
+  </tr>
+ </thead>
+<tbody>
+  <tr>
+   <td style="text-align:left;"> i_skill0 </td>
+   <td style="text-align:left;"> 0.637 </td>
+   <td style="text-align:left;">  </td>
+   <td style="text-align:left;">  </td>
+  </tr>
+  <tr>
+   <td style="text-align:left;"> i_orga0 </td>
+   <td style="text-align:left;"> 0.551 </td>
+   <td style="text-align:left;"> 0.301 </td>
+   <td style="text-align:left;"> 0.448 </td>
+  </tr>
+  <tr>
+   <td style="text-align:left;"> i_comm0 </td>
+   <td style="text-align:left;">  </td>
+   <td style="text-align:left;"> 0.444 </td>
+   <td style="text-align:left;"> 0.594 </td>
+  </tr>
+  <tr>
+   <td style="text-align:left;"> i_iden0 </td>
+   <td style="text-align:left;"> 0.574 </td>
+   <td style="text-align:left;"> 0.479 </td>
+   <td style="text-align:left;">  </td>
+  </tr>
+  <tr>
+   <td style="text-align:left;"> i_anom0 </td>
+   <td style="text-align:left;">  </td>
+   <td style="text-align:left;"> 0.702 </td>
+   <td style="text-align:left;"> 0.307 </td>
+  </tr>
+</tbody>
+</table>
+
+</div>
+</div>
+</section>
+</section>
+</section>
+
+</main>
+<!-- /main column -->
+<script id="quarto-html-after-body" type="application/javascript">
+window.document.addEventListener("DOMContentLoaded", function (event) {
+  const toggleBodyColorMode = (bsSheetEl) => {
+    const mode = bsSheetEl.getAttribute("data-mode");
+    const bodyEl = window.document.querySelector("body");
+    if (mode === "dark") {
+      bodyEl.classList.add("quarto-dark");
+      bodyEl.classList.remove("quarto-light");
+    } else {
+      bodyEl.classList.add("quarto-light");
+      bodyEl.classList.remove("quarto-dark");
+    }
+  }
+  const toggleBodyColorPrimary = () => {
+    const bsSheetEl = window.document.querySelector("link#quarto-bootstrap");
+    if (bsSheetEl) {
+      toggleBodyColorMode(bsSheetEl);
+    }
+  }
+  toggleBodyColorPrimary();  
+  const icon = "";
+  const anchorJS = new window.AnchorJS();
+  anchorJS.options = {
+    placement: 'right',
+    icon: icon
+  };
+  anchorJS.add('.anchored');
+  const clipboard = new window.ClipboardJS('.code-copy-button', {
+    target: function(trigger) {
+      return trigger.previousElementSibling;
+    }
+  });
+  clipboard.on('success', function(e) {
+    // button target
+    const button = e.trigger;
+    // don't keep focus
+    button.blur();
+    // flash "checked"
+    button.classList.add('code-copy-button-checked');
+    var currentTitle = button.getAttribute("title");
+    button.setAttribute("title", "Copied!");
+    setTimeout(function() {
+      button.setAttribute("title", currentTitle);
+      button.classList.remove('code-copy-button-checked');
+    }, 1000);
+    // clear code selection
+    e.clearSelection();
+  });
+  function tippyHover(el, contentFn) {
+    const config = {
+      allowHTML: true,
+      content: contentFn,
+      maxWidth: 500,
+      delay: 100,
+      arrow: false,
+      appendTo: function(el) {
+          return el.parentElement;
+      },
+      interactive: true,
+      interactiveBorder: 10,
+      theme: 'quarto',
+      placement: 'bottom-start'
+    };
+    window.tippy(el, config); 
+  }
+  const noterefs = window.document.querySelectorAll('a[role="doc-noteref"]');
+  for (var i=0; i<noterefs.length; i++) {
+    const ref = noterefs[i];
+    tippyHover(ref, function() {
+      // use id or data attribute instead here
+      let href = ref.getAttribute('data-footnote-href') || ref.getAttribute('href');
+      try { href = new URL(href).hash; } catch {}
+      const id = href.replace(/^#\/?/, "");
+      const note = window.document.getElementById(id);
+      return note.innerHTML;
+    });
+  }
+  var bibliorefs = window.document.querySelectorAll('a[role="doc-biblioref"]');
+  for (var i=0; i<bibliorefs.length; i++) {
+    const ref = bibliorefs[i];
+    const cites = ref.parentNode.getAttribute('data-cites').split(' ');
+    tippyHover(ref, function() {
+      var popup = window.document.createElement('div');
+      cites.forEach(function(cite) {
+        var citeDiv = window.document.createElement('div');
+        citeDiv.classList.add('hanging-indent');
+        citeDiv.classList.add('csl-entry');
+        var biblioDiv = window.document.getElementById('ref-' + cite);
+        if (biblioDiv) {
+          citeDiv.innerHTML = biblioDiv.innerHTML;
+        }
+        popup.appendChild(citeDiv);
+      });
+      return popup.innerHTML;
+    });
+  }
+});
+</script>
+</div> <!-- /content -->
+
+
+
+</body></html>

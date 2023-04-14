@@ -1,0 +1,180 @@
+<!DOCTYPE html>
+<html lang="" xml:lang="">
+<head>
+
+<meta charset="utf-8" />
+<meta name="generator" content="pandoc" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<meta property="og:title" content="3.2 Correlation matrix | Developing a scale to measure factors influencing skier’s self-perceived group dynamics (FISSGD)" />
+<meta property="og:type" content="book" />
+
+
+
+
+<meta name="author" content="Rong Guang" />
+
+
+
+<meta name="description" content="3.2 Correlation matrix | Developing a scale to measure factors influencing skier’s self-perceived group dynamics (FISSGD)">
+
+<title>3.2 Correlation matrix | Developing a scale to measure factors influencing skier’s self-perceived group dynamics (FISSGD)</title>
+
+<script src="libs/jquery-3.6.0/jquery-3.6.0.min.js"></script>
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<link href="libs/bootstrap-3.3.5/css/bootstrap.min.css" rel="stylesheet" />
+<script src="libs/bootstrap-3.3.5/js/bootstrap.min.js"></script>
+<script src="libs/bootstrap-3.3.5/shim/html5shiv.min.js"></script>
+<script src="libs/bootstrap-3.3.5/shim/respond.min.js"></script>
+<style>h1 {font-size: 34px;}
+       h1.title {font-size: 38px;}
+       h2 {font-size: 30px;}
+       h3 {font-size: 24px;}
+       h4 {font-size: 18px;}
+       h5 {font-size: 16px;}
+       h6 {font-size: 12px;}
+       code {color: inherit; background-color: rgba(0, 0, 0, 0.04);}
+       pre:not([class]) { background-color: white }</style>
+<script src="libs/navigation-1.1/tabsets.js"></script>
+<script src="libs/kePrint-0.0.1/kePrint.js"></script>
+<link href="libs/lightable-0.0.1/lightable.css" rel="stylesheet" />
+
+
+
+
+
+<link rel="stylesheet" href="toc.css" type="text/css" />
+
+<style type = "text/css">
+.main-container {
+  max-width: 940px;
+  margin-left: auto;
+  margin-right: auto;
+}
+code {
+  color: inherit;
+  background-color: rgba(0, 0, 0, 0.04);
+}
+img {
+  max-width:100%;
+  height: auto;
+}
+/* show arrow before summary tag as in bootstrap
+TODO: remove if boostrap in updated in html_document (rmarkdown#1485) */
+details > summary {
+  display: list-item;
+  cursor: pointer;
+}
+</style>
+</head>
+
+<body>
+
+<div class="container-fluid main-container">
+
+
+<div class="row">
+<div class="col-sm-12">
+<div id="TOC">
+<ul>
+<li class="has-sub"><a href="1-data-wrangling.html#data-wrangling" id="toc-data-wrangling"><span class="toc-section-number">1</span> Data Wrangling</a>
+<ul>
+<li><a href="1.1-read-in-the-data.html#read-in-the-data" id="toc-read-in-the-data"><span class="toc-section-number">1.1</span> Read in the data</a></li>
+<li><a href="1.2-combine-2022-and-2023-data.html#combine-2022-and-2023-data" id="toc-combine-2022-and-2023-data"><span class="toc-section-number">1.2</span> Combine 2022 and 2023 data</a></li>
+<li class="has-sub"><a href="1.3-reomove-cases.html#reomove-cases" id="toc-reomove-cases"><span class="toc-section-number">1.3</span> Reomove cases</a>
+<ul>
+<li><a href="1.3-reomove-cases.html#remove-careless-responses-according-to-attention-trap" id="toc-remove-careless-responses-according-to-attention-trap"><span class="toc-section-number">1.3.1</span> Remove careless responses (according to attention trap)</a></li>
+<li><a href="1.3-reomove-cases.html#remove-cases-who-did-not-consent" id="toc-remove-cases-who-did-not-consent"><span class="toc-section-number">1.3.2</span> Remove cases who did not consent</a></li>
+<li><a href="1.3-reomove-cases.html#remove-cases-with-na-for-if-having-a-leader" id="toc-remove-cases-with-na-for-if-having-a-leader"><span class="toc-section-number">1.3.3</span> Remove cases with NA for if having a leader</a></li>
+</ul></li>
+<li><a href="1.4-replace-value-of--99-with-na.html#replace-value-of--99-with-na" id="toc-replace-value-of--99-with-na"><span class="toc-section-number">1.4</span> Replace value of -99 with NA</a></li>
+<li><a href="1.5-unify-value-labels.html#unify-value-labels" id="toc-unify-value-labels"><span class="toc-section-number">1.5</span> Unify value labels</a></li>
+<li><a href="1.6-relabel-variables.html#relabel-variables" id="toc-relabel-variables"><span class="toc-section-number">1.6</span> Relabel variables</a></li>
+<li><a href="1.7-replace-dont-know-with-nas.html#replace-dont-know-with-nas" id="toc-replace-dont-know-with-nas"><span class="toc-section-number">1.7</span> Replace “Don’t know” with NAs</a></li>
+<li class="has-sub"><a href="1.8-create-data-sets.html#create-data-sets" id="toc-create-data-sets"><span class="toc-section-number">1.8</span> Create data sets</a>
+<ul>
+<li><a href="1.8-create-data-sets.html#create-with-leader-and-without-leader-data-sets" id="toc-create-with-leader-and-without-leader-data-sets"><span class="toc-section-number">1.8.1</span> Create with-leader and without-leader data-sets</a></li>
+<li><a href="1.8-create-data-sets.html#remove-cases-with-50-nas-across-major-questions-for-each-data-sets" id="toc-remove-cases-with-50-nas-across-major-questions-for-each-data-sets"><span class="toc-section-number">1.8.2</span> Remove cases with 50% NAs across major questions for each data sets</a></li>
+<li><a href="1.8-create-data-sets.html#create-data-set-17-item-without-leader" id="toc-create-data-set-17-item-without-leader"><span class="toc-section-number">1.8.3</span> Create data set: 17 item without leader</a></li>
+<li><a href="1.8-create-data-sets.html#create-data-set-5-item-without-leader" id="toc-create-data-set-5-item-without-leader"><span class="toc-section-number">1.8.4</span> Create data set: 5 item without leader</a></li>
+<li><a href="1.8-create-data-sets.html#create-data-set-20-item-with-leader" id="toc-create-data-set-20-item-with-leader"><span class="toc-section-number">1.8.5</span> Create data set: 20 item with leader</a></li>
+<li><a href="1.8-create-data-sets.html#create-data-set-6-item-with-leader" id="toc-create-data-set-6-item-with-leader"><span class="toc-section-number">1.8.6</span> Create data set: 6 item with leader</a></li>
+</ul></li>
+</ul></li>
+<li><a href="2-descriptive-statistics.html#descriptive-statistics" id="toc-descriptive-statistics"><span class="toc-section-number">2</span> Descriptive statistics</a></li>
+<li class="has-sub"><a href="3-visualization.html#visualization" id="toc-visualization"><span class="toc-section-number">3</span> Visualization</a>
+<ul>
+<li><a href="3.1-distribution.html#distribution" id="toc-distribution"><span class="toc-section-number">3.1</span> Distribution</a></li>
+<li><a href="3.2-correlation-matrix.html#correlation-matrix" id="toc-correlation-matrix"><span class="toc-section-number">3.2</span> Correlation matrix</a></li>
+</ul></li>
+<li><a href="4-impute-nas.html#impute-nas" id="toc-impute-nas"><span class="toc-section-number">4</span> Impute NAs</a></li>
+<li class="has-sub"><a href="5-factor-analysis-for-with-leader-group-long.html#factor-analysis-for-with-leader-group-long" id="toc-factor-analysis-for-with-leader-group-long"><span class="toc-section-number">5</span> Factor analysis for with-leader group (long)</a>
+<ul>
+<li><a href="5.1-check-factoribility.html#check-factoribility" id="toc-check-factoribility"><span class="toc-section-number">5.1</span> Check factoribility</a></li>
+<li><a href="5.2-explore-number-of-factors.html#explore-number-of-factors" id="toc-explore-number-of-factors"><span class="toc-section-number">5.2</span> Explore number of factors</a></li>
+<li class="has-sub"><a href="5.3-explore-factor-solutions.html#explore-factor-solutions" id="toc-explore-factor-solutions"><span class="toc-section-number">5.3</span> Explore factor solutions</a>
+<ul>
+<li><a href="5.3-explore-factor-solutions.html#explore-5-factor-solution" id="toc-explore-5-factor-solution"><span class="toc-section-number">5.3.1</span> Explore 5-factor solution</a></li>
+<li><a href="5.3-explore-factor-solutions.html#explore-4-factor-solution" id="toc-explore-4-factor-solution"><span class="toc-section-number">5.3.2</span> Explore 4-factor solution</a></li>
+<li><a href="5.3-explore-factor-solutions.html#explore-3-factor-solution" id="toc-explore-3-factor-solution"><span class="toc-section-number">5.3.3</span> Explore 3-factor solution</a></li>
+<li><a href="5.3-explore-factor-solutions.html#finetune-3-factor-solution" id="toc-finetune-3-factor-solution"><span class="toc-section-number">5.3.4</span> Finetune 3-factor solution</a></li>
+<li><a href="5.3-explore-factor-solutions.html#explore-2-factor-solution" id="toc-explore-2-factor-solution"><span class="toc-section-number">5.3.5</span> Explore 2-factor solution</a></li>
+<li><a href="5.3-explore-factor-solutions.html#finetune-2-factor-solution" id="toc-finetune-2-factor-solution"><span class="toc-section-number">5.3.6</span> Finetune 2-factor solution</a></li>
+</ul></li>
+<li class="has-sub"><a href="5.4-comparison-between-factor-solutions-with-leader-long.html#comparison-between-factor-solutions-with-leader-long" id="toc-comparison-between-factor-solutions-with-leader-long"><span class="toc-section-number">5.4</span> Comparison between factor solutions, with-leader (long)</a>
+<ul>
+<li><a href="5.4-comparison-between-factor-solutions-with-leader-long.html#check-the-factor-connotation-for-3-factor-solution-fine-tuned" id="toc-check-the-factor-connotation-for-3-factor-solution-fine-tuned"><span class="toc-section-number">5.4.1</span> Check the factor connotation for 3-factor solution (fine-tuned)</a></li>
+</ul></li>
+</ul></li>
+<li class="has-sub"><a href="6-factor-analysis-for-with-leader-group-short.html#factor-analysis-for-with-leader-group-short" id="toc-factor-analysis-for-with-leader-group-short"><span class="toc-section-number">6</span> Factor analysis for with-leader group (short)</a>
+<ul>
+<li><a href="6.1-check-factoribility-1.html#check-factoribility-1" id="toc-check-factoribility-1"><span class="toc-section-number">6.1</span> Check factoribility</a></li>
+<li class="has-sub"><a href="6.2-explore-number-of-factors-1.html#explore-number-of-factors-1" id="toc-explore-number-of-factors-1"><span class="toc-section-number">6.2</span> Explore number of factors</a>
+<ul>
+<li><a href="6.2-explore-number-of-factors-1.html#explore-2-factor-solution-1" id="toc-explore-2-factor-solution-1"><span class="toc-section-number">6.2.1</span> Explore 2-factor solution</a></li>
+<li><a href="6.2-explore-number-of-factors-1.html#fine-tune-2-factor-solution" id="toc-fine-tune-2-factor-solution"><span class="toc-section-number">6.2.2</span> fine-tune 2-factor solution</a></li>
+<li><a href="6.2-explore-number-of-factors-1.html#explore-3-factor-solution-1" id="toc-explore-3-factor-solution-1"><span class="toc-section-number">6.2.3</span> Explore 3-factor solution</a></li>
+</ul></li>
+</ul></li>
+<li class="has-sub"><a href="7-factor-analysis-for-without-leader-group-short.html#factor-analysis-for-without-leader-group-short" id="toc-factor-analysis-for-without-leader-group-short"><span class="toc-section-number">7</span> Factor analysis for without-leader group (short)</a>
+<ul>
+<li><a href="7.1-check-factoribility-2.html#check-factoribility-2" id="toc-check-factoribility-2"><span class="toc-section-number">7.1</span> Check factoribility</a></li>
+<li class="has-sub"><a href="7.2-explore-number-of-factors-2.html#explore-number-of-factors-2" id="toc-explore-number-of-factors-2"><span class="toc-section-number">7.2</span> Explore number of factors</a>
+<ul>
+<li><a href="7.2-explore-number-of-factors-2.html#explore-2-factor-solution-2" id="toc-explore-2-factor-solution-2"><span class="toc-section-number">7.2.1</span> Explore 2-factor solution</a></li>
+</ul></li>
+</ul></li>
+</ul>
+</div>
+</div>
+</div>
+<div class="row">
+<div class="col-sm-12">
+<div id="correlation-matrix" class="section level2" number="3.2">
+<h2><span class="header-section-number">3.2</span> Correlation matrix</h2>
+<p><img src="SCOAIL_files/figure-html/unnamed-chunk-37-1.png" width="576" style="display: block; margin: auto;" /></p>
+<p><img src="SCOAIL_files/figure-html/unnamed-chunk-38-1.png" width="576" style="display: block; margin: auto;" /></p>
+<p><img src="SCOAIL_files/figure-html/unnamed-chunk-39-1.png" width="672" style="display: block; margin: auto;" /></p>
+<p><img src="SCOAIL_files/figure-html/unnamed-chunk-40-1.png" width="672" style="display: block; margin: auto;" /></p>
+</div>
+<!-- </div> -->
+<p style="text-align: center;">
+<a href="3.1-distribution.html"><button class="btn btn-default">Previous</button></a>
+<a href="4-impute-nas.html"><button class="btn btn-default">Next</button></a>
+</p>
+</div>
+</div>
+
+
+</div>
+
+<script>
+
+// add bootstrap table styles to pandoc tables
+$(document).ready(function () {
+  $('tr.header').parent('thead').parent('table').addClass('table table-condensed');
+});
+
+</script>
+
+</body>
+</html>

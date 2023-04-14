@@ -1,0 +1,1968 @@
+<!DOCTYPE html>
+<html lang="" xml:lang="">
+<head>
+
+  <meta charset="utf-8" />
+  <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+  <title>6.3 Explore factor solutions | Developing a scale to measure factors influencing skier’s self-perceived group dynamics (FISSGD)</title>
+  <meta name="description" content="6.3 Explore factor solutions | Developing a scale to measure factors influencing skier’s self-perceived group dynamics (FISSGD)" />
+  <meta name="generator" content="bookdown 0.32 and GitBook 2.6.7" />
+
+  <meta property="og:title" content="6.3 Explore factor solutions | Developing a scale to measure factors influencing skier’s self-perceived group dynamics (FISSGD)" />
+  <meta property="og:type" content="book" />
+  
+  
+  
+
+  <meta name="twitter:card" content="summary" />
+  <meta name="twitter:title" content="6.3 Explore factor solutions | Developing a scale to measure factors influencing skier’s self-perceived group dynamics (FISSGD)" />
+  
+  
+  
+
+<meta name="author" content="Rong Guang" />
+
+
+
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <meta name="apple-mobile-web-app-capable" content="yes" />
+  <meta name="apple-mobile-web-app-status-bar-style" content="black" />
+  
+  
+<link rel="prev" href="explore-number-of-factors.html"/>
+<link rel="next" href="comparison-between-factor-solutions-with-leader-long.html"/>
+<script src="assets/jquery-3.6.0/jquery-3.6.0.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/fuse.js@6.4.6/dist/fuse.min.js"></script>
+<link href="assets/gitbook-2.6.7/css/style.css" rel="stylesheet" />
+<link href="assets/gitbook-2.6.7/css/plugin-table.css" rel="stylesheet" />
+<link href="assets/gitbook-2.6.7/css/plugin-bookdown.css" rel="stylesheet" />
+<link href="assets/gitbook-2.6.7/css/plugin-highlight.css" rel="stylesheet" />
+<link href="assets/gitbook-2.6.7/css/plugin-search.css" rel="stylesheet" />
+<link href="assets/gitbook-2.6.7/css/plugin-fontsettings.css" rel="stylesheet" />
+<link href="assets/gitbook-2.6.7/css/plugin-clipboard.css" rel="stylesheet" />
+
+
+
+
+
+
+
+
+<link href="assets/anchor-sections-1.1.0/anchor-sections.css" rel="stylesheet" />
+<link href="assets/anchor-sections-1.1.0/anchor-sections-hash.css" rel="stylesheet" />
+<script src="assets/anchor-sections-1.1.0/anchor-sections.js"></script>
+<script src="assets/kePrint-0.0.1/kePrint.js"></script>
+<link href="assets/lightable-0.0.1/lightable.css" rel="stylesheet" />
+
+
+
+
+</head>
+
+<body>
+
+
+
+  <div class="book without-animation with-summary font-size-2 font-family-1" data-basepath=".">
+
+    <div class="book-summary">
+      <nav role="navigation">
+
+<ul class="summary">
+<li class="chapter" data-level="1" data-path="data-wrangling.html"><a href="data-wrangling.html"><i class="fa fa-check"></i><b>1</b> Data Wrangling</a>
+<ul>
+<li class="chapter" data-level="1.1" data-path="read-in-the-data.html"><a href="read-in-the-data.html"><i class="fa fa-check"></i><b>1.1</b> Read in the data</a></li>
+<li class="chapter" data-level="1.2" data-path="combine-2022-and-2023-data.html"><a href="combine-2022-and-2023-data.html"><i class="fa fa-check"></i><b>1.2</b> Combine 2022 and 2023 data</a></li>
+<li class="chapter" data-level="1.3" data-path="reomove-cases.html"><a href="reomove-cases.html"><i class="fa fa-check"></i><b>1.3</b> Reomove cases</a>
+<ul>
+<li class="chapter" data-level="1.3.1" data-path="reomove-cases.html"><a href="reomove-cases.html#remove-careless-responses-according-to-attention-trap"><i class="fa fa-check"></i><b>1.3.1</b> Remove careless responses (according to attention trap)</a></li>
+<li class="chapter" data-level="1.3.2" data-path="reomove-cases.html"><a href="reomove-cases.html#remove-cases-who-did-not-consent"><i class="fa fa-check"></i><b>1.3.2</b> Remove cases who did not consent</a></li>
+<li class="chapter" data-level="1.3.3" data-path="reomove-cases.html"><a href="reomove-cases.html#remove-cases-with-na-for-if-having-a-leader"><i class="fa fa-check"></i><b>1.3.3</b> Remove cases with NA for if having a leader</a></li>
+</ul></li>
+<li class="chapter" data-level="1.4" data-path="replace-value-of--99-with-na.html"><a href="replace-value-of--99-with-na.html"><i class="fa fa-check"></i><b>1.4</b> Replace value of -99 with NA</a></li>
+<li class="chapter" data-level="1.5" data-path="unify-value-labels.html"><a href="unify-value-labels.html"><i class="fa fa-check"></i><b>1.5</b> Unify value labels</a></li>
+<li class="chapter" data-level="1.6" data-path="relabel-variables.html"><a href="relabel-variables.html"><i class="fa fa-check"></i><b>1.6</b> Relabel variables</a></li>
+<li class="chapter" data-level="1.7" data-path="unify-the-direction-of-item-wording.html"><a href="unify-the-direction-of-item-wording.html"><i class="fa fa-check"></i><b>1.7</b> Unify the direction of item wording</a></li>
+<li class="chapter" data-level="1.8" data-path="generate-norwegian-variable-labels.html"><a href="generate-norwegian-variable-labels.html"><i class="fa fa-check"></i><b>1.8</b> Generate Norwegian variable labels</a></li>
+</ul></li>
+<li class="chapter" data-level="2" data-path="create-data-sets-for-analysis.html"><a href="create-data-sets-for-analysis.html"><i class="fa fa-check"></i><b>2</b> Create data sets for analysis</a>
+<ul>
+<li class="chapter" data-level="2.1" data-path="create-with-leader-and-without-leader-data-sets.html"><a href="create-with-leader-and-without-leader-data-sets.html"><i class="fa fa-check"></i><b>2.1</b> Create with-leader and without-leader data-sets</a></li>
+<li class="chapter" data-level="2.2" data-path="remove-cases-with-50-nas-across-major-questions-for-each-data-sets.html"><a href="remove-cases-with-50-nas-across-major-questions-for-each-data-sets.html"><i class="fa fa-check"></i><b>2.2</b> Remove cases with 50% NAs across major questions for each data sets</a></li>
+<li class="chapter" data-level="2.3" data-path="create-data-set-17-item-without-leader.html"><a href="create-data-set-17-item-without-leader.html"><i class="fa fa-check"></i><b>2.3</b> Create data set: 17 item without leader</a></li>
+<li class="chapter" data-level="2.4" data-path="create-data-set-5-item-without-leader.html"><a href="create-data-set-5-item-without-leader.html"><i class="fa fa-check"></i><b>2.4</b> Create data set: 5 item without leader</a></li>
+<li class="chapter" data-level="2.5" data-path="create-data-set-20-item-with-leader.html"><a href="create-data-set-20-item-with-leader.html"><i class="fa fa-check"></i><b>2.5</b> Create data set: 20 item with leader</a></li>
+<li class="chapter" data-level="2.6" data-path="create-data-set-6-item-with-leader.html"><a href="create-data-set-6-item-with-leader.html"><i class="fa fa-check"></i><b>2.6</b> Create data set: 6 item with leader</a></li>
+</ul></li>
+<li class="chapter" data-level="3" data-path="check-and-impute-nas-and-idns.html"><a href="check-and-impute-nas-and-idns.html"><i class="fa fa-check"></i><b>3</b> Check and impute NAs and IDNs</a>
+<ul>
+<li class="chapter" data-level="3.1" data-path="discritpive-statistics-with-number-of-nas-and-idns-for-each-item.html"><a href="discritpive-statistics-with-number-of-nas-and-idns-for-each-item.html"><i class="fa fa-check"></i><b>3.1</b> Discritpive statistics with number of NAs and IDNs for each item</a></li>
+<li class="chapter" data-level="3.2" data-path="adress-na-and-idn-casewise.html"><a href="adress-na-and-idn-casewise.html"><i class="fa fa-check"></i><b>3.2</b> Adress NA and IDN casewise</a></li>
+<li class="chapter" data-level="3.3" data-path="sumarize-data-clensing.html"><a href="sumarize-data-clensing.html"><i class="fa fa-check"></i><b>3.3</b> Sumarize data clensing</a></li>
+</ul></li>
+<li class="chapter" data-level="4" data-path="data-analysis-plan.html"><a href="data-analysis-plan.html"><i class="fa fa-check"></i><b>4</b> Data analysis plan</a></li>
+<li class="chapter" data-level="5" data-path="variable-distribution-and-correlation-matrix.html"><a href="variable-distribution-and-correlation-matrix.html"><i class="fa fa-check"></i><b>5</b> Variable distribution and correlation matrix</a>
+<ul>
+<li class="chapter" data-level="5.1" data-path="distribution.html"><a href="distribution.html"><i class="fa fa-check"></i><b>5.1</b> Distribution</a></li>
+<li class="chapter" data-level="5.2" data-path="correlation-matrix.html"><a href="correlation-matrix.html"><i class="fa fa-check"></i><b>5.2</b> Correlation matrix</a></li>
+</ul></li>
+<li class="chapter" data-level="6" data-path="factor-analysis-for-with-leader-group-long.html"><a href="factor-analysis-for-with-leader-group-long.html"><i class="fa fa-check"></i><b>6</b> Factor analysis for with-leader group (long)</a>
+<ul>
+<li class="chapter" data-level="6.1" data-path="check-factoribility.html"><a href="check-factoribility.html"><i class="fa fa-check"></i><b>6.1</b> Check factoribility</a></li>
+<li class="chapter" data-level="6.2" data-path="explore-number-of-factors.html"><a href="explore-number-of-factors.html"><i class="fa fa-check"></i><b>6.2</b> Explore number of factors</a></li>
+<li class="chapter" data-level="6.3" data-path="explore-factor-solutions.html"><a href="explore-factor-solutions.html"><i class="fa fa-check"></i><b>6.3</b> Explore factor solutions</a>
+<ul>
+<li class="chapter" data-level="6.3.1" data-path="explore-factor-solutions.html"><a href="explore-factor-solutions.html#explore-5-factor-solution"><i class="fa fa-check"></i><b>6.3.1</b> Explore 5-factor solution</a></li>
+<li class="chapter" data-level="6.3.2" data-path="explore-factor-solutions.html"><a href="explore-factor-solutions.html#explore-4-factor-solution"><i class="fa fa-check"></i><b>6.3.2</b> Explore 4-factor solution</a></li>
+<li class="chapter" data-level="6.3.3" data-path="explore-factor-solutions.html"><a href="explore-factor-solutions.html#explore-3-factor-solution"><i class="fa fa-check"></i><b>6.3.3</b> Explore 3-factor solution</a></li>
+<li class="chapter" data-level="6.3.4" data-path="explore-factor-solutions.html"><a href="explore-factor-solutions.html#explore-2-factor-solution"><i class="fa fa-check"></i><b>6.3.4</b> Explore 2-factor solution</a></li>
+</ul></li>
+<li class="chapter" data-level="6.4" data-path="comparison-between-factor-solutions-with-leader-long.html"><a href="comparison-between-factor-solutions-with-leader-long.html"><i class="fa fa-check"></i><b>6.4</b> Comparison between factor solutions, with-leader (long)</a>
+<ul>
+<li class="chapter" data-level="6.4.1" data-path="comparison-between-factor-solutions-with-leader-long.html"><a href="comparison-between-factor-solutions-with-leader-long.html#check-the-factor-connotation-for-3-factor-solution"><i class="fa fa-check"></i><b>6.4.1</b> Check the factor connotation for 3-factor solution</a></li>
+</ul></li>
+</ul></li>
+<li class="chapter" data-level="7" data-path="factor-analysis-for-with-leader-group-short.html"><a href="factor-analysis-for-with-leader-group-short.html"><i class="fa fa-check"></i><b>7</b> Factor analysis for with-leader group (short)</a>
+<ul>
+<li class="chapter" data-level="7.1" data-path="check-factoribility-1.html"><a href="check-factoribility-1.html"><i class="fa fa-check"></i><b>7.1</b> Check factoribility</a></li>
+<li class="chapter" data-level="7.2" data-path="explore-number-of-factors-1.html"><a href="explore-number-of-factors-1.html"><i class="fa fa-check"></i><b>7.2</b> Explore number of factors</a></li>
+<li class="chapter" data-level="7.3" data-path="explore-factor-solutions-1.html"><a href="explore-factor-solutions-1.html"><i class="fa fa-check"></i><b>7.3</b> Explore factor solutions</a>
+<ul>
+<li class="chapter" data-level="7.3.1" data-path="explore-factor-solutions-1.html"><a href="explore-factor-solutions-1.html#explore-2-factor-solution-1"><i class="fa fa-check"></i><b>7.3.1</b> Explore 2-factor solution</a></li>
+<li class="chapter" data-level="7.3.2" data-path="explore-factor-solutions-1.html"><a href="explore-factor-solutions-1.html#explore-3-factor-solution-1"><i class="fa fa-check"></i><b>7.3.2</b> Explore 3-factor solution</a></li>
+</ul></li>
+</ul></li>
+<li class="chapter" data-level="8" data-path="factor-analysis-for-without-leader-group-long.html"><a href="factor-analysis-for-without-leader-group-long.html"><i class="fa fa-check"></i><b>8</b> Factor analysis for without-leader group (long)</a>
+<ul>
+<li class="chapter" data-level="8.1" data-path="check-factoribility-2.html"><a href="check-factoribility-2.html"><i class="fa fa-check"></i><b>8.1</b> Check factoribility</a></li>
+<li class="chapter" data-level="8.2" data-path="explore-number-of-factors-2.html"><a href="explore-number-of-factors-2.html"><i class="fa fa-check"></i><b>8.2</b> Explore number of factors</a></li>
+<li class="chapter" data-level="8.3" data-path="explore-factor-solutions-2.html"><a href="explore-factor-solutions-2.html"><i class="fa fa-check"></i><b>8.3</b> Explore factor solutions</a>
+<ul>
+<li class="chapter" data-level="8.3.1" data-path="explore-factor-solutions-2.html"><a href="explore-factor-solutions-2.html#explore-5-factor-solution-1"><i class="fa fa-check"></i><b>8.3.1</b> Explore 5-factor solution</a></li>
+<li class="chapter" data-level="8.3.2" data-path="explore-factor-solutions-2.html"><a href="explore-factor-solutions-2.html#explore-4-factor-solution-1"><i class="fa fa-check"></i><b>8.3.2</b> Explore 4-factor solution</a></li>
+<li class="chapter" data-level="8.3.3" data-path="explore-factor-solutions-2.html"><a href="explore-factor-solutions-2.html#explore-3-factor-solution-2"><i class="fa fa-check"></i><b>8.3.3</b> Explore 3-factor solution</a></li>
+<li class="chapter" data-level="8.3.4" data-path="explore-factor-solutions-2.html"><a href="explore-factor-solutions-2.html#explore-2-factor-solution-2"><i class="fa fa-check"></i><b>8.3.4</b> Explore 2-factor solution</a></li>
+</ul></li>
+<li class="chapter" data-level="8.4" data-path="comparison-between-factor-solutions-with-leader-long-1.html"><a href="comparison-between-factor-solutions-with-leader-long-1.html"><i class="fa fa-check"></i><b>8.4</b> Comparison between factor solutions, with-leader (long)</a></li>
+</ul></li>
+<li class="chapter" data-level="9" data-path="factor-analysis-for-without-leader-group-short.html"><a href="factor-analysis-for-without-leader-group-short.html"><i class="fa fa-check"></i><b>9</b> Factor analysis for without-leader group (short)</a>
+<ul>
+<li class="chapter" data-level="9.1" data-path="check-factoribility-3.html"><a href="check-factoribility-3.html"><i class="fa fa-check"></i><b>9.1</b> Check factoribility</a></li>
+<li class="chapter" data-level="9.2" data-path="explore-number-of-factors-3.html"><a href="explore-number-of-factors-3.html"><i class="fa fa-check"></i><b>9.2</b> Explore number of factors</a></li>
+<li class="chapter" data-level="9.3" data-path="explore-2-factor-solution-3.html"><a href="explore-2-factor-solution-3.html"><i class="fa fa-check"></i><b>9.3</b> Explore 2-factor solution</a></li>
+</ul></li>
+<li class="chapter" data-level="10" data-path="supplement-file-case-wise-discussion-on-na-and-idn.html"><a href="supplement-file-case-wise-discussion-on-na-and-idn.html"><i class="fa fa-check"></i><b>10</b> Supplement File: case-wise discussion on NA and IDN</a></li>
+</ul>
+
+      </nav>
+    </div>
+
+    <div class="book-body">
+      <div class="body-inner">
+        <div class="book-header" role="navigation">
+          <h1>
+            <i class="fa fa-circle-o-notch fa-spin"></i><a href="./">Developing a scale to measure factors influencing skier’s self-perceived group dynamics (FISSGD)</a>
+          </h1>
+        </div>
+
+        <div class="page-wrapper" tabindex="-1" role="main">
+          <div class="page-inner">
+
+            <section class="normal" id="section-">
+<div id="explore-factor-solutions" class="section level2 hasAnchor" number="6.3">
+<h2><span class="header-section-number">6.3</span> Explore factor solutions<a href="explore-factor-solutions.html#explore-factor-solutions" class="anchor-section" aria-label="Anchor link to header"></a></h2>
+<div id="explore-5-factor-solution" class="section level3 hasAnchor" number="6.3.1">
+<h3><span class="header-section-number">6.3.1</span> Explore 5-factor solution<a href="explore-factor-solutions.html#explore-5-factor-solution" class="anchor-section" aria-label="Anchor link to header"></a></h3>
+<p>After fitting 8 models, we achieved the most optimal model for 5 factor solution. The item removal process was encapsulated in table 8. One item was removed due to cross loading and other seven items were removed due to factor loading &lt;0.4. The final model has 10 items, with 60.8% variance explained, see table 9 and figure 13. Note that one of the factor identified only involves one item (i_comm2), which is not a preferred situation.</p>
+<table class="table" style="margin-left: auto; margin-right: auto;border-bottom: 0;">
+<caption>
+<span id="tab:unnamed-chunk-60">Table 6.3: </span>Item removing process for 5 factor solution
+</caption>
+<thead>
+<tr>
+<th style="empty-cells: hide;border-bottom:hidden;" colspan="1">
+</th>
+<th style="border-bottom:hidden;padding-bottom:0; padding-left:3px;padding-right:3px;text-align: center; " colspan="6">
+<div style="border-bottom: 1px solid #ddd; padding-bottom: 5px; ">
+Factor loadings of the items removed
+</div>
+</th>
+<th style="empty-cells: hide;border-bottom:hidden;" colspan="1">
+</th>
+</tr>
+<tr>
+<th style="text-align:left;">
+Iteration
+</th>
+<th style="text-align:left;">
+Item removed†
+</th>
+<th style="text-align:right;">
+ML2
+</th>
+<th style="text-align:right;">
+ML5
+</th>
+<th style="text-align:right;">
+ML4
+</th>
+<th style="text-align:right;">
+ML1
+</th>
+<th style="text-align:right;">
+ML3
+</th>
+<th style="text-align:right;">
+Variance Explained
+</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align:left;">
+model1
+</td>
+<td style="text-align:left;">
+i_skill4
+</td>
+<td style="text-align:right;">
+0.332
+</td>
+<td style="text-align:right;">
+0.062
+</td>
+<td style="text-align:right;">
+0.235
+</td>
+<td style="text-align:right;">
+0.085
+</td>
+<td style="text-align:right;">
+-0.161
+</td>
+<td style="text-align:right;">
+0.447
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+model2
+</td>
+<td style="text-align:left;">
+i_orga1
+</td>
+<td style="text-align:right;">
+0.109
+</td>
+<td style="text-align:right;">
+0.231
+</td>
+<td style="text-align:right;">
+-0.167
+</td>
+<td style="text-align:right;">
+0.324
+</td>
+<td style="text-align:right;">
+0.185
+</td>
+<td style="text-align:right;">
+0.463
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+model3
+</td>
+<td style="text-align:left;">
+i_leader1
+</td>
+<td style="text-align:right;">
+0.122
+</td>
+<td style="text-align:right;">
+0.246
+</td>
+<td style="text-align:right;">
+0.232
+</td>
+<td style="text-align:right;">
+0.342
+</td>
+<td style="text-align:right;">
+-0.384
+</td>
+<td style="text-align:right;">
+0.487
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+model4
+</td>
+<td style="text-align:left;">
+i_iden2
+</td>
+<td style="text-align:right;">
+0.045
+</td>
+<td style="text-align:right;">
+0.307
+</td>
+<td style="text-align:right;">
+0.131
+</td>
+<td style="text-align:right;">
+0.066
+</td>
+<td style="text-align:right;">
+0.038
+</td>
+<td style="text-align:right;">
+0.479
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+model5
+</td>
+<td style="text-align:left;">
+i_comm1
+</td>
+<td style="text-align:right;">
+-0.076
+</td>
+<td style="text-align:right;">
+0.322
+</td>
+<td style="text-align:right;">
+0.108
+</td>
+<td style="text-align:right;">
+0.154
+</td>
+<td style="text-align:right;">
+0.259
+</td>
+<td style="text-align:right;">
+0.508
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+model6
+</td>
+<td style="text-align:left;">
+i_leader2
+</td>
+<td style="text-align:right;">
+-0.004
+</td>
+<td style="text-align:right;">
+0.260
+</td>
+<td style="text-align:right;">
+0.153
+</td>
+<td style="text-align:right;">
+0.257
+</td>
+<td style="text-align:right;">
+0.129
+</td>
+<td style="text-align:right;">
+0.532
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+model7
+</td>
+<td style="text-align:left;">
+i_orga2
+</td>
+<td style="text-align:right;">
+0.298
+</td>
+<td style="text-align:right;">
+0.049
+</td>
+<td style="text-align:right;">
+0.083
+</td>
+<td style="text-align:right;">
+0.173
+</td>
+<td style="text-align:right;">
+0.230
+</td>
+<td style="text-align:right;">
+0.552
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+model8*
+</td>
+<td style="text-align:left;">
+i_leader3
+</td>
+<td style="text-align:right;">
+0.086
+</td>
+<td style="text-align:right;">
+0.455
+</td>
+<td style="text-align:right;">
+0.547
+</td>
+<td style="text-align:right;">
+0.096
+</td>
+<td style="text-align:right;">
+0.041
+</td>
+<td style="text-align:right;">
+0.608
+</td>
+</tr>
+</tbody>
+<tfoot>
+<tr>
+<td style="padding: 0; " colspan="100%">
+<sup>*</sup> The item removed for the model is due to cross-loading
+</td>
+</tr>
+<tr>
+<td style="padding: 0; " colspan="100%">
+<sup>†</sup> The items removed a model include the ones in the current and preceding rows
+</td>
+</tr>
+</tfoot>
+</table>
+<table class="table" style="margin-left: auto; margin-right: auto;">
+<caption>
+<span id="tab:unnamed-chunk-60">Table 6.3: </span>Factor loadings of the 5 factor solution for with-leader group (long)
+</caption>
+<thead>
+<tr>
+<th style="text-align:left;">
+Item
+</th>
+<th style="text-align:right;">
+ML4
+</th>
+<th style="text-align:right;">
+ML1
+</th>
+<th style="text-align:right;">
+ML2
+</th>
+<th style="text-align:right;">
+ML5
+</th>
+<th style="text-align:right;">
+ML3
+</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align:left;">
+i_skill1
+</td>
+<td style="text-align:right;">
+0.866
+</td>
+<td style="text-align:right;">
+</td>
+<td style="text-align:right;">
+</td>
+<td style="text-align:right;">
+</td>
+<td style="text-align:right;">
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+i_skill2
+</td>
+<td style="text-align:right;">
+0.68
+</td>
+<td style="text-align:right;">
+</td>
+<td style="text-align:right;">
+</td>
+<td style="text-align:right;">
+</td>
+<td style="text-align:right;">
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+i_skill3
+</td>
+<td style="text-align:right;">
+0.43
+</td>
+<td style="text-align:right;">
+</td>
+<td style="text-align:right;">
+</td>
+<td style="text-align:right;">
+</td>
+<td style="text-align:right;">
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+i_orga3
+</td>
+<td style="text-align:right;">
+</td>
+<td style="text-align:right;">
+</td>
+<td style="text-align:right;">
+0.974
+</td>
+<td style="text-align:right;">
+</td>
+<td style="text-align:right;">
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+i_comm2
+</td>
+<td style="text-align:right;">
+</td>
+<td style="text-align:right;">
+</td>
+<td style="text-align:right;">
+</td>
+<td style="text-align:right;">
+</td>
+<td style="text-align:right;">
+0.853
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+i_comm3
+</td>
+<td style="text-align:right;">
+</td>
+<td style="text-align:right;">
+</td>
+<td style="text-align:right;">
+</td>
+<td style="text-align:right;">
+0.634
+</td>
+<td style="text-align:right;">
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+i_iden1
+</td>
+<td style="text-align:right;">
+</td>
+<td style="text-align:right;">
+</td>
+<td style="text-align:right;">
+0.412
+</td>
+<td style="text-align:right;">
+</td>
+<td style="text-align:right;">
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+i_iden3
+</td>
+<td style="text-align:right;">
+</td>
+<td style="text-align:right;">
+0.448
+</td>
+<td style="text-align:right;">
+</td>
+<td style="text-align:right;">
+</td>
+<td style="text-align:right;">
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+i_anom1
+</td>
+<td style="text-align:right;">
+</td>
+<td style="text-align:right;">
+0.962
+</td>
+<td style="text-align:right;">
+</td>
+<td style="text-align:right;">
+</td>
+<td style="text-align:right;">
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+i_anom2
+</td>
+<td style="text-align:right;">
+</td>
+<td style="text-align:right;">
+</td>
+<td style="text-align:right;">
+</td>
+<td style="text-align:right;">
+0.593
+</td>
+<td style="text-align:right;">
+</td>
+</tr>
+</tbody>
+</table>
+<p><img src="SCOAIL_files/figure-html/unnamed-chunk-60-1.png" width="672" style="display: block; margin: auto;" /></p>
+</div>
+<div id="explore-4-factor-solution" class="section level3 hasAnchor" number="6.3.2">
+<h3><span class="header-section-number">6.3.2</span> Explore 4-factor solution<a href="explore-factor-solutions.html#explore-4-factor-solution" class="anchor-section" aria-label="Anchor link to header"></a></h3>
+<p>After fitting 8 models, we achieved the most optimal model for 4 factor solution. The item removal process was encapsulated in table 10. All items were removed due to factor loading &lt;0.4. The final model has 10 items, with 57.5% variance explained, see table 11 and figure 14. Note that one item (i_leader1) has a negative loading onto the factor, albeit it has positive wording. To check the questions for this factor, see table 12.</p>
+<table class="table" style="margin-left: auto; margin-right: auto;border-bottom: 0;">
+<caption>
+<span id="tab:unnamed-chunk-61">Table 6.4: </span>Item removing process for 4 factor solution
+</caption>
+<thead>
+<tr>
+<th style="empty-cells: hide;border-bottom:hidden;" colspan="1">
+</th>
+<th style="border-bottom:hidden;padding-bottom:0; padding-left:3px;padding-right:3px;text-align: center; " colspan="5">
+<div style="border-bottom: 1px solid #ddd; padding-bottom: 5px; ">
+Factor loadings of the items removed
+</div>
+</th>
+<th style="empty-cells: hide;border-bottom:hidden;" colspan="1">
+</th>
+</tr>
+<tr>
+<th style="text-align:left;">
+Iteration
+</th>
+<th style="text-align:left;">
+Item removed†
+</th>
+<th style="text-align:right;">
+ML1
+</th>
+<th style="text-align:right;">
+ML3
+</th>
+<th style="text-align:right;">
+ML2
+</th>
+<th style="text-align:right;">
+ML4
+</th>
+<th style="text-align:right;">
+Variance Explained
+</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align:left;">
+model1
+</td>
+<td style="text-align:left;">
+i_skill4
+</td>
+<td style="text-align:right;">
+0.358
+</td>
+<td style="text-align:right;">
+0.250
+</td>
+<td style="text-align:right;">
+0.048
+</td>
+<td style="text-align:right;">
+-0.076
+</td>
+<td style="text-align:right;">
+0.392
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+model2
+</td>
+<td style="text-align:left;">
+i_iden2
+</td>
+<td style="text-align:right;">
+0.013
+</td>
+<td style="text-align:right;">
+0.262
+</td>
+<td style="text-align:right;">
+0.127
+</td>
+<td style="text-align:right;">
+0.171
+</td>
+<td style="text-align:right;">
+0.404
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+model3
+</td>
+<td style="text-align:left;">
+i_orga1
+</td>
+<td style="text-align:right;">
+0.159
+</td>
+<td style="text-align:right;">
+-0.179
+</td>
+<td style="text-align:right;">
+0.382
+</td>
+<td style="text-align:right;">
+0.256
+</td>
+<td style="text-align:right;">
+0.422
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+model4
+</td>
+<td style="text-align:left;">
+i_orga3
+</td>
+<td style="text-align:right;">
+-0.047
+</td>
+<td style="text-align:right;">
+-0.256
+</td>
+<td style="text-align:right;">
+0.147
+</td>
+<td style="text-align:right;">
+0.359
+</td>
+<td style="text-align:right;">
+0.450
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+model5
+</td>
+<td style="text-align:left;">
+i_iden1
+</td>
+<td style="text-align:right;">
+0.083
+</td>
+<td style="text-align:right;">
+0.051
+</td>
+<td style="text-align:right;">
+0.055
+</td>
+<td style="text-align:right;">
+0.305
+</td>
+<td style="text-align:right;">
+0.467
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+model6
+</td>
+<td style="text-align:left;">
+i_orga2
+</td>
+<td style="text-align:right;">
+0.015
+</td>
+<td style="text-align:right;">
+0.250
+</td>
+<td style="text-align:right;">
+-0.023
+</td>
+<td style="text-align:right;">
+0.339
+</td>
+<td style="text-align:right;">
+0.494
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+model7
+</td>
+<td style="text-align:left;">
+i_anom2
+</td>
+<td style="text-align:right;">
+0.330
+</td>
+<td style="text-align:right;">
+0.008
+</td>
+<td style="text-align:right;">
+0.222
+</td>
+<td style="text-align:right;">
+0.358
+</td>
+<td style="text-align:right;">
+0.526
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+model8
+</td>
+<td style="text-align:left;">
+i_skill3
+</td>
+<td style="text-align:right;">
+0.124
+</td>
+<td style="text-align:right;">
+0.183
+</td>
+<td style="text-align:right;">
+0.362
+</td>
+<td style="text-align:right;">
+0.168
+</td>
+<td style="text-align:right;">
+0.575
+</td>
+</tr>
+</tbody>
+<tfoot>
+<tr>
+<td style="padding: 0; " colspan="100%">
+<sup><em></sup> ’</em>’ indicates the model is by removing a cross-loading item
+</td>
+</tr>
+<tr>
+<td style="padding: 0; " colspan="100%">
+<sup>†</sup> The items removed a model include the ones in the current and preceding rows
+</td>
+</tr>
+</tfoot>
+</table>
+<table class="table" style="margin-left: auto; margin-right: auto;">
+<caption>
+<span id="tab:unnamed-chunk-61">Table 6.4: </span>Factor loadings of the 4 factor solution for with-leader group (long)
+</caption>
+<thead>
+<tr>
+<th style="text-align:left;">
+Item
+</th>
+<th style="text-align:right;">
+ML3
+</th>
+<th style="text-align:right;">
+ML1
+</th>
+<th style="text-align:right;">
+ML4
+</th>
+<th style="text-align:right;">
+ML2
+</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align:left;">
+i_leader1
+</td>
+<td style="text-align:right;">
+-0.47
+</td>
+<td style="text-align:right;">
+</td>
+<td style="text-align:right;">
+</td>
+<td style="text-align:right;">
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+i_leader2
+</td>
+<td style="text-align:right;">
+</td>
+<td style="text-align:right;">
+</td>
+<td style="text-align:right;">
+</td>
+<td style="text-align:right;">
+0.889
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+i_leader3
+</td>
+<td style="text-align:right;">
+</td>
+<td style="text-align:right;">
+0.98
+</td>
+<td style="text-align:right;">
+</td>
+<td style="text-align:right;">
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+i_skill1
+</td>
+<td style="text-align:right;">
+0.858
+</td>
+<td style="text-align:right;">
+</td>
+<td style="text-align:right;">
+</td>
+<td style="text-align:right;">
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+i_skill2
+</td>
+<td style="text-align:right;">
+0.678
+</td>
+<td style="text-align:right;">
+</td>
+<td style="text-align:right;">
+</td>
+<td style="text-align:right;">
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+i_comm1
+</td>
+<td style="text-align:right;">
+</td>
+<td style="text-align:right;">
+</td>
+<td style="text-align:right;">
+</td>
+<td style="text-align:right;">
+0.432
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+i_comm2
+</td>
+<td style="text-align:right;">
+</td>
+<td style="text-align:right;">
+0.414
+</td>
+<td style="text-align:right;">
+</td>
+<td style="text-align:right;">
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+i_comm3
+</td>
+<td style="text-align:right;">
+</td>
+<td style="text-align:right;">
+0.444
+</td>
+<td style="text-align:right;">
+</td>
+<td style="text-align:right;">
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+i_iden3
+</td>
+<td style="text-align:right;">
+</td>
+<td style="text-align:right;">
+</td>
+<td style="text-align:right;">
+0.82
+</td>
+<td style="text-align:right;">
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+i_anom1
+</td>
+<td style="text-align:right;">
+</td>
+<td style="text-align:right;">
+</td>
+<td style="text-align:right;">
+0.601
+</td>
+<td style="text-align:right;">
+</td>
+</tr>
+</tbody>
+</table>
+<img src="SCOAIL_files/figure-html/unnamed-chunk-61-1.png" width="672" style="display: block; margin: auto;" />
+<table class="table" style="margin-left: auto; margin-right: auto;">
+<caption>
+<span id="tab:unnamed-chunk-61">Table 6.4: </span>Item with negative loading and other items under the same factor
+</caption>
+<thead>
+<tr>
+<th style="text-align:left;">
+</th>
+<th style="text-align:left;">
+Item
+</th>
+<th style="text-align:left;">
+loadings
+</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align:left;">
+i_skill1
+</td>
+<td style="text-align:left;width: 10cm; ">
+The least knowledgeable group member could conduct satisfactory avalanche assessments for this trip
+</td>
+<td style="text-align:left;">
+0.86
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+i_skill2
+</td>
+<td style="text-align:left;width: 10cm; ">
+There was no large gap in avalanche assessment skills between the group members
+</td>
+<td style="text-align:left;">
+0.68
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+i_leader1
+</td>
+<td style="text-align:left;width: 10cm; ">
+The leader (formal or informal) was the best suited person in the group to make the decisions.
+</td>
+<td style="text-align:left;">
+-0.47
+</td>
+</tr>
+</tbody>
+</table>
+</div>
+<div id="explore-3-factor-solution" class="section level3 hasAnchor" number="6.3.3">
+<h3><span class="header-section-number">6.3.3</span> Explore 3-factor solution<a href="explore-factor-solutions.html#explore-3-factor-solution" class="anchor-section" aria-label="Anchor link to header"></a></h3>
+<p>After fitting 12 models, we achieved the most optimal model for 3 factor solution. The item removal process was encapsulated in table 13. Two items were removed due to cross-loading, and others due to factor loading &lt;0.4. The final model has 6 items, with 62.4% variance explained, see table 14 and figure 15. To check the questions for this factor, see table 12.</p>
+<table class="table" style="margin-left: auto; margin-right: auto;border-bottom: 0;">
+<caption>
+<span id="tab:unnamed-chunk-62">Table 6.5: </span>Item removing process for 3 factor solution
+</caption>
+<thead>
+<tr>
+<th style="empty-cells: hide;border-bottom:hidden;" colspan="1">
+</th>
+<th style="border-bottom:hidden;padding-bottom:0; padding-left:3px;padding-right:3px;text-align: center; " colspan="4">
+<div style="border-bottom: 1px solid #ddd; padding-bottom: 5px; ">
+Factor loadings of the items removed
+</div>
+</th>
+<th style="empty-cells: hide;border-bottom:hidden;" colspan="1">
+</th>
+</tr>
+<tr>
+<th style="text-align:left;">
+Iteration
+</th>
+<th style="text-align:left;">
+Item removed†
+</th>
+<th style="text-align:right;">
+ML2
+</th>
+<th style="text-align:right;">
+ML1
+</th>
+<th style="text-align:right;">
+ML3
+</th>
+<th style="text-align:right;">
+Variance Explained
+</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align:left;">
+model1
+</td>
+<td style="text-align:left;">
+i_iden2
+</td>
+<td style="text-align:right;">
+0.197
+</td>
+<td style="text-align:right;">
+0.036
+</td>
+<td style="text-align:right;">
+0.273
+</td>
+<td style="text-align:right;">
+0.349
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+model2
+</td>
+<td style="text-align:left;">
+i_iden1
+</td>
+<td style="text-align:right;">
+0.384
+</td>
+<td style="text-align:right;">
+0.049
+</td>
+<td style="text-align:right;">
+0.053
+</td>
+<td style="text-align:right;">
+0.363
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+model3
+</td>
+<td style="text-align:left;">
+i_orga2
+</td>
+<td style="text-align:right;">
+0.261
+</td>
+<td style="text-align:right;">
+0.270
+</td>
+<td style="text-align:right;">
+0.024
+</td>
+<td style="text-align:right;">
+0.376
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+model4
+</td>
+<td style="text-align:left;">
+i_orga3
+</td>
+<td style="text-align:right;">
+0.384
+</td>
+<td style="text-align:right;">
+-0.247
+</td>
+<td style="text-align:right;">
+0.000
+</td>
+<td style="text-align:right;">
+0.392
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+model5
+</td>
+<td style="text-align:left;">
+i_skill4
+</td>
+<td style="text-align:right;">
+0.184
+</td>
+<td style="text-align:right;">
+0.375
+</td>
+<td style="text-align:right;">
+0.064
+</td>
+<td style="text-align:right;">
+0.406
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+model6
+</td>
+<td style="text-align:left;">
+i_skill3
+</td>
+<td style="text-align:right;">
+0.172
+</td>
+<td style="text-align:right;">
+0.367
+</td>
+<td style="text-align:right;">
+0.237
+</td>
+<td style="text-align:right;">
+0.423
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+model7*
+</td>
+<td style="text-align:left;">
+i_leader1
+</td>
+<td style="text-align:right;">
+0.519
+</td>
+<td style="text-align:right;">
+-0.462
+</td>
+<td style="text-align:right;">
+0.189
+</td>
+<td style="text-align:right;">
+0.439
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+model8
+</td>
+<td style="text-align:left;">
+i_leader2
+</td>
+<td style="text-align:right;">
+0.383
+</td>
+<td style="text-align:right;">
+0.133
+</td>
+<td style="text-align:right;">
+0.138
+</td>
+<td style="text-align:right;">
+0.437
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+model9
+</td>
+<td style="text-align:left;">
+i_comm1
+</td>
+<td style="text-align:right;">
+0.217
+</td>
+<td style="text-align:right;">
+0.280
+</td>
+<td style="text-align:right;">
+0.182
+</td>
+<td style="text-align:right;">
+0.469
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+model10
+</td>
+<td style="text-align:left;">
+i_anom2
+</td>
+<td style="text-align:right;">
+0.337
+</td>
+<td style="text-align:right;">
+0.016
+</td>
+<td style="text-align:right;">
+0.369
+</td>
+<td style="text-align:right;">
+0.497
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+model11
+</td>
+<td style="text-align:left;">
+i_orga1
+</td>
+<td style="text-align:right;">
+0.395
+</td>
+<td style="text-align:right;">
+0.120
+</td>
+<td style="text-align:right;">
+0.035
+</td>
+<td style="text-align:right;">
+0.522
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+model12*
+</td>
+<td style="text-align:left;">
+i_comm2
+</td>
+<td style="text-align:right;">
+0.368
+</td>
+<td style="text-align:right;">
+0.416
+</td>
+<td style="text-align:right;">
+0.410
+</td>
+<td style="text-align:right;">
+0.624
+</td>
+</tr>
+</tbody>
+<tfoot>
+<tr>
+<td style="padding: 0; " colspan="100%">
+<sup>*</sup> The item removed for the model is due to cross-loading
+</td>
+</tr>
+<tr>
+<td style="padding: 0; " colspan="100%">
+<sup>†</sup> The items removed a model include the ones in the current and preceding rows
+</td>
+</tr>
+</tfoot>
+</table>
+<table class="table" style="margin-left: auto; margin-right: auto;">
+<caption>
+<span id="tab:unnamed-chunk-62">Table 6.5: </span>Factor loadings of the 3 factor solution for with-leader group (long)
+</caption>
+<thead>
+<tr>
+<th style="text-align:left;">
+Item
+</th>
+<th style="text-align:right;">
+ML2
+</th>
+<th style="text-align:right;">
+ML1
+</th>
+<th style="text-align:right;">
+ML3
+</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align:left;">
+i_leader3
+</td>
+<td style="text-align:right;">
+</td>
+<td style="text-align:right;">
+0.984
+</td>
+<td style="text-align:right;">
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+i_skill1
+</td>
+<td style="text-align:right;">
+0.988
+</td>
+<td style="text-align:right;">
+</td>
+<td style="text-align:right;">
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+i_skill2
+</td>
+<td style="text-align:right;">
+0.609
+</td>
+<td style="text-align:right;">
+</td>
+<td style="text-align:right;">
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+i_comm3
+</td>
+<td style="text-align:right;">
+</td>
+<td style="text-align:right;">
+0.447
+</td>
+<td style="text-align:right;">
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+i_iden3
+</td>
+<td style="text-align:right;">
+</td>
+<td style="text-align:right;">
+</td>
+<td style="text-align:right;">
+0.636
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+i_anom1
+</td>
+<td style="text-align:right;">
+</td>
+<td style="text-align:right;">
+</td>
+<td style="text-align:right;">
+0.771
+</td>
+</tr>
+</tbody>
+</table>
+<img src="SCOAIL_files/figure-html/unnamed-chunk-62-1.png" width="672" style="display: block; margin: auto;" />
+<table class="table" style="margin-left: auto; margin-right: auto;">
+<caption>
+<span id="tab:unnamed-chunk-62">Table 6.5: </span>Items of 3-factor solution, with-leader group (long)
+</caption>
+<thead>
+<tr>
+<th style="text-align:left;">
+</th>
+<th style="text-align:left;">
+Item
+</th>
+</tr>
+</thead>
+<tbody>
+<tr grouplength="2">
+<td colspan="2" style="border-bottom: 1px solid;">
+<strong>factor1</strong>
+</td>
+</tr>
+<tr>
+<td style="text-align:left;padding-left: 2em;" indentlevel="1">
+i_skill1
+</td>
+<td style="text-align:left;width: 10cm; ">
+The least knowledgeable group member could conduct satisfactory avalanche assessments for this trip
+</td>
+</tr>
+<tr>
+<td style="text-align:left;padding-left: 2em;" indentlevel="1">
+i_skill2
+</td>
+<td style="text-align:left;width: 10cm; ">
+There was no large gap in avalanche assessment skills between the group members
+</td>
+</tr>
+<tr grouplength="2">
+<td colspan="2" style="border-bottom: 1px solid;">
+<strong>factor2</strong>
+</td>
+</tr>
+<tr>
+<td style="text-align:left;padding-left: 2em;" indentlevel="1">
+i_leader3
+</td>
+<td style="text-align:left;width: 10cm; ">
+Everyone could voice their concerns to the leader (formal or informal)
+</td>
+</tr>
+<tr>
+<td style="text-align:left;padding-left: 2em;" indentlevel="1">
+i_comm3
+</td>
+<td style="text-align:left;width: 10cm; ">
+Everyone voiced their concerns whenever they felt necessary
+</td>
+</tr>
+<tr grouplength="2">
+<td colspan="2" style="border-bottom: 1px solid;">
+<strong>factor3</strong>
+</td>
+</tr>
+<tr>
+<td style="text-align:left;padding-left: 2em;" indentlevel="1">
+i_anom1
+</td>
+<td style="text-align:left;width: 10cm; ">
+The group decisions at the decision points were unanimous
+</td>
+</tr>
+<tr>
+<td style="text-align:left;padding-left: 2em;" indentlevel="1">
+i_iden3
+</td>
+<td style="text-align:left;width: 10cm; ">
+Everyone was happy with the decisions that were made
+</td>
+</tr>
+</tbody>
+</table>
+<p>After fitting 10 models, we achieved the most optimal model for 2 factor solution. The item removal process was encapsulated in table 16. one items was removed due to cross-loading, and others due to factor loading &lt;0.4. The final model has 8 items, with 44.8% variance explained, see table 17 and figure 16.</p>
+</div>
+<div id="explore-2-factor-solution" class="section level3 hasAnchor" number="6.3.4">
+<h3><span class="header-section-number">6.3.4</span> Explore 2-factor solution<a href="explore-factor-solutions.html#explore-2-factor-solution" class="anchor-section" aria-label="Anchor link to header"></a></h3>
+<table class="table" style="margin-left: auto; margin-right: auto;border-bottom: 0;">
+<caption>
+<span id="tab:unnamed-chunk-63">Table 6.6: </span>Item removing process for 2 factor solution
+</caption>
+<thead>
+<tr>
+<th style="empty-cells: hide;border-bottom:hidden;" colspan="1">
+</th>
+<th style="border-bottom:hidden;padding-bottom:0; padding-left:3px;padding-right:3px;text-align: center; " colspan="3">
+<div style="border-bottom: 1px solid #ddd; padding-bottom: 5px; ">
+Factor loadings of the items removed
+</div>
+</th>
+<th style="empty-cells: hide;border-bottom:hidden;" colspan="1">
+</th>
+</tr>
+<tr>
+<th style="text-align:left;">
+Iteration
+</th>
+<th style="text-align:left;">
+Item removed†
+</th>
+<th style="text-align:right;">
+ML2
+</th>
+<th style="text-align:right;">
+ML1
+</th>
+<th style="text-align:right;">
+Variance Explained
+</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align:left;">
+model1
+</td>
+<td style="text-align:left;">
+i_orga3
+</td>
+<td style="text-align:right;">
+0.382
+</td>
+<td style="text-align:right;">
+-0.184
+</td>
+<td style="text-align:right;">
+0.291
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+model2
+</td>
+<td style="text-align:left;">
+i_orga1
+</td>
+<td style="text-align:right;">
+0.211
+</td>
+<td style="text-align:right;">
+0.185
+</td>
+<td style="text-align:right;">
+0.298
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+model3
+</td>
+<td style="text-align:left;">
+i_iden1
+</td>
+<td style="text-align:right;">
+0.299
+</td>
+<td style="text-align:right;">
+0.093
+</td>
+<td style="text-align:right;">
+0.312
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+model4
+</td>
+<td style="text-align:left;">
+i_iden2
+</td>
+<td style="text-align:right;">
+0.328
+</td>
+<td style="text-align:right;">
+0.077
+</td>
+<td style="text-align:right;">
+0.326
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+model5
+</td>
+<td style="text-align:left;">
+i_orga2
+</td>
+<td style="text-align:right;">
+0.198
+</td>
+<td style="text-align:right;">
+0.289
+</td>
+<td style="text-align:right;">
+0.341
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+model6
+</td>
+<td style="text-align:left;">
+i_skill4
+</td>
+<td style="text-align:right;">
+0.162
+</td>
+<td style="text-align:right;">
+0.360
+</td>
+<td style="text-align:right;">
+0.359
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+model7
+</td>
+<td style="text-align:left;">
+i_comm1
+</td>
+<td style="text-align:right;">
+0.341
+</td>
+<td style="text-align:right;">
+0.295
+</td>
+<td style="text-align:right;">
+0.376
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+model8
+</td>
+<td style="text-align:left;">
+i_skill3
+</td>
+<td style="text-align:right;">
+0.277
+</td>
+<td style="text-align:right;">
+0.366
+</td>
+<td style="text-align:right;">
+0.391
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+model9*
+</td>
+<td style="text-align:left;">
+i_leader1
+</td>
+<td style="text-align:right;">
+0.467
+</td>
+<td style="text-align:right;">
+-0.431
+</td>
+<td style="text-align:right;">
+0.408
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+model10
+</td>
+<td style="text-align:left;">
+i_leader2
+</td>
+<td style="text-align:right;">
+0.381
+</td>
+<td style="text-align:right;">
+0.140
+</td>
+<td style="text-align:right;">
+0.448
+</td>
+</tr>
+</tbody>
+<tfoot>
+<tr>
+<td style="padding: 0; " colspan="100%">
+<sup>*</sup> The item removed for the model is due to cross-loading
+</td>
+</tr>
+<tr>
+<td style="padding: 0; " colspan="100%">
+<sup>†</sup> The items removed a model include the ones in the current and preceding rows
+</td>
+</tr>
+</tfoot>
+</table>
+<table class="table" style="margin-left: auto; margin-right: auto;">
+<caption>
+<span id="tab:unnamed-chunk-63">Table 6.6: </span>Factor loadings of the 2 factor solution for with-leader group (long)
+</caption>
+<thead>
+<tr>
+<th style="text-align:left;">
+Item
+</th>
+<th style="text-align:right;">
+ML2
+</th>
+<th style="text-align:right;">
+ML1
+</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align:left;">
+i_leader3
+</td>
+<td style="text-align:right;">
+0.649
+</td>
+<td style="text-align:right;">
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+i_skill1
+</td>
+<td style="text-align:right;">
+</td>
+<td style="text-align:right;">
+0.962
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+i_skill2
+</td>
+<td style="text-align:right;">
+</td>
+<td style="text-align:right;">
+0.628
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+i_comm2
+</td>
+<td style="text-align:right;">
+0.597
+</td>
+<td style="text-align:right;">
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+i_comm3
+</td>
+<td style="text-align:right;">
+0.51
+</td>
+<td style="text-align:right;">
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+i_iden3
+</td>
+<td style="text-align:right;">
+0.676
+</td>
+<td style="text-align:right;">
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+i_anom1
+</td>
+<td style="text-align:right;">
+0.54
+</td>
+<td style="text-align:right;">
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+i_anom2
+</td>
+<td style="text-align:right;">
+0.512
+</td>
+<td style="text-align:right;">
+</td>
+</tr>
+</tbody>
+</table>
+<p><img src="SCOAIL_files/figure-html/unnamed-chunk-63-1.png" width="960" style="display: block; margin: auto;" /></p>
+</div>
+</div>
+            </section>
+
+          </div>
+        </div>
+      </div>
+<a href="explore-number-of-factors.html" class="navigation navigation-prev " aria-label="Previous page"><i class="fa fa-angle-left"></i></a>
+<a href="comparison-between-factor-solutions-with-leader-long.html" class="navigation navigation-next " aria-label="Next page"><i class="fa fa-angle-right"></i></a>
+    </div>
+  </div>
+<script src="assets/gitbook-2.6.7/js/app.min.js"></script>
+<script src="assets/gitbook-2.6.7/js/clipboard.min.js"></script>
+<script src="assets/gitbook-2.6.7/js/plugin-search.js"></script>
+<script src="assets/gitbook-2.6.7/js/plugin-sharing.js"></script>
+<script src="assets/gitbook-2.6.7/js/plugin-fontsettings.js"></script>
+<script src="assets/gitbook-2.6.7/js/plugin-bookdown.js"></script>
+<script src="assets/gitbook-2.6.7/js/jquery.highlight.js"></script>
+<script src="assets/gitbook-2.6.7/js/plugin-clipboard.js"></script>
+<script>
+gitbook.require(["gitbook"], function(gitbook) {
+gitbook.start({
+"sharing": {
+"github": false,
+"facebook": true,
+"twitter": true,
+"linkedin": false,
+"weibo": false,
+"instapaper": false,
+"vk": false,
+"whatsapp": false,
+"all": ["facebook", "twitter", "linkedin", "weibo", "instapaper"]
+},
+"fontsettings": {
+"theme": "white",
+"family": "sans",
+"size": 2
+},
+"edit": {
+"link": null,
+"text": null
+},
+"history": {
+"link": null,
+"text": null
+},
+"view": {
+"link": null,
+"text": null
+},
+"download": null,
+"search": false,
+"toc": {
+"collapse": "subsection"
+},
+"toolbar": {
+"position": "static"
+}
+});
+});
+</script>
+
+<!-- dynamically load mathjax for compatibility with self-contained -->
+<script>
+  (function () {
+    var script = document.createElement("script");
+    script.type = "text/javascript";
+    var src = "true";
+    if (src === "" || src === "true") src = "https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.9/latest.js?config=TeX-MML-AM_CHTML";
+    if (location.protocol !== "file:")
+      if (/^https?:/.test(src))
+        src = src.replace(/^https?:/, '');
+    script.src = src;
+    document.getElementsByTagName("head")[0].appendChild(script);
+  })();
+</script>
+</body>
+
+</html>

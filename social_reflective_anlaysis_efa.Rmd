@@ -1,0 +1,2684 @@
+---
+title: "Developing a scale to measure factors influencing skier's self-perceived group dynamics (FISSGD)"
+author: "Rong Guang"
+output:
+  bookdown::gitbook:
+    lib_dir: assets
+    split_by: section
+    config:
+      toolbar:
+        position: static
+---
+```{r, eval=F, echo = F}
+bookdown::gitbook:
+    lib_dir: assets
+    split_by: section
+    config:
+      toolbar:
+        position: static
+
+bookdown::pdf_document2:
+    latex_engine: lualatex    
+```
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(
+  echo = F, 
+  warning = F, 
+  message = F, 
+  cache = F, 
+  fig.align = 'center'
+)
+```
+
+```{r, echo = F}
+if (!require("pacman")) install.packages("pacman")
+pacman::p_load(here, 
+               haven,
+               expss, 
+               tidyverse, 
+               janitor,
+               knitr, 
+               stringr,
+               labelled,
+               sjPlot,
+               GPArotation, # for factor analysis
+               psych#for factor analysis
+               )
+```
+
+# Data Wrangling
+
+For the interest of space, codes in this section will not be shown. Yet they are available in the .rmd file.
+
+## Read in the data
+
+The data were collected across years 2022 (CARE panel, n=218) and 2023 (Students joining an avalanche course, n =59).  
+
+```{r, echo = F}
+library(tidyverse)
+library(haven)
+library(here)
+latest.name22 <- "SOCIAL_2022.sav"#This week's file name
+latest.name23 <- "SOCIAL_2023.sav"#This week's file name
+#read in the data
+social22 <-  #2022 wave
+  haven::read_spss(
+    file.path(
+      here(),
+      'SOCIAL',
+      'data',
+      latest.name22
+      )
+    )
+
+social23 <-  #2023 wave
+  haven::read_spss(
+    file.path(
+      here(),
+      'SOCIAL',
+      'data',
+      latest.name23
+      )
+    )
+```
+
+## Combine 2022 and 2023 data
+
+They were combined into one data set (n = 277). An index variable was generated as the unique identifier for each case.
+
+```{r, echo = F}
+#unify variable names across data sets
+social23 <- social23 |> 
+  rename(id = ID)
+
+social22$ID.0 <- NULL
+
+#combine data sets into one
+social <- 
+  rbind(
+    social22, 
+    social23
+    )
+
+social <- 
+  social |> 
+  mutate(
+    index = 1:nrow(social)
+    ) |> 
+  dplyr::select(
+    index, 
+    everything()
+    )
+```
+
+## Reomove cases
+
+### Remove careless responses (according to attention trap)
+
+Q10_2 and Q10_5, as well as Q19_1 and Q19_4 were same questions with different wordings. If the responses had conflictory results between them, they would be regarded as careless responses and hence deleted (n = 24).
+
+```{r, echo = F}
+social_remove <- 
+  social |> 
+  filter(
+    (Q10_2 %in% c(1,2) & 
+       Q10_5 %in% c(1,2) | 
+       Q10_2 %in% c(3,4) & 
+       Q10_5 %in% c(3,4)) |
+      ((Q19_1 %in% c(1,2) & 
+          Q19_4 %in% c(1,2)) | 
+         (Q19_1 %in% c(3,4) & 
+            Q19_4 %in% c(3,4)
+         )
+      )
+  ) 
+
+remove <- social_remove$index
+social <- social |> 
+  filter(!index %in% remove)
+```
+
+### Remove cases who did not consent
+
+Respondents who did not consent to participate were removed from the data (n = 4).
+
+```{r}
+#find the cases who did not consent
+social_remove_refuse <- 
+  social |> 
+  filter(is.na(Q30) | Q30 == -99)
+#remove those cases
+remove_refuse <- social_remove_refuse$index
+
+social <- 
+  social |>
+  filter(!index %in% remove_refuse)
+
+```
+
+### Remove cases with NA for if having a leader
+
+Respondents who did not disclose if the ski group had a leader were removed from the data (n = 27).
+
+```{r}
+social_remove_ldrNA <- 
+  social |> 
+  filter(is.na(BG_Q_leader)| BG_Q_leader == -99)
+
+remove_ldrNA <- social_remove_ldrNA$index
+
+social <- 
+  social |> 
+  filter(!index %in% remove_ldrNA)
+```
+
+## Replace value of -99 with NA
+
+-99 was used to label seen but unanswered questions. They were relabeled as NA.
+
+```{r, echo = F}
+social <- 
+  social |> 
+  mutate(
+    across(
+      everything(), 
+      ~replace(.x, 
+               .== -99, 
+               NA)
+    )
+  )
+```
+
+## Unify value labels
+
+Values of some of the variables had been inconsistently labeled by Qualtrics. They were unified here.
+
+```{r, echo = F}
+sofa <-  # so fa is for SOcial Factor Analysis 
+  social |> 
+  dplyr::select(
+    index, 
+    Q14_1:Q27_3
+  )
+```
+
+```{r, echo = F}
+library(labelled)
+val_labels(sofa$Q14_1) <- c("Strongly disagree"=1,
+                         "Disagree"=2,
+                         "Neither agree nor disagree"=3,
+                         "Agree"=4,
+                         "Strongly agree"=5,
+                         "Don't know"=6)
+val_labels(sofa$Q14_2)<- c("Strongly disagree"=1,
+                         "Disagree"=2,
+                         "Neither agree nor disagree"=3,
+                         "Agree"=4,
+                         "Strongly agree"=5,
+                         "Don't know"=6)
+val_labels(sofa$Q14_3)<- c("Strongly disagree"=1,
+                         "Disagree"=2,
+                         "Neither agree nor disagree"=3,
+                         "Agree"=4,
+                         "Strongly agree"=5,
+                         "Don't know"=6)
+val_labels(sofa$Q14_4)<- c("Strongly disagree"=1,
+                         "Disagree"=2,
+                         "Neither agree nor disagree"=3,
+                         "Agree"=4,
+                         "Strongly agree"=5,
+                         "Don't know"=6)
+val_labels(sofa$Q18_1) <- c("Strongly disagree"=1,
+                         "Disagree"=2,
+                         "Neither agree nor disagree"=3,
+                         "Agree"=4,
+                         "Strongly agree"=5,
+                         "Don't know"=6)
+```
+
+```{r, echo = F}
+#sofa <- 
+#  sofa |> 
+#  mutate(
+#    across(
+#      where(is.factor), as.numeric))
+
+sofa <- 
+  sofa |> 
+  mutate(
+    across(starts_with("Q"), 
+           ~replace(.,. == 7, 3)
+           ),
+    across(starts_with("Q"), 
+           ~replace(.,. == 8, 4)
+           ),
+    across(starts_with("Q"), 
+           ~replace(.,. == 9, 5)
+           ),
+    across(starts_with("Q"), 
+           ~replace(.,. == 10, 6)
+           )
+    )
+
+```
+
+## Relabel variables
+
+Properly label the variables so that the interpretation can be better managed. For the label, see Table 1.
+
+```{r, echo = F}
+library(finalfit)
+##leader
+sofa <- sofa |> 
+  mutate(i_leader0 = if_else(is.na(Q14_1), Q28_1, Q14_1) |> 
+           ff_label(
+             str_split(var_lab(sofa$Q14_1), "-")[[1]][2]
+             )
+         )
+
+sofa <- sofa |> 
+  mutate(i_leader1 = if_else(is.na(Q14_2), Q27_1, Q14_2) |> 
+           ff_label(
+             str_split(var_lab(sofa$Q14_2), "-")[[1]][2]
+             )
+         )
+
+sofa <- sofa |> 
+  mutate(i_leader2 = if_else(is.na(Q14_3), Q27_2, Q14_3) |> 
+           ff_label(
+             str_split(var_lab(sofa$Q14_3), "-")[[1]][2]
+             )
+         ) 
+
+sofa <- sofa |> 
+  mutate(i_leader3 = if_else(is.na(Q14_4), Q27_3, Q14_4) |> 
+           ff_label(
+             str_split(var_lab(sofa$Q14_4), "-")[[1]][2]
+             )
+         )
+```
+
+```{r, echo = F}
+##skill
+sofa <- sofa |> 
+  mutate(i_skill0 = if_else(is.na(Q8_1), Q18_1, Q8_1) |> 
+           ff_label(
+             str_split(var_lab(sofa$Q8_1), "-")[[1]][2]
+             )
+         )
+
+sofa <- sofa |> 
+  mutate(i_skill1 = if_else(is.na(Q8_2), Q17_1, Q8_2) |> 
+           ff_label(
+             str_split(var_lab(sofa$Q8_2), "-")[[1]][2]
+             )
+         )
+
+sofa <- sofa |> 
+  mutate(i_skill2 = if_else(is.na(Q8_3), Q17_2, Q8_3) |> 
+         ff_label(
+           str_split(var_lab(sofa$Q8_3), "-")[[1]][2]
+           )
+         )
+
+sofa <- sofa |> 
+  mutate(i_skill3 = if_else(is.na(Q8_4), Q17_3, Q8_4) |> 
+           ff_label(
+             str_split(var_lab(sofa$Q8_4), "-")[[1]][2]
+             )
+         )
+
+sofa <- sofa |> 
+  mutate(i_skill4 = if_else(is.na(Q8_5), Q17_4, Q8_5) |> 
+           ff_label(
+             str_split(var_lab(sofa$Q8_5), "-")[[1]][2]
+             )
+         )
+```
+
+```{r}
+#social$Q10_5 |> var_label();social$Q19_5 |> var_label()
+```
+
+```{r, echo = F}
+##organization
+sofa <- sofa |> 
+  mutate(i_orga0 = if_else(is.na(Q10_1), Q20_1, Q10_1) |> 
+           ff_label(
+             "The group was well-set up and organized for this trip"
+             )
+         )
+
+sofa <- sofa |> 
+  mutate(i_orga1 = if_else(is.na(Q10_2), Q19_2, Q10_2) |> 
+           ff_label(
+             str_split(var_lab(sofa$Q10_2), "-")[[1]][2]
+             )
+         )
+
+sofa <- sofa |> 
+  mutate(i_orga2 = if_else(is.na(Q10_3), Q19_3, Q10_3) |> 
+           ff_label(
+             str_split(var_lab(sofa$Q10_3), "-")[[1]][2]
+             )
+         )
+
+sofa <- sofa |> 
+  mutate(i_orga3 = if_else(is.na(Q10_4), Q19_4, Q10_4) |> 
+           ff_label(
+             str_split(var_lab(sofa$Q10_4), "-")[[1]][2]
+             )
+         )
+
+#sofa <- sofa |> 
+#  mutate(i_orga4 = if_else(is.na(Q10_5), Q19_5, Q10_5) |> 
+#           ff_label(
+#             str_split(var_lab(sofa$Q10_5), "-")[[1]][2]
+#             )
+#         )
+```
+
+```{r, echo = F}
+## communication
+sofa <- sofa |> 
+  mutate(i_comm0 = if_else(is.na(Q22_1), Q11_1, Q22_1) |> 
+           ff_label(
+             str_split(var_lab(sofa$Q22_1), "-")[[1]][2]
+             )
+         )
+
+sofa <- sofa |> 
+  mutate(i_comm1 = if_else(is.na(Q22_2), Q21_1, Q22_2) |> 
+           ff_label(
+             str_split(var_lab(sofa$Q22_2), "-")[[1]][2]
+             )
+         )
+
+sofa <- sofa |> 
+  mutate(i_comm2 = if_else(is.na(Q22_3), Q21_2, Q22_3) |> 
+           ff_label(
+             str_split(var_lab(sofa$Q22_3), "-")[[1]][2]
+             )
+         )
+
+sofa <- sofa |> 
+  mutate(i_comm3 = if_else(is.na(Q22_4), Q21_3, Q22_4) |> 
+           ff_label(
+             str_split(var_lab(sofa$Q22_4), "-")[[1]][2]
+             )
+         )
+```
+
+```{r, echo = F}
+##identification
+sofa <- sofa |> 
+  mutate(i_iden0 = if_else(is.na(Q12_1), Q24_1, Q12_1) |> 
+           ff_label(
+             str_split(var_lab(sofa$Q12_1), "-")[[1]][2]
+             )
+         )
+
+sofa <- sofa |> 
+  mutate(i_iden1 = if_else(is.na(Q12_2), Q23_1, Q12_2) |> 
+           ff_label(
+             str_split(var_lab(sofa$Q12_2), "-")[[1]][2]
+             )
+         )
+
+sofa <- sofa |> 
+  mutate(i_iden2 = if_else(is.na(Q12_3), Q23_2, Q12_3) |> 
+           ff_label(
+             str_split(var_lab(sofa$Q12_3), "-")[[1]][2]
+             )
+         )
+
+sofa <- sofa |> 
+  mutate(i_iden3 = if_else(is.na(Q12_4), Q23_3, Q12_4) |> 
+           ff_label(
+             str_split(var_lab(sofa$Q23_3), "-")[[1]][2]
+             )
+         )
+```
+
+```{r}
+#sofa$i_iden3 |> get_label()
+```
+
+```{r, echo = F}
+## anomaly
+sofa <- sofa |> 
+  mutate(i_anom0 = if_else(is.na(Q13_1), Q26_1, Q13_1) |> 
+           ff_label(
+             str_split(var_lab(sofa$Q13_1), "-")[[1]][2]
+             )
+         )
+
+sofa <- sofa |> 
+  mutate(i_anom1 = if_else(is.na(Q13_2), Q25_1, Q13_2) |> 
+           ff_label(
+             str_split(var_lab(sofa$Q13_2), "-")[[1]][2]
+             )
+         )
+
+sofa <- sofa |> 
+  mutate(i_anom2 = if_else(is.na(Q13_3), Q25_2, Q13_3) |> 
+           ff_label(
+             str_split(var_lab(sofa$Q13_3), "-")[[1]][2]
+             )
+         )
+
+sofa <- sofa |> 
+  mutate(i_anom3 = if_else(is.na(Q13_4), Q25_3, Q13_4) |> 
+           ff_label(
+            str_split(var_lab(sofa$Q13_4), "-")[[1]][2]
+             )
+         )
+
+sofa <- sofa |> 
+  mutate(i_anom4 = if_else(is.na(Q13_5), Q25_4, Q13_5) |> 
+           ff_label(
+             str_split(var_lab(sofa$Q13_5), "-")[[1]][2]
+             )
+         )
+```
+
+## Unify the direction of item wording
+
+Four items of the SOCIAL were worded in negative direction (e.g. XXXX). Basic factor analysis attempts to identify latent variance through exploring the **co-variance** in measured variables. As such, the direction of the item wording (positive vs negative) does not influence the analysis. However, we still unify the results into same wording direction (positive) for the interest of easy interpretation.
+
+```{r}
+neg_cols <- 
+  c(
+    "i_skill0",
+    "i_anom0",
+    "i_anom2",
+    "i_anom3",
+    "i_anom4"
+  )
+
+sofa <- 
+  sofa |> 
+  mutate(
+    across(
+      all_of(
+        neg_cols
+      ),
+      ~case_when(
+        . == 1 ~ 5,
+        . == 2 ~ 4,
+        . == 4 ~ 2,
+        . == 5 ~ 1,
+        TRUE ~ .
+        )
+      )
+    )
+# "Q8_1", #skill0
+# "Q18_1",
+# "Q13_1",#anom0
+# "Q26_1",
+# "Q13_3",#anom2
+# "Q25_2",
+# "Q13_4",#anom3
+# "Q25_3",
+# "Q13_5",#anom4
+# "Q25_4"
+```
+
+## Generate Norwegian variable labels
+
+The survey was carried out in Norwegian and the initial language of text is Norwegian. Norwegian labels were created here.
+
+```{r}
+## Skill (Norwegian)
+sofa_NO <- 
+  sofa |> 
+  mutate(
+    i_skill0_NO = i_skill0 |> 
+      ff_label("Ferdighetsnivået i skredvurdering og kammeratredning var svært ulikt i gruppen"),
+    i_skill1_NO = i_skill1 |> 
+      ff_label("Den i gruppen med minst kunnskap kunne utføre tilfredstillende skredfare-vurderinger på denne turen"),
+    i_skill2_NO = i_skill2 |> 
+      ff_label("Det var ingen vesentlig forskjell i gruppemedlemmenes kompetanse til å utføre skredvurderinger"),
+    i_skill3_NO = i_skill3 |> 
+      ff_label("Det var ingen vesentlig forskjell i skiferdighetsnivå mellom gruppemedlemmene, gitt terrenget"),
+    i_skill4_NO = i_skill4 |> 
+      ff_label("Alle gruppemedlemene var utstyrt med standard skredutstyr (spade, søkestang og sender-mottaker) og trent i å bruke de"), 
+    ##organization (Norwegian)
+    i_orga0_NO = i_orga0 |> 
+      ff_label("Gruppen var godt sammensveiset og forberedt for denne turen"),
+    i_orga1_NO = i_orga1 |> 
+      ff_label("Gruppemedlemmene kjente hverandre godt"),
+    i_orga2_NO = i_orga2 |> 
+      ff_label("Størrelsen på gruppen stod i forhold til den gjennomførte turen (tid, vanskelighetsgrad)"),
+    i_orga3_NO = i_orga3 |> 
+      ff_label("Rollene i gruppen var avklart"),
+    ## Communication (Norwegian)
+    i_comm0_NO = i_comm0 |> 
+      ff_label("Kommunikasjonen i gruppen var god"),
+    i_comm1_NO = i_comm1 |> 
+      ff_label("Beslutningene knyttet til skredfare ble diskutert nøye i gruppen"),
+    i_comm2_NO = i_comm2 |> 
+      ff_label("Alle i gruppen forsto beslutningene som ble tatt"),
+    i_comm3_NO = i_comm3 |> 
+      ff_label("Alle i gruppen sa sin mening når de følte at det var nødvendig"),
+    ## Identification (Norwegian)
+    i_iden0_NO = i_iden0 |> 
+      ff_label("Gruppen var samkjørt og hadde et felles mål"),
+    i_iden1_NO = i_iden1 |> 
+      ff_label("Det var klare forventninger til hvert gruppemedlem"),
+    i_iden2_NO = i_iden2 |> 
+      ff_label("Det fantes et fornuftig turalternativ dersom det oppstod uenigheter"),
+    i_iden3_NO = i_iden3 |> 
+      ff_label("Alle var fornøyde med beslutningene som ble tatt"),
+    ## Anomaly (Norwegian)
+    i_anom0_NO = i_anom0 |> 
+      ff_label("Negative sosiale faktorer påvirket gruppens evnen til å ta fornuftige beslutninger"),
+    i_anom1_NO = i_anom1 |> 
+      ff_label("Alle i gruppen var enig i gruppens beslutninger på hvert beslutningspunkt"),
+    i_anom2_NO = i_anom2 |> 
+      ff_label("Noen prøvde å imponere andre."),
+    i_anom3_NO = i_anom3 |> 
+      ff_label("Det var pågånde flørting eller forelskelse i gruppen"),
+    i_anom4_NO = i_anom4 |> 
+      ff_label("Tilstedeværelsen av andre grupper påvirket beslutningene i min gruppe"),
+    ## Leadership (Norwegian)
+    i_leader0_NO = i_leader0 |> 
+      ff_label("Alle medlemmene i gruppen fulgte beslutningene som ble tatt"),
+    i_leader1_NO = i_leader1 |> 
+      ff_label("Lederen (formell eller uformell) var den i gruppen som var best skikket til å ta beslutningene"),
+    i_leader2_NO = i_leader2 |> 
+      ff_label("Lederen (formell eller uformell) kommuniserte åpent og tydelig"),
+    i_leader3_NO = i_leader3 |> 
+      ff_label("Alle kunne si i fra om sine bekymringer til lederen (formell eller uformell)")
+  )
+```
+
+```{r, eval=F}
+library(kableExtra)
+sofa |> 
+  select(starts_with("i_s"),
+         starts_with("i_o"),
+         starts_with("i_c"),
+         starts_with("i_i"),
+         starts_with("i_a"),
+         starts_with("i_l")) |> 
+  lapply(function(x)var_lab(x)) |> 
+  as.data.frame() |> 
+  t() |> 
+  kable(
+    linesep = "",
+    caption = "Item labels 
+    (Item highlighted in red are short version; others are long version)"
+  ) |> 
+  kable_styling(
+    latex_options = "striped"
+  ) |> 
+  column_spec(2, width = "13cm") |> 
+  pack_rows("Skill", 0, 4) |> 
+  pack_rows("Organization", 5, 8) |> 
+  pack_rows("Communication", 9, 12) |> 
+  pack_rows("Identification", 13, 16) |> 
+  pack_rows("Anomaly", 17, 21) |> 
+  pack_rows("Leader", 22, 25) |> 
+  row_spec(c(0,5,9,13,17,22), color = "red")
+```
+
+```{r, eval=F}
+sofa_NO |> 
+  select(starts_with("i_s"),
+         starts_with("i_o"),
+         starts_with("i_c"),
+         starts_with("i_i"),
+         starts_with("i_a"),
+         starts_with("i_l")) |> 
+  select(ends_with("_NO")) |> 
+  lapply(function(x)var_lab(x)) |> 
+  as.data.frame() |> 
+  t() |> 
+  kable(
+    linesep = "",
+    caption = "Item labels 
+    (Item highlighted in red are short version; others are long version)"
+  ) |> 
+  kable_classic(
+    latex_options = "striped"
+  ) |> 
+  column_spec(2, width = "13cm") |> 
+  pack_rows("Skill", 0, 4) |> 
+  pack_rows("Organization", 5, 8) |> 
+  pack_rows("Communication", 9, 12) |> 
+  pack_rows("Identification", 13, 16) |> 
+  pack_rows("Anomaly", 17, 21) |> 
+  pack_rows("Leader", 22, 25) |> 
+  row_spec(c(0,5,9,13,17,22), color = "red")
+```
+
+
+```{r, echo = F}
+## Replace "Don't know" with NAs
+#sofa <- sofa |> 
+#  mutate(across(starts_with("i"),
+#                ~replace(., . == 6, NA)))
+```
+
+# Create data sets for analysis
+
+Four data sets were created. They are a. 18 item with leader; b. 6 item with leader; c. 17 item without leader; d. 5 item without leader; 3. background. The case identifier is "index" variable across data sets.
+
+```{r, echo = F}
+#combine items with background information
+sofa_ifleader <- 
+  left_join(sofa, 
+            social[,c(
+              "index", 
+              "BG_Q_leader"
+            )], 
+            by = "index" )
+
+background <- 
+  social[,c(
+    "index",
+    "BG_Q_role",
+    "BG_Q_familiar",
+    "BG_Q_confidence_1",
+    "Q16_1", #trust
+    "Q15" #dynamics
+  )]
+
+background <- 
+  background |> 
+  rename(
+    BG_role = BG_Q_role,
+    BG_familiar = BG_Q_familiar,
+    BG_confidence = BG_Q_confidence_1,
+    BG_trust = Q16_1,
+    BG_dynamics = Q15
+    )
+```
+
+```{r, echo = F, eval=F}
+#replace missing value with median
+sofa_ifleader <- 
+  sofa_ifleader |> 
+  mutate(across(starts_with("i_"),
+                ~replace_na(., median(., na.rm = T))
+                )
+         )
+#sofa_noleader18 <- 
+#  sofa_noleader_missing |>
+#  mutate(across(everything(), 
+#                ~replace_na(., median(., na.rm=TRUE)
+#                            )
+#                )
+#         )
+```
+
+## Create with-leader and without-leader data-sets
+
+Before generating 4 data sets, the data were first separated according to with (n = 104) or with-out leader (n = 118).
+
+```{r, echo = F}
+#find cases without leader or "BG_Q_leader" is NA (long items + short items)
+sofa_noleader <- 
+  sofa_ifleader |> 
+  filter(BG_Q_leader == 1 | is.na(sofa_ifleader$BG_Q_leader)) |> 
+  dplyr::select(
+    index, 
+    starts_with("i_")
+  ) |> 
+  dplyr::select( 
+    !starts_with("i_leader")
+    )
+```
+
+```{r, echo = F}
+#find cases with leader (long items + short items)
+sofa_leader <- 
+  sofa_ifleader |> 
+  filter(
+    BG_Q_leader != 1
+  ) |> 
+  dplyr::select(
+    index,
+    starts_with("i_")
+  )
+```
+
+## Remove cases with 50% NAs across major questions for each data sets
+
+Within in each data set (with/without leader), cases with 50% NAs were removed from data. Three cases (#213,253,276) were removed from with-leader group; Four cases (#94, 252, 258, 275) were removed from without-leader group. 
+
+```{r}
+#Add a column for number of rowwise NA
+sofa_leader$n_na <- rowSums(is.na(sofa_leader))
+sofa_noleader$n_na <- rowSums(is.na(sofa_noleader))
+
+#filter out number of NA > half of the items
+sofa_leader <- 
+  sofa_leader |> 
+  filter(n_na < 0.5*ncol(sofa_leader[,-1]))
+
+sofa_noleader <- 
+  sofa_noleader |> 
+  filter(n_na < 0.5*ncol(sofa_noleader[,-1]))
+
+sofa_leader$ifleader <- "leader"
+sofa_noleader$ifleader <- "no leader"
+```
+
+## Create data set: 17 item without leader
+
+Without-leader group respondents answered 22 out of 26 questions in the survey (the remaining 4 questions were about leader). Within the 22 questions, 17 were adapted from Zeiweiful's long version, 5 were from short version. They were further split into two data sets. They were subsequently referred to as without-leader long and without-leader short, respectively. The sample size is 114. According the publications, the minimum sample size for an exploratory factor analysis should be 5 × (number of items). In our case, the without-leader group's long version analysis involves 17 items, indicating at least 17×5=85 samples. Our sample size meets this requirement.
+
+```{r, echo = F}
+#create 17 item no leader data set
+sofa_noleader17 <- 
+  sofa_noleader |> 
+  dplyr::select(
+    -ends_with("0"),
+    -ifleader,
+    -n_na
+    )
+```
+
+## Create data set: 5 item without leader
+
+ According the publications, the minimum sample size for an exploratory factor analysis should be 5 × (number of items). In our case, the without-leader group's long version analysis involves 5 items, indicating at least 5×5=25 samples. Our sample size meets this requirement.
+
+```{r, echo = F}
+sofa_noleader5 <- 
+  sofa_noleader |> 
+  dplyr::select(
+    index, 
+    ends_with("0")
+  )
+```
+
+## Create data set: 20 item with leader
+
+Without-leader group respondents answered all 26 questions in the survey. Among the questions, 20 were adapted from Zeiweiful's long version, 6 were from short version. They were further split into two data sets. They were subsequently referred to as with-leader long and with-leader short, respectively. The sample size is 101. According the publications, the minimum sample size for an exploratory factor analysis should be 5 × (number of items). In our case, the without-leader group's long version analysis involves 20 items, indicating at least 20×5=100 samples. Our sample size meets this requirement.
+
+```{r, echo = F}
+sofa_leader20 <- 
+  sofa_leader |> 
+  dplyr::select(
+    -ends_with("0"),
+    -ifleader,
+    -n_na
+  )
+```
+
+## Create data set: 6 item with leader
+
+ According the publications, the minimum sample size for an exploratory factor analysis should be 5 × (number of items). In our case, the without-leader group's long version analysis involves 5 items, indicating at least 6×5=30 samples. Our sample size meets this requirement.
+
+```{r, echo = F}
+sofa_leader6 <- 
+  sofa_leader |> 
+  dplyr::select(
+    index,
+    ends_with("0")
+  )
+```
+
+```{r}
+#sofa_noleader |> view()
+```
+
+```{r, eval=F}
+sofa_leader |> 
+  dplyr::select(starts_with("i_")) |> 
+  apply(2, function(x)tabyl(x))
+idn_index_ldr <- sofa_leader |> 
+  filter_all(any_vars(.==6))
+idn_index_ldr <- idn_index_ldr$index
+idn_index_ldr <- idn_index_ldr[-1] 
+
+idn_index_noldr <- sofa_noleader |> 
+  filter_all(any_vars(.==6))
+idn_index_noldr <- idn_index_noldr$index
+
+
+
+sofa_noleader |> 
+  filter_all(any_vars(is.na(.)))
+
+sofa |> filter(index == 200) |> 
+  dplyr::select(starts_with("i")) |> t()
+social$BG_Q_leader |> val_lab()
+social |> filter(index == 160)
+
+social$Q10_1 |> val_lab()
+
+sofa |> filter(index %in% idn_index_noldr ) |> 
+  dplyr::select(starts_with("i"))|> t()
+
+social |> filter(index == 18)
+
+sofa |> filter(index %in% c(3,18,217))
+
+nrow(sofa_noleader)
+sofa$i_anom0 |> var_lab();sofa$i_skill4 |> var_lab()
+```
+
+# Check and impute NAs and IDNs
+
+## Discritpive statistics with number of NAs and IDNs for each item
+
+```{r, echo=F}
+descriptive <- function(data, text, footnote = 
+                          c("number of cases minus number of NA",
+                            "IDN: Don't know")){
+  IDN_table <- 
+    data |>
+    pivot_longer(everything(), names_to = "var", values_to = "value") |> 
+    group_by(value, var) |> 
+    summarise(count = n()) |> 
+    filter(value == 6)
+  IDN_table <- IDN_table[,c(2,3)]
+  
+  library(finalfit)
+  library(kableExtra)
+  inspect.table <- ff_glimpse(data[,-1])$Continuous
+  inspect.table$var <- rownames(inspect.table)
+  rownames(inspect.table) <- NULL
+  inspect.table <- left_join(inspect.table, IDN_table, by = "var")
+  
+  inspect.table  |>  
+    mutate('Q1Q3' = paste(quartile_25, 
+                          quartile_75, 
+                          sep = " ~ "))  |>  
+    dplyr::select(
+      var,
+      'Question' = label, 
+      'n*' = n, 
+      'n of IDN†' = count,
+      'n of NA' = missing_n, 
+      'Mean' = mean, 
+      'Median' = median,
+      'SD' = sd, 
+      'Q1~Q3' = Q1Q3
+    )  |> 
+    mutate(across(everything(), 
+                  ~replace_na(., 0)
+    )
+    ) |> 
+    kable(booktabs = T,  
+          align = "llrrrrrrr",
+          longtable = T,
+          #linesep = "",
+          caption = text) |> 
+    add_header_above(c(" " = 5,
+                       "Central tendency" = 2, 
+                       "Dispersion tendency" = 2)) %>% 
+    kable_styling(latex_options = c("striped", 
+                                    "repeat_header")) %>% 
+    column_spec(1, width = "1.5cm") |> 
+    column_spec(2, width = "11cm") |> 
+    footnote(
+      symbol =footnote
+    ) |> 
+    landscape()
+}
+
+descriptive(sofa_leader20[,-1], 
+            "Descriptive statistics for with-leader group (long)",
+            footnote = c("number of cases minus number of NA",
+              "IDN: Don't know"))
+
+descriptive(sofa_noleader17[,-1], 
+            "Descriptive statistics for without-leader group (long)")
+
+descriptive(sofa_leader6[,-1], 
+            "Descriptive statistics for with-leader group (short)")
+
+descriptive(sofa_noleader5[,-1], 
+            "Descriptive statistics for without-leader group (short)")
+```
+
+## Adress NA and IDN casewise
+
+The number of NAs and IDNs were few in number comparing with the sample size for each data set. Hence, the NAs and IDNs were checked case-wise, and decisions for each case were made accordingly. Please go to file "NA_and_IDN.md" for full description. A quck summary here: case #82 (in without group) were removed due to high proportion of IDNs, while other cases with NAs/IDNs does not show much logical issue. These NAs/IDNs will be imputed by within-subgroup median. 
+
+```{r}
+sofa_leader <- 
+  sofa_leader |> 
+  filter(!index == 82)
+
+sofa_leader20 <- 
+  sofa_leader20 |> 
+  filter(!index == 82)
+
+sofa_leader6 <- 
+  sofa_leader6 |> 
+  filter(!index == 82)
+```
+
+```{r}
+#replace missing value with median
+sofa_ldr20 <- 
+  sofa_leader20 |> 
+  mutate(across(starts_with("i_"),
+                ~replace_na(., median(., na.rm = T))
+                )
+  )
+```
+
+```{r}
+#replace missing value with median
+sofa_ldr6 <- 
+  sofa_leader6 |> 
+  mutate(across(starts_with("i_"),
+                ~replace_na(., median(., na.rm = T))
+                )
+  )
+```
+
+```{r}
+#replace missing value with median
+sofa_noldr17 <- 
+  sofa_noleader17 |> 
+  mutate(across(starts_with("i_"),
+                ~replace_na(., median(., na.rm = T))
+                )
+  )
+```
+
+```{r}
+#replace missing value with median
+sofa_noldr5 <- 
+  sofa_noleader5 |> 
+  mutate(across(starts_with("i_"),
+                ~replace_na(., median(., na.rm = T))
+                )
+  )
+```
+
+## Sumarize data clensing 
+
+The full processes of data cleansing were summarized in the following flowchart.
+
+![Flowchart for data cleansing](data/data_cleansing_flowchart.png)
+
+# Data analysis plan
+
+The full processes of data analysis plan were demonstrated in the following flowchart, see figure 2. 
+
+![Flowchart for data analysis](data/method.png)
+
+For each of the four data set created, the analysis will be done as follows:
+
+(1) Check factorability
+
+*Correlation Matrix*
+
+Factorability is the assumption that there are at least some correlations amongst the variables so that coherent factors can be identified.
+
+There are several well-recognized criteria for checking factorability, including correlation matrix, KMO test, and Bartlett sphericity test. Our decision will be based on all the three. 
+
+For correlation matrix, if all the items have >0.3 correlation with at least one other item, we can expect some redunduncy among these items and assume good factorability. For the items that do not meet this standard, we plan to remove them from the following analysis.
+
+*KMO test*
+
+The Kaiser–Meyer–Olkin (KMO) test is a statistical measure to determine how suited data is for factor analysis. The test measures sampling adequacy for each variable in the model and the complete model. The statistic is a measure of the proportion of variance among variables that might be common variance. KMO returns values between 0 and 1. Table 5 summarizes a rule of thumb for interpreting the statistic. We set a cutoff >0.6 to determine if our data is suitable for factor analysis.
+
+```{r}
+KMO.reference <- 
+  tibble::tribble(
+    ~"KMO value",       ~"Level of acceptance",
+    "Above 0.90",       "Superb",
+    "0.80 to 0.90",     "Great",
+    "0.70 to 0.80",     "Good",
+    "0.50 to 0.70",     "Mediocre",
+    "Below 0.50",       "Unacceptable",
+  ) |> 
+  as.data.frame()
+
+KMO.reference |> 
+  kable(
+    caption = "Level of acceptance of the Kaiser-Meyer-Olkin (KMO) value",
+    linesep = "",
+    align = "lc"
+  ) |> 
+  kable_styling(latex_options = c("striped", "hover", "condensed", "responsive")) 
+```
+
+*Bartlett's test*
+
+Bartlett’s Test of Sphericity compares an observed correlation matrix to the identity matrix. Essentially it checks to see if there is a certain redundancy between the variables that we can summarize with a few number of factors. 
+
+The null hypothesis of the test is that the variables are orthogonal, i.e. not correlated. The alternative hypothesis is that the variables are not orthogonal, i.e. they are correlated enough to where the correlation matrix diverges significantly from the identity matrix. We expect the null hypothesis to be rejected as the evidence for good factorability. In our study we will make the conclusion based on an $α = 0.05$. 
+
+(2) Determine number of factors (factor solutions)
+
+Determining the appropriate number of factors from a factor analysis is perhaps one of the greatest challenges in factor analysis. There are many solutions to this problem, none of which is uniformly the best. 
+
+In the current study, we will use the results from four methods: scree plots (parallel analysis), very simple structure (VSS), Velicer MAP and BIC. Each will calculate and generate a most suitable number of factors for the data. Their result can either be different or same. When they give different factor solutions, we will test all solutions in actual factor analysis and compare across them. 
+
+(3) Factor extract method and matrix rotation method
+
+*Factor extraction method*
+
+Factor extraction method refers to the mathematical approach for extracting the factors from your dataset. The most common choices are maximum likelihood (ML), principal axis factoring (PAF), and principal components analysis (PCA). PCA is least preferred since it is mainly for dimensionality reduction and does not assess the underlying commonalities that unobserved factors cause. In the present study maximum likelihood (fm = "ml") was used considering its robustness in dealing with data of different distributions. 
+
+*Factor rotation*
+
+Rotating the factors maximizes and minimizes the entire set of factor loadings, creating sharp contrast between high and low loadings. It makes intepretations easier. There are two main types of rotation methods: orthogonal (Varimax) and oblique. Orthogonal preserves the orthogonality of the factors, while oblique allows the new factors to be correlated. We considers that the latent aspects of SOCIAL are not expected to be correlated with each other (e.g. skill and communication), and hence will use Varimax rotation all along.
+
+(4) Item removal
+
+For each factor solution identified in step (2), we will carry out factor analysis and improve the factor structure by removing one item with low loading each time. We set a cutoff for factor loading of $±0.3$. The item with the lowest loading on all factors across all items will be removed from the factor structure, until all the remaining items have a factor loading >0.3 on at least one factor.
+
+Aftering removing items based on factor loading, we further examine if there is cross-loading (one item having >0.3 factor loadings on $≥2$ factors). Ifthe the items with cross loading having factor loading very close to 0.3 or the gap between the largest and second largest factor loadings are smaller than 0.1, or they are very hard to interpret, we will remove the item for the following analysis. Cross-loaded items will also be removed one for each time. 
+
+(5) Factor solution comparison
+
+After item removal for each of the factor solution identified, we will compare the goodness of these solutions. The criteria will include: an acceptable trade-off between minor complexity and higher variance explained, and good intepretability. 
+
+```{r}
+# fa.diagram(
+#   sofa_ldr20_fa5, 
+#   cut = 0, 
+#   digits =2, 
+#   main = "Figure 10. Five-factor solution, with-leader group (long)"
+#   )
+```
+
+
+```{r}
+#test
+finetune <- function(data = sofa_ldr20[-1], 
+                     num.fa, 
+                     num.item, 
+                     ld.cutoff,
+                     title,
+                     cl = T){
+  remove.item <- NULL
+  remove.item.table <- as.data.frame(NULL)
+  for (z in 1:num.item){
+    for (i in 1:num.item){
+      data <- data |> 
+        dplyr::select(-any_of(remove.item))
+      
+      fa.results <- 
+        fa(data, 
+           nfactors = num.fa, 
+           rotate = "varimax", 
+           fm = "ml", 
+           scores = "regression"
+        )
+      
+      loadings.initial <- 
+        fa.results$loadings[1:(ncol(data)),]|> 
+        as.data.frame()
+      
+      loadings.initial$Item <- rownames(loadings.initial)
+      rownames(loadings.initial) <- NULL
+      
+      loadings.tab <- loadings.initial |> 
+        dplyr::select(Item, everything()) |> 
+        mutate(
+          across(starts_with("ML"), ~round(., digits = 3)),
+          fa.sum = rowSums(across(starts_with("ML")))
+        ) 
+      
+      loadings.tab.remove <- loadings.tab |> 
+        filter(if_all(starts_with("ML"), ~abs(.)<ld.cutoff)) |> 
+        arrange(fa.sum) 
+      
+      n.loadings.tab.remove <- nrow(loadings.tab.remove)
+      
+      if (n.loadings.tab.remove == 0){
+        break
+      } else{
+        #add the remove items
+        remove.item <- append(remove.item,loadings.tab.remove[1,1])
+        #create a table for remove items, their loadings and variance explained
+        remove.item.table <- rbind(
+          remove.item.table, 
+          loadings.tab |> 
+            filter(Item == loadings.tab.remove[1,1]) |> 
+            dplyr::select (-fa.sum) |> 
+            mutate(Iteration = NA,
+                   "Variance Explained" = NA))
+        #add a variable: number of items deleted
+        remove.item.table$"Iteration"[length(remove.item)] <- paste0("model", length(remove.item))
+        #add a variable: variance expalined
+        remove.item.table$"Variance Explained"[length(remove.item)] <- 
+          fa.results$Vaccounted[3,num.fa] |> 
+          round(3) 
+      }
+    }#add for end
+    #################################   
+    x <-  num.item - length(remove.item)
+    #cross-loading check  
+    if (cl == T) {
+      for (j in 1: x){
+        data <- data |> 
+          dplyr::select(-any_of(remove.item))
+        
+        fa.results <- fa(data, 
+                         nfactors = num.fa, 
+                         rotate = "varimax", 
+                         fm = "ml", 
+                         scores = "regression"
+        )
+        
+        loadings.initial <- 
+          fa.results$loadings[1:ncol(data),]|> 
+          as.data.frame()
+        
+        loadings.initial$Item <- rownames(loadings.initial)
+        rownames(loadings.initial) <- NULL
+        
+        loadings.tab <- loadings.initial |> 
+          dplyr::select(Item, everything()) |> 
+          mutate(
+            across(starts_with("ML"), ~round(., digits = 3)),
+            fa.sum = rowSums(across(starts_with("ML")))
+          ) 
+        
+        loadings.tab.remove <- loadings.tab |> 
+          filter(rowSums(across(starts_with("ML"), ~abs(.)>ld.cutoff)) >= 2) |> 
+          arrange(fa.sum) 
+        
+        n.loadings.tab.remove <- nrow(loadings.tab.remove)
+        
+        if (n.loadings.tab.remove == 0){
+          break
+        } else{
+          #add the remove items
+          remove.item <- append(remove.item,loadings.tab.remove[1,1])
+          #create a table for remove items, their loadings and variance explained
+          remove.item.table <- rbind(
+            remove.item.table, 
+            loadings.tab |> 
+              filter(Item == loadings.tab.remove[1,1]) |> 
+              dplyr::select (-fa.sum) |> 
+              mutate(Iteration = NA,
+                     "Variance Explained" = NA))
+          #add a variable: number of items deleted
+          remove.item.table$"Iteration"[(length(remove.item))] <- 
+            paste0("model", (length(remove.item)), "*")
+          #add a variable: variance expalined
+          remove.item.table$"Variance Explained"[(length(remove.item))] <- 
+            fa.results$Vaccounted[3,num.fa] |> 
+            round(3) 
+        }
+      }#end of for
+    } # end of if
+    data <- data |> 
+      dplyr::select(-any_of(remove.item))
+    
+    fa.results <- 
+      fa(data, 
+         nfactors = num.fa, 
+         rotate = "varimax", 
+         fm = "ml", 
+         scores = "regression"
+      )
+    
+    loadings.initial <- 
+      fa.results$loadings[1:(ncol(data)),]|> 
+      as.data.frame()
+    
+    loadings.initial$Item <- rownames(loadings.initial)
+    rownames(loadings.initial) <- NULL
+    
+    loadings.tab <- loadings.initial |> 
+      dplyr::select(Item, everything()) |> 
+      mutate(
+        across(starts_with("ML"), ~round(., digits = 3)),
+        fa.sum = rowSums(across(starts_with("ML")))
+      ) 
+    
+    loadings.tab.remove <- loadings.tab |> 
+      filter(if_all(starts_with("ML"), ~abs(.)<ld.cutoff)) |> 
+      arrange(fa.sum) 
+    
+    n.cross <- nrow(loadings.tab |> 
+                      filter(rowSums(across(starts_with("ML"), ~abs(.)>ld.cutoff)) >= 2))
+    n.remove <- nrow(loadings.tab.remove)
+    ###        
+    
+    if (n.cross == 0 & n.remove == 0){
+      break
+    }
+  }
+  
+  
+  
+  loading.table<- loadings.initial |> 
+    dplyr::select(Item, everything()) |> 
+    mutate(
+      across(starts_with("ML"), ~round(., digits = 3)),
+      across(starts_with("ML"), ~replace(.,abs(.)<ld.cutoff, ""))
+    ) 
+  ##latex
+  loading.table.latex <- loading.table |>
+    kable(
+      booktab = T,
+      digits  = 3,
+      linesep = "",
+      caption = title,
+      align = paste0("l", strrep("r", num.fa))
+    ) |>
+    kable_styling(latex_options = "striped")
+  
+  #results of factor explained
+  var.exp <- fa.results$Vaccounted[3,num.fa] |> round(3)
+  #remove item table aesthetics
+  ##plain
+  remove.item.table <- 
+    remove.item.table |> 
+    dplyr::select(
+      "Iteration",
+      "Item removed†" = Item,
+      everything()) 
+  remove.item.table[nrow(remove.item.table), ncol(remove.item.table)] <- var.exp
+  ## latex
+  remove.item.table.latex <- 
+    remove.item.table |>
+    kable(booktab = T,
+          digits  = 3,
+          linesep = "",
+          caption = paste("Item removing process for", num.fa, "factor solution"),
+          align = paste0("ll", strrep("r", (num.fa+1))))|>
+    kable_styling(latex_options = "striped")
+  
+  summary <- list(
+    final.results = fa.results,
+    loading.table = loading.table, 
+    loading.table.latex = loading.table.latex,
+    var.exp= var.exp, 
+    remove.item=remove.item,
+    remove.item.table = remove.item.table,
+    remove.item.table.latex = remove.item.table.latex
+  )
+  return(summary)
+}
+```
+
+# Variable distribution and correlation matrix
+
+## Distribution
+
+Since the data were collected from Likert scale, which usually skewed towards an end, I do not seek normality from these graphs. Instead, I scanned through the distributions to get a sense of the features of each item, such as left skewness (e.g. i_anom3), right skewness (e.g. i_skill4), kurtosis (e.g. i_orga3), polarization (e.g. i_skill3). These also shed light on skiers' overall performance pattern across sub-groups. To illustrate, it could be interesting to find that the organization of without-leader group wasn't rated notably lower than that of with-leader group. However, the skills were rated higher in without-leader group. This indicates people who ski without a leader are more confident in his and his teammates skiing/avalanche-forecasting skills. Of course, I hope for a normal distribution from the factor scores obtained by the following factor analysis. 
+
+```{r, echo = F}
+corr.density <- function(data, fig.num = 1, text, column = 4){
+  data |>  
+    pivot_longer(everything())  |>   #longer format
+    ggplot(aes(x = value)) + #x axis used variable "value" (a default of pivot)
+    geom_histogram(
+      binwidth = 1, 
+      aes(y = ..density..
+      ), #match ys of density and histogram plots
+      color = "black",  
+      fill = "#9999CC"
+    )+  # adjust aesthetics for hist
+    geom_density(
+      fill = "pink", 
+      alpha = 0.25
+    )+ #adjust aesthetics for density plot
+    facet_wrap(
+      ~name, 
+      scales = "free", 
+      ncol = column
+    ) + #wrap by name variable
+    theme(panel.grid.major = 
+            element_blank(), #get rid of the  grids
+          panel.grid.minor = 
+            element_blank(),
+          panel.background = 
+            element_rect(
+              fill = "white",#adjust the background
+              color = "black"
+              ),
+          strip.background = 
+            element_rect(
+              color = "black",#adjust the strips aes
+              fill = "steelblue"
+              ),
+          strip.text = 
+            element_text(
+              size =8, 
+              color = "white"
+            ), #adjust strip text
+          axis.title.x = 
+            element_blank(), #adjust the x text
+          axis.title.y = 
+            element_text(size = 12), # adjust the y text
+          plot.title = 
+            element_text(size = 12, 
+                         face = "bold",
+                         hjust = 0.5))+ #adjust the title
+    labs(title = 
+           paste(
+             "Figure ", 
+             fig.num, text
+           )
+    ) #title it
+}
+
+```
+
+```{r, fig.height= 4, fig.width=6}
+corr.density(sofa_leader20 [,-1], 
+         fig.num = 3, 
+         "Distributions of the item for with-leader group (long)",
+         column = 5)
+```
+
+
+```{r, fig.height= 4, fig.width=6}
+corr.density(sofa_noleader17 [,-1], 
+         fig.num = 4, 
+         "Distribtuions of the item for without-leader group (long)",
+         column = 5)
+```
+
+```{r, fig.height= 3, fig.width=6}
+corr.density(sofa_leader6 [,-1], 
+         fig.num = 5, 
+         "Distributions of the item for with-leader group (short)",
+         column = 3)
+```
+
+```{r, fig.height= 3, fig.width=6}
+corr.density(sofa_noleader5 [,-1], 
+         fig.num = 6, 
+         "Distributions of the item for without-leader group (short)",
+         column = 3)
+```
+
+## Correlation matrix
+
+Correlation matrix was created for each of the four scales (2 long and 2 short). Pearson correlation coefficients were reported. Any coefficients ≥ 0.3 were highlighted in green circle; any coefficients ≥ 0.3 were highlighted in read circle.
+
+For the planned methods for factorability check, including correlation matrix, KMO test, and Bartlett sphericity test, correlation matrix was examined in this section. Other criteria were checked in the following section. We hope that the majority of the items have a correlation coefficient ≥ 0.3 with at least one other item, which suggest good factorability. 
+
+```{r, fig.height= 4, fig.width=6}
+mymatrix <- function(data, fig.num = 3, text){
+  library(GGally)
+ggcorr(data, 
+       geom = "blank", 
+       label = TRUE, 
+       hjust = 0.9, 
+       color = "red", 
+       face = "bold", 
+       method = c("pairwise","pearson"),
+       digits = 1,
+       size= 2.5,
+       label_size = 2.5,
+       label_round = 1,
+       layout.exp =1) +
+  geom_point(size = 7, 
+             aes(color = "steelblue", 
+                 alpha = abs(coefficient) > 0.25)) +
+  scale_alpha_manual(values = c("TRUE" = 0.4, 
+                                "FALSE" = 0)) +
+    geom_point(size = 8, 
+               aes(color = "red", 
+                   alpha = abs(coefficient) > 0.55)) +
+  scale_alpha_manual(values = c("TRUE" = 0.4, 
+                                "FALSE" = 0)) +
+  guides(color = FALSE, 
+         alpha = FALSE) +
+  labs(title = paste("Figure ", fig.num, text),
+       caption = 
+         " Red circles indicates the absolute of correlation coefficient >= 0.6 
+        green circle indicates >= 0.3")+
+  theme(plot.title = element_text(size = 10,
+                                  face = "bold",
+                                  hjust = 0.5),
+        plot.caption = element_text(color = "red"))
+}
+```
+
+For with-leader group (long), it was observed that 18 of the 20 items correlated at least .3 with at least one other item, suggesting reasonable factorability. See figure 6.
+
+```{r, fig.height= 4.5, fig.width=7}
+mymatrix(sofa_leader20 [,-1], 
+         fig.num = 7, 
+         "Correlation matrix of the item for with-leader group (long)")
+```
+
+For without-leader group (long), it was observed that 16 of the 17 items correlated at least .3 with at least one other item, suggesting reasonable factorability. See figure 7.
+
+```{r, fig.height= 4, fig.width=7}
+mymatrix(sofa_noleader17 [,-1], 
+         fig.num = 8, 
+         "Correlation matrix of the item for without-leader group (long)")
+```
+
+For with-leader group (short), it was observed that 6 of the 6 items correlated at least .3 with at least one other item, suggesting reasonable factorability. See figure 8.
+
+```{r, fig.height= 3, fig.width=5}
+mymatrix(sofa_leader6 [,-1], 
+         fig.num = 9, 
+         "Correlation matrix of the item for with-leader group (short)")
+```
+
+For without-leader group (short), it was observed that 6 of the 6 items correlated at least .3 with at least one other item, suggesting reasonable factorability. See figure 9.
+
+```{r, fig.height= 3, fig.width=5}
+mymatrix(sofa_noleader5 [,-1], 
+         fig.num = 10, 
+         "Correlation matrix of the item for without-leader group (short)")
+```
+
+# Factor analysis for with-leader group (long)
+
+## Check factoribility
+
+The Kaiser-Meyer-Olkin measure of sampling adequacy was .68, above the commonly recommended value of .6.  However, when the two items with <0.3 correlation with any other items were removed, the adequacy increased to 0.713, reaching "Good acceptance", see table 6.
+
+```{r}
+library(psych)
+
+ldr20.kmo <- KMO(sofa_ldr20[-1]) 
+ldr20.kmo.selected <- 
+   KMO(sofa_ldr20[,!names(sofa_ldr20) %in% c("index","i_anom3","i_anom4")]) 
+
+KMO.ldr20 <- append(ldr20.kmo$MSAi, ldr20.kmo$MSA) 
+KMO.ldr20 <- append(KMO.ldr20, ldr20.kmo.selected$MSA)
+
+names(KMO.ldr20) [length(KMO.ldr20)-1] <- "Overall"
+names(KMO.ldr20) [length(KMO.ldr20)] <- "Selected†"
+
+KMO.ldr20 <- 
+  KMO.ldr20 |> 
+  as.data.frame()
+
+KMO.ldr20$Item <- rownames(KMO.ldr20)
+rownames(KMO.ldr20) <- NULL
+KMO.ldr20 <- KMO.ldr20[,c("Item", "KMO.ldr20")]
+
+KMO.ldr20 |> 
+  rename(KMO = KMO.ldr20) |> 
+  mutate("if correlation \n acceptable*" = 
+           case_when(Item == "i_anom3" ~ "No",
+                     Item == "i_anom4" ~ "No",
+                     Item == "Overall" ~ "",
+                     Item == "Selected†" ~ "",
+                     TRUE ~ "Yes")) |> 
+  kable(booktab = T,
+        digits = 3,
+        caption = "Results of KMO test of sampling adequacy for with-leader group (long)",
+        linesep = "",
+        align = "lrr"
+  ) |> 
+  kable_styling() |> 
+  row_spec(KMO.ldr20 |> nrow(), color = "white", background = "gray") |> 
+  row_spec(KMO.ldr20 |> nrow()-1, color = "white", background = "gray") |> 
+  footnote(symbol = c("having>0.3 correlation coefficient with at least one other item",
+                      "excluing i_anom3 and i_anom4"))
+```
+
+Bartlett’s test of sphericity were significant for full items (χ2 (190) = 518.94, p < .001) and selected items (χ2 (153) = 483.67, p < .001) , suggesting that there is a certain redundancy between the variables that we can summarize with a few number of factors. 
+
+Given these overall indicators, factor analysis was deemed to be suitable with all 18 of the 20 items (excluding two anomaly items). The following factor analysis were done on the these 18 items.
+
+```{r}
+sofa_ldr20 <- sofa_ldr20[, !names(sofa_ldr20) %in% c("i_anom3", "i_anom4")]
+```
+
+
+```{r}
+library(kableExtra)
+bart.ldr20 <- cortest.bartlett(sofa_ldr20[-1], nrow(sofa_ldr)) |> 
+  as.data.frame() 
+bart.ldr20.selected <- cortest.bartlett(
+  sofa_ldr20[,!names(sofa_ldr20) %in% c("index","i_anom3","i_anom4")], 
+  nrow(sofa_ldr)) |> 
+  as.data.frame() 
+
+Bart.ldr20.tbl <- rbind(bart.ldr20, bart.ldr20.selected)
+Bart.ldr20.tbl$"Dataset" <- c("Overall", "Select*")
+
+Bart.ldr20.tbl |> 
+  mutate(p.value = case_when(p.value >= 0.001 ~ as.character(p.value),
+                               p.value < 0.001 ~ "<0.001")) |> 
+  dplyr::select(
+    Dataset,
+    'Chi-square' =  chisq,
+    'p-value' = p.value,
+    'DF' = df
+  ) |> 
+  kable(digits = 3,
+        caption = "Results of bartlett test for with-leader group (long)",
+        booktab = T) |> 
+  footnote(symbol = "excluing i_anom3 and i_anom4, see section 4.2")
+```
+
+## Explore number of factors
+
+Scree plots and VSS indicated an 3 factor solution (figures 11 and 12), while Velicer MAP, Empirical BIC and Sample size adjusted BIC suggested 2-, 4-, and 5-factor solution, respectively. Solutions for three, four and five were separately examined using varimax rotations of the factor loading matrix. 
+
+```{r}
+set.seed(123)
+parallel = fa.parallel(sofa_ldr20[-1],
+ fm = 'pa',
+ fa = 'fa',
+ n.iter = 50,
+ SMC = TRUE,
+ quant = .95,
+ plot = F)
+
+obs = data.frame(parallel$fa.values)
+obs$type = c('Observed Data')
+obs$num = c(row.names(obs))
+obs$num = as.numeric(obs$num)
+colnames(obs) = c('eigenvalue', 'type', 'num')
+
+#Calculate quantiles for eigenvalues, but only store those from simulated CF model in percentile1
+percentile = apply(parallel$values,2,function(x) quantile(x,.95))
+min = as.numeric(nrow(obs))
+min = (4*min) - (min-1)
+max = as.numeric(nrow(obs))
+max = 4*max
+percentile1 = percentile[min:max]
+ 
+#Create data frame called &amp;amp;amp;amp;amp;quot;sim&amp;amp;amp;amp;amp;quot; with simulated eigenvalue data
+sim = data.frame(percentile1)
+sim$type = c('Simulated Data (95th %ile)')
+sim$num = c(row.names(obs))
+sim$num = as.numeric(sim$num)
+colnames(sim) = c('eigenvalue', 'type', 'num')
+ 
+#Merge the two data frames (obs and sim) together into data frame called eigendat
+eigendat = rbind(obs,sim)
+
+#Use data from eigendat. Map number of factors to x-axis, eigenvalue to y-axis, and give different data point shapes depending on whether eigenvalue is observed or simulated
+ggplot(eigendat, aes(x=num, y=eigenvalue, shape=type)) +#Add lines connecting data points
+  geom_line(aes(color = type))+#Add the data points.
+  geom_point(size=3, aes(color = type))+
+  scale_y_continuous(name='Eigenvalue')+
+  scale_x_continuous(name='Factor Number', 
+                     breaks=min(eigendat$num):max(eigendat$num))+
+  scale_shape_manual(values=c(16,1)) +
+  scale_color_manual(values = c("blue", "red"))+
+  annotate(geom = "text", 
+           x = 6.5, 
+           y =2, 
+           label = " max number of factors to retain")+
+  labs(caption = "The dashed vertical line indicates suggested max number of factors to retain",
+       title = "Figure 11. Scree plot for with-leader group (long)")+
+  geom_vline(xintercept = parallel$nfact, linetype = 'dashed') +
+  theme(legend.position = c(0.82, 0.88),
+        panel.background = element_rect(color = "black",
+                                       fill = "white"),
+        legend.title = element_blank(),
+        plot.title = element_text(
+          size = 11,
+          hjust = 0.5)
+        )
+```
+
+
+```{r, fig.width= 10, fig.height=7}
+#very simple structure and BIC
+# nfactors(
+#   sofa_ldr20[-1],
+#   n=5,
+#   rotate = "varimax",
+#   fm = "ml",
+#   n.obs=nrow(sofa_ldr20)
+# )
+vss(sofa_ldr20[-1],n=5, 
+    rotate = "varimax", 
+    fm = "ml", 
+    n.obs=nrow(sofa_ldr20),
+    title = ""
+    )[3]
+
+title(main = "Figure 12. VSS plot for with-leader group (long)",
+      cex.main = 1.4,
+      font.main = 1)
+```
+
+## Explore factor solutions
+
+### Explore 5-factor solution
+
+After fitting 8 models, we achieved the most optimal model for 5 factor solution. The item removal process was encapsulated in table 8. One item was removed due to cross loading and other seven items were removed due to factor loading <0.4. The final model has 10 items, with 60.8% variance explained, see table 9 and figure 13. Note that one of the factor identified only involves one item (i_comm2), which is not a preferred situation.  
+
+```{r, fig.align = "center"}
+sofa_ldr20_fa5_full <- finetune(sofa_ldr20[-1], num.fa = 5, num.item = 17, ld.cutoff = 0.40,
+              title = "Factor loadings of the 5 factor solution for with-leader group (long)",
+              cl = T)
+#item removal table
+sofa_ldr20_fa5_full$remove.item.table.latex|> 
+  add_header_above(c(" " = 1,
+                     "Factor loadings of the items removed" = 6, 
+                     " " = 1)) |> 
+  footnote(symbol = c("The item removed for the model is due to cross-loading",
+                      "The items removed a model include the ones in the current and preceding rows"))
+#factor loading table
+sofa_ldr20_fa5_full$loading.table.latex
+#save the results
+sofa_ldr20_fa5 <- sofa_ldr20_fa5_full$final.results
+#plot the diagram
+fa.diagram(
+  sofa_ldr20_fa5, 
+  cut = 0, 
+  digits =2,
+  main = ""
+  )
+title(main = "Figure 13. Path diagram of 5 factor solution, with-leader group (long)",
+      cex.main = 1.0,
+      font.main = 1)
+```
+
+### Explore 4-factor solution
+
+After fitting 8 models, we achieved the most optimal model for 4 factor solution. The item removal process was encapsulated in table 10. All items were removed due to  factor loading <0.4. The final model has 10 items, with 57.5% variance explained, see table 11 and figure 14. Note that one item (i_leader1) has a negative loading onto the factor, albeit it has positive wording. To check the questions for this factor, see table 12. 
+
+```{r, fig.align = "center"}
+library(sjlabelled)
+sofa_ldr20_fa4_full <- finetune(sofa_ldr20[-1], num.fa = 4, num.item = 17, ld.cutoff = 0.40,
+              title = "Factor loadings of the 4 factor solution for with-leader group (long)",
+              cl = T)
+#item removal table
+sofa_ldr20_fa4_full$remove.item.table.latex|> 
+  add_header_above(c(" " = 1,
+                     "Factor loadings of the items removed" = 5, 
+                     " " = 1)) |> 
+  footnote(symbol = c("'*' indicates the model is by removing a cross-loading item",
+                      "The items removed a model include the ones in the current and preceding rows"))
+#factor loading table
+sofa_ldr20_fa4_full$loading.table.latex
+#save the results
+sofa_ldr20_fa4 <- sofa_ldr20_fa4_full$final.results
+#plot the diagram
+fa.diagram(
+  sofa_ldr20_fa4, 
+  cut = 0, 
+  digits =2,
+  main = ""
+  )
+title(main = "Figure 14. Path diagram of 4 factor solution, with-leader group (long)",
+      cex.main = 1.0,
+      font.main = 1)
+
+check.table1 <- 
+  c(
+    var_lab(sofa$i_skill1),
+    var_lab(sofa$i_skill2),
+    var_lab(sofa$i_leader1)
+  )
+
+names(check.table1) <- c(
+  "i_skill1",
+  "i_skill2",
+  "i_leader1"
+)
+
+check.table1 <- check.table1 |> 
+  as.data.frame() 
+
+check.table1$loadings <- c("0.86", "0.68", "-0.47")
+
+check.table1 |> 
+  rename(Item = check.table1) |> 
+  kable(
+    booktab = T,
+    caption = "Item with negative loading and other items under the same factor",
+    linesep = ""
+  ) |> 
+  kable_styling(latex_options = "striped") |> 
+  column_spec(2, width = "10cm")
+```
+
+### Explore 3-factor solution
+
+After fitting 12 models, we achieved the most optimal model for 3 factor solution. The item removal process was encapsulated in table 13. Two items were removed due to  cross-loading, and others due to factor loading <0.4. The final model has 6 items, with 62.4% variance explained, see table 14 and figure 15. To check the questions for this factor, see table 12. 
+
+```{r, fig.align = "center"}
+sofa_ldr20_fa3_full <- finetune(sofa_ldr20[-1], num.fa = 3, num.item = 17, ld.cutoff = 0.40,
+              title = "Factor loadings of the 3 factor solution for with-leader group (long)",
+              cl = T)
+#item removal table
+sofa_ldr20_fa3_full$remove.item.table.latex |> 
+  add_header_above(c(" " = 1,
+                     "Factor loadings of the items removed" = 4, 
+                     " " = 1)) |> 
+  footnote(symbol = c("The item removed for the model is due to cross-loading",
+                      "The items removed a model include the ones in the current and preceding rows"))
+#factor loading table
+sofa_ldr20_fa3_full$loading.table.latex
+#save the results
+sofa_ldr20_fa3 <- sofa_ldr20_fa3_full$final.results
+#plot the diagram
+fa.diagram(
+  sofa_ldr20_fa3, 
+  cut = 0, 
+  digits =2,
+  main = ""
+  )
+title(main = "Figure 15. Path diagram of 3 factor solution, with-leader group (long)",
+      cex.main = 1.0,
+      font.main = 1)
+
+#check 3 factor solution
+check.table2 <- 
+  c(
+    var_lab(sofa$i_skill1),
+    var_lab(sofa$i_skill2),
+    var_lab(sofa$i_leader3),
+    var_lab(sofa$i_comm3),
+    var_lab(sofa$i_anom1),
+    var_lab(sofa$i_iden3)
+  )
+
+names(check.table2) <- c(
+  "i_skill1",
+  "i_skill2",
+  "i_leader3",
+  "i_comm3",
+  "i_anom1",
+  "i_iden3"
+)
+
+check.table2 <- check.table2 |> 
+  as.data.frame() 
+
+check.table2 |> 
+  rename(Item = check.table2) |> 
+  kable(
+    booktab = T,
+    caption = "Items of 3-factor solution, with-leader group (long)",
+    linesep = ""
+  ) |> 
+  kable_styling(latex_options = "striped") |> 
+  column_spec(2, width = "10cm") |> 
+  pack_rows("factor1",1,2) |> 
+  pack_rows("factor2",3,4)|> 
+  pack_rows("factor3",5,6)
+```
+
+After fitting 10 models, we achieved the most optimal model for 2 factor solution. The item removal process was encapsulated in table 16. one items was removed due to  cross-loading, and others due to factor loading <0.4. The final model has 8 items, with 44.8% variance explained, see table 17 and figure 16. 
+
+### Explore 2-factor solution 
+
+```{r, fig.width=10, fig.height=10}
+sofa_ldr20_fa2_full <- finetune(sofa_ldr20[-1], num.fa = 2, num.item = 17, ld.cutoff = 0.40,
+              title = "Factor loadings of the 2 factor solution for with-leader group (long)",
+              cl = T)
+#item removal table
+sofa_ldr20_fa2_full$remove.item.table.latex |> 
+  add_header_above(c(" " = 1,
+                     "Factor loadings of the items removed" = 3, 
+                     " " = 1)) |> 
+  footnote(symbol = c("The item removed for the model is due to cross-loading",
+                      "The items removed a model include the ones in the current and preceding rows"))
+#factor loading table
+sofa_ldr20_fa2_full$loading.table.latex
+#save the results
+sofa_ldr20_fa2 <- sofa_ldr20_fa2_full$final.results
+#plot the diagram
+fa.diagram(
+  sofa_ldr20_fa2, 
+  cut = 0, 
+  digits =2,
+  main = ""
+  )
+title(main = "Figure 16. Path diagram of 2 factor solution, with-leader group (long)",
+      cex.main = 1.0,
+      font.main = 1)
+```
+
+## Comparison between factor solutions, with-leader (long)
+
+3-factor solution is the most optimal solution with regards to both parsimony and variance explained, see table 18.
+
+```{r}
+VarianceExplained <- 
+  c(
+  sofa_ldr20_fa2_full$var.exp,
+  sofa_ldr20_fa3_full$var.exp,
+  sofa_ldr20_fa4_full$var.exp,
+  sofa_ldr20_fa5_full$var.exp
+)
+
+names(VarianceExplained) <- 
+  c(
+  "2-factor solution",
+  "3-factor solution",
+  "4-factor solution",
+  "5-factor solution"
+)
+
+VarianceExplained <- VarianceExplained |> as.data.frame()
+ 
+VarianceExplained$"Number of items" <- 
+  c(
+    18-length(sofa_ldr20_fa2_full$remove.item),
+    18-length(sofa_ldr20_fa3_full$remove.item),
+    18-length(sofa_ldr20_fa4_full$remove.item),
+    18-length(sofa_ldr20_fa5_full$remove.item)
+    )
+
+VarianceExplained |> 
+  as.data.frame() |> 
+  kable(
+    booktab = T,
+    caption = "Comparison between factor solutions, with-leader (long)",
+    linesep = ""
+  ) |> 
+  kable_styling()
+```
+
+### Check the factor connotation for 3-factor solution
+
+3-factor has fairly good intetrepability, see table 19. 
+
+```{r}
+check.table3 <- 
+  c(
+    var_lab(sofa$i_skill1),
+    var_lab(sofa$i_skill2),
+    var_lab(sofa$i_leader3),
+    var_lab(sofa$i_comm3),
+    var_lab(sofa$i_anom1),
+    var_lab(sofa$i_iden3)
+  )
+
+names(check.table3) <- c(
+  "i_skill1",
+  "i_skill2",
+  "i_leader3",
+  "i_comm3",
+  "i_anom1",
+  "i_iden3"
+)
+
+check.table3 <- check.table3 |> 
+  as.data.frame() 
+
+check.table3 |> 
+  rename(Item = check.table3) |> 
+  kable(
+    booktab = T,
+    caption = "Items of 3-factor solution, with-leader group (long)",
+    linesep = ""
+  ) |> 
+  kable_styling(latex_options = "striped") |> 
+  column_spec(2, width = "13.5cm") |> 
+  pack_rows("Factor1: Skill (proportion variance: 0.231)",1,2, label_row_css = "background-color: #666; color: #fff;") |> 
+  pack_rows("Factor2: Communication (proportion variance: 0.213)",3,4, label_row_css = "background-color: #666; color: #fff;")|> 
+  pack_rows("Factor3: Individual contribution (proportion variance: 0.180)",5,6, label_row_css = "background-color: #666; color: #fff;")
+```
+
+# Factor analysis for with-leader group (short)
+
+## Check factoribility
+
+For with-leader group (short), it was observed that 6 of the 6 items correlated at least .3 with at least one other item, suggesting reasonable factorability. As such, no item was dropped for factoribility tests.
+
+The Kaiser-Meyer-Olkin measure of sampling adequacy was .735, achieving "Good acceptance", see table 21.
+
+Bartlett’s test of sphericity were significant for the items (χ2 (15) = 94.2, p < .001) , suggesting that there is a certain redundancy between the variables that we can summarize with a few number of factors. See table 22.
+
+```{r}
+library(psych)
+ldr6.kmo <- KMO(sofa_ldr6[-1]) 
+
+KMO.ldr6 <- append(ldr6.kmo$MSAi, ldr6.kmo$MSA) 
+
+names(KMO.ldr6) [7] <- "Overall"
+
+KMO.ldr6 |> 
+  as.data.frame() |> 
+  rename(KMO = KMO.ldr6) |> 
+  kable(booktab = T,
+        digits = 3,
+        caption = "Results of KMO test of sampling adequacy for with-leader group (short)",
+        linesep = "") |> 
+  row_spec(KMO.ldr6 |> nrow()-1, color = "white", background = "gray")
+```
+
+```{r}
+library(kableExtra)
+cortest.bartlett(sofa_ldr6[-1], nrow(sofa_ldr6)) |> 
+  as.data.frame() |> 
+  mutate(p.value = case_when(p.value >= 0.001 ~ as.character(p.value),
+                               p.value < 0.001 ~ "<0.001")) |> 
+  dplyr::select(
+    'Chi-square' =  chisq,
+    'p-value' = p.value,
+    'DF' = df
+  ) |> 
+  kable(digits = 3,
+        caption = "Results of bartlett test for with-leader group (short)",
+        booktab = T) 
+  
+```
+
+## Explore number of factors
+
+Scree plots (figures 17), BIC and Velicer MAP indicated an 1 factor solution, while and VSS suggested 2-factor solution (figures 18). Solutions for two was examined using varimax rotations of the factor loading matrix. 
+
+```{r}
+set.seed(123)
+parallel = fa.parallel(sofa_ldr6[-1],
+ fm = 'pa',
+ fa = 'fa',
+ n.iter = 50,
+ SMC = TRUE,
+ quant = .95,
+ plot = F)
+
+obs = data.frame(parallel$fa.values)
+obs$type = c('Observed Data')
+obs$num = c(row.names(obs))
+obs$num = as.numeric(obs$num)
+colnames(obs) = c('eigenvalue', 'type', 'num')
+
+#Calculate quantiles for eigenvalues, but only store those from simulated CF model in percentile1
+percentile = apply(parallel$values,2,function(x) quantile(x,.95))
+min = as.numeric(nrow(obs))
+min = (4*min) - (min-1)
+max = as.numeric(nrow(obs))
+max = 4*max
+percentile1 = percentile[min:max]
+ 
+#Create data frame called &amp;amp;amp;amp;amp;quot;sim&amp;amp;amp;amp;amp;quot; with simulated eigenvalue data
+sim = data.frame(percentile1)
+sim$type = c('Simulated Data (95th %ile)')
+sim$num = c(row.names(obs))
+sim$num = as.numeric(sim$num)
+colnames(sim) = c('eigenvalue', 'type', 'num')
+ 
+#Merge the two data frames (obs and sim) together into data frame called eigendat
+eigendat = rbind(obs,sim)
+
+#Use data from eigendat. Map number of factors to x-axis, eigenvalue to y-axis, and give different data point shapes depending on whether eigenvalue is observed or simulated
+ggplot(eigendat, aes(x=num, y=eigenvalue, shape=type)) +#Add lines connecting data points
+  geom_line(aes(color = type))+#Add the data points.
+  geom_point(size=3, aes(color = type))+
+  scale_y_continuous(name='Eigenvalue')+
+  scale_x_continuous(name='Factor Number', 
+                     breaks=min(eigendat$num):max(eigendat$num))+
+  scale_shape_manual(values=c(16,1)) +
+  scale_color_manual(values = c("blue", "red"))+
+  annotate(geom = "text", 
+           x = 6.5, 
+           y =2, 
+           label = " max number of factors to retain")+
+  labs(caption = "The dashed vertical line indicates suggested max number of factors to retain",
+       title = "Figure 17. Scree plot for with-leader group (short)")+
+  geom_vline(xintercept = parallel$nfact, linetype = 'dashed') +
+  theme(legend.position = c(0.82, 0.88),
+        panel.background = element_rect(color = "black",
+                                       fill = "white"),
+        legend.title = element_blank(),
+        plot.title = element_text(
+          size = 11,
+          hjust = 0.5)
+        )
+```
+
+
+```{r, fig.width= 10, fig.height=7}
+#very simple structure and BIC
+# nfactors(
+#   sofa_ldr6[-1],
+#   n=6,
+#   rotate = "varimax",
+#   fm = "ml",
+#   n.obs=nrow(sofa_ldr6)
+# )
+vss(sofa_ldr6[-1],n=5,
+    rotate = "varimax",
+    fm = "ml",
+    n.obs=nrow(sofa_ldr6),
+    title = ""
+    )[3]
+
+title(main = "Figure 18. VSS plot for with-leader group (short)",
+      cex.main = 1.4,
+      font.main = 1)
+```
+
+## Explore factor solutions
+
+### Explore 2-factor solution
+
+```{r, fig.height=10, fig.width=10}
+sofa_ldr6_fa2 <- 
+  fa(sofa_ldr6[-1], 
+     nfactors = 2, 
+     rotate = "varimax", 
+     fm = "ml", 
+     scores = "regression")
+
+fa.diagram(
+  sofa_ldr6_fa2, 
+  cut = 0, 
+  digits =2, 
+  main = "Factor Analysis, Varimax rotation"
+  )
+
+loading_ldr6_fa2 <- sofa_ldr6_fa2$loadings[1:6,]
+loading_ldr6_fa2 <- loading_ldr6_fa2 |> as.data.frame()
+loading_ldr6_fa2$Item <- rownames(loading_ldr6_fa2)
+rownames(loading_ldr6_fa2) <- NULL
+
+loading_ldr6_fa2 |> 
+  dplyr::select(Item, everything()) |> 
+  mutate(
+    across(starts_with("ML"), ~round(., digits = 3)),
+    across(starts_with("ML"), ~replace(.,abs(.)<0.3, ""))
+         ) |> 
+  kable(
+    booktab = T,
+    digits  = 3,
+    linesep = "",
+    caption = "Figure 19. Factor loadings of the 2-factor solution for with-leader group (short)"
+  ) |> 
+  kable_styling(latex_options = "striped")
+```
+
+
+
+```{r, fig.width=10, fig.height=10}
+### fine-tune 2-factor solution
+# sofa_ldr6_ft_fa2 <- 
+#   sofa_ldr6 |> 
+#   dplyr::select(
+#     i_iden0,
+#     i_comm0,
+#     i_leader0,
+#     i_orga0,
+#     i_skill0,
+#     #i_anom0
+#   )
+# 
+# sofa_ldr6_fa2_ft <- 
+#   fa(sofa_ldr6_ft_fa2, 
+#      nfactors = 2, 
+#      rotate = "varimax", 
+#      fm = "ml", 
+#      scores = "regression")
+# 
+# fa.diagram(sofa_ldr6_fa2_ft, 
+#            cut = 0, 
+#            digits =2,
+#            main = "Figure 17. Fine-tuned two-factor solution, with-leader group (short)")
+# 
+# loading_ldr6_fa2_ft <- sofa_ldr6_fa2_ft$loadings[1:5,]
+# loading_ldr6_fa2_ft <- loading_ldr6_fa2_ft |> as.data.frame()
+# loading_ldr6_fa2_ft$Item <- rownames(loading_ldr6_fa2_ft)
+# rownames(loading_ldr6_fa2_ft) <- NULL
+# 
+# loading_ldr6_fa2_ft |> 
+#   dplyr::select(Item, everything()) |> 
+#   mutate(
+#     across(starts_with("ML"), ~round(., digits = 3)),
+#     across(starts_with("ML"), ~replace(.,abs(.)<0.3, ""))
+#          ) |> 
+#   kable(
+#     booktab = T,
+#     digits  = 3,
+#     linesep = "",
+#     caption = "Factor loadings of the 2-factor solution for with-leader group (long)",
+#     align = "lrrr"
+#   ) |> 
+#   kable_styling(latex_options = "striped")
+
+```
+
+### Explore 3-factor solution
+
+```{r, fig.height=10, fig.width=10}
+sofa_ldr6_fa3 <- 
+  fa(
+    sofa_ldr6[-1], 
+    nfactors = 3, 
+    rotate = "varimax", 
+    fm = "ml", 
+    scores = "regression"
+    )
+
+fa.diagram(
+  sofa_ldr6_fa3, 
+  cut = 0, 
+  digits =2, 
+  main = "Figure 20. Factor loadings of the 3-factor solution for with-leader group (short)"
+  )
+
+loading_ldr6_fa3 <- sofa_ldr6_fa3$loadings[1:6,]
+loading_ldr6_fa3 <- loading_ldr6_fa3 |> as.data.frame()
+loading_ldr6_fa3$Item <- rownames(loading_ldr6_fa3)
+rownames(loading_ldr6_fa3) <- NULL
+
+loading_ldr6_fa3 |> 
+  dplyr::select(Item, everything()) |> 
+  mutate(
+    across(starts_with("ML"), ~round(., digits = 3)),
+    across(starts_with("ML"), ~replace(.,abs(.)<0.3, ""))
+         ) |> 
+  kable(
+    booktab = T,
+    digits  = 3,
+    linesep = "",
+    caption = "Factor loadings of the 3-factor solution for with-leader group (short)"
+  ) |> 
+  kable_styling(latex_options = "striped")
+```
+
+# Factor analysis for without-leader group (long)
+
+## Check factoribility
+
+The Kaiser-Meyer-Olkin measure of sampling adequacy was .745, above the commonly recommended value of .6.  When the two items with <0.3 correlation with any other items were removed, the adequacy increased to 0.762, see table 24 and table 7.
+
+```{r}
+library(psych)
+
+ldr17.kmo <- KMO(sofa_noldr17[-1]) 
+ldr17.kmo.selected <- 
+   KMO(sofa_noldr17[,!names(sofa_noldr17) %in% c("index","i_anom3","i_anom4")]) 
+
+KMO.ldr17 <- append(ldr17.kmo$MSAi, ldr17.kmo$MSA) 
+KMO.ldr17 <- append(KMO.ldr17, ldr17.kmo.selected$MSA)
+
+names(KMO.ldr17) [length(KMO.ldr17)-1] <- "Overall"
+names(KMO.ldr17) [length(KMO.ldr17)] <- "Selected†"
+
+KMO.ldr17 <- 
+  KMO.ldr17 |> 
+  as.data.frame()
+
+KMO.ldr17$Item <- rownames(KMO.ldr17)
+rownames(KMO.ldr17) <- NULL
+KMO.ldr17 <- KMO.ldr17[,c("Item", "KMO.ldr17")]
+
+KMO.ldr17 |> 
+  rename(KMO = KMO.ldr17) |> 
+  mutate("if correlation \n acceptable*" = 
+           case_when(Item == "i_anom3" ~ "No",
+                     Item == "i_anom4" ~ "No",
+                     Item == "Overall" ~ "",
+                     Item == "Selected†" ~ "",
+                     TRUE ~ "Yes")) |> 
+  kable(booktab = T,
+        digits = 3,
+        caption = "Results of KMO test of sampling adequacy for without-leader group (long)",
+        linesep = "",
+        align = "lrr"
+  ) |> 
+  kable_styling() |> 
+  row_spec(KMO.ldr17 |> nrow(), color = "white", background = "gray") |> 
+  row_spec(KMO.ldr17 |> nrow()-1, color = "white", background = "gray") |> 
+  footnote(symbol = c("having>0.3 correlation coefficient with at least one other item",
+                      "excluing i_anom3 and i_anom4"))
+```
+
+Bartlett’s test of sphericity were significant for full items (χ2 (136) = 476.483, p < .001) and selected items (χ2 (105) = 448.005, p < .001) , suggesting that there is a certain redundancy between the variables that we can summarize with a few number of factors. 
+
+
+```{r}
+bart.ldr17 <- cortest.bartlett(sofa_noldr17[-1], nrow(sofa_noldr17)) |> 
+  as.data.frame() 
+bart.ldr17.selected <- cortest.bartlett(
+  sofa_noldr17[,!names(sofa_noldr17) %in% c("index","i_anom3","i_anom4")], 
+  nrow(sofa_noldr17)) |> 
+  as.data.frame() 
+
+Bart.ldr17.tbl <- rbind(bart.ldr17, bart.ldr17.selected)
+Bart.ldr17.tbl$"Dataset" <- c("Overall", "Select*")
+
+Bart.ldr17.tbl |> 
+  mutate(p.value = case_when(p.value >= 0.001 ~ as.character(p.value),
+                               p.value < 0.001 ~ "<0.001")) |> 
+  dplyr::select(
+    Dataset,
+    'Chi-square' =  chisq,
+    'p-value' = p.value,
+    'DF' = df
+  ) |> 
+  kable(digits = 3,
+        caption = "Results of bartlett test for without-leader group (long)",
+        booktab = T) |> 
+  footnote(symbol = "excluing i_anom3 and i_anom4")
+```
+
+Given these overall indicators, factor analysis was deemed to be suitable with all 15 of the 17 items (excluding two anomaly items). The following factor analysis were done on the these 18 items.
+
+```{r}
+sofa_noldr17 <- sofa_noldr17[, !names(sofa_noldr17) %in% c("i_anom3", "i_anom4")]
+```
+
+## Explore number of factors
+
+Solutions for two, three, four and five were separately examined using varimax rotations of the factor loading matrix according to the results from scree plot, VSS, BIC and Velicer MAP. 
+
+```{r}
+set.seed(123)
+parallel = fa.parallel(sofa_noldr17[-1],
+ fm = 'pa',
+ fa = 'fa',
+ n.iter = 50,
+ SMC = TRUE,
+ quant = .95,
+ plot = F)
+
+obs = data.frame(parallel$fa.values)
+obs$type = c('Observed Data')
+obs$num = c(row.names(obs))
+obs$num = as.numeric(obs$num)
+colnames(obs) = c('eigenvalue', 'type', 'num')
+
+#Calculate quantiles for eigenvalues, but only store those from simulated CF model in percentile1
+percentile = apply(parallel$values,2,function(x) quantile(x,.95))
+min = as.numeric(nrow(obs))
+min = (4*min) - (min-1)
+max = as.numeric(nrow(obs))
+max = 4*max
+percentile1 = percentile[min:max]
+ 
+#Create data frame called &amp;amp;amp;amp;amp;quot;sim&amp;amp;amp;amp;amp;quot; with simulated eigenvalue data
+sim = data.frame(percentile1)
+sim$type = c('Simulated Data (95th %ile)')
+sim$num = c(row.names(obs))
+sim$num = as.numeric(sim$num)
+colnames(sim) = c('eigenvalue', 'type', 'num')
+ 
+#Merge the two data frames (obs and sim) together into data frame called eigendat
+eigendat = rbind(obs,sim)
+
+#Use data from eigendat. Map number of factors to x-axis, eigenvalue to y-axis, and give different data point shapes depending on whether eigenvalue is observed or simulated
+ggplot(eigendat, aes(x=num, y=eigenvalue, shape=type)) +#Add lines connecting data points
+  geom_line(aes(color = type))+#Add the data points.
+  geom_point(size=3, aes(color = type))+
+  scale_y_continuous(name='Eigenvalue')+
+  scale_x_continuous(name='Factor Number', 
+                     breaks=min(eigendat$num):max(eigendat$num))+
+  scale_shape_manual(values=c(16,1)) +
+  scale_color_manual(values = c("blue", "red"))+
+  annotate(geom = "text", 
+           x = 6.5, 
+           y =2, 
+           label = " max number of factors to retain")+
+  labs(caption = "The dashed vertical line indicates suggested max number of factors to retain",
+       title = "Figure 11. Scree plot for with-leader group (long)")+
+  geom_vline(xintercept = parallel$nfact, linetype = 'dashed') +
+  theme(legend.position = c(0.82, 0.88),
+        panel.background = element_rect(color = "black",
+                                       fill = "white"),
+        legend.title = element_blank(),
+        plot.title = element_text(
+          size = 11,
+          hjust = 0.5)
+        )
+```
+
+```{r, fig.width= 10, fig.height=7}
+#very simple structure and BIC
+# nfactors(
+#   sofa_noldr17[-1],
+#   n=5,
+#   rotate = "varimax",
+#   fm = "ml",
+#   n.obs=nrow(sofa_noldr17)
+# )
+vss(sofa_noldr17[-1],n=5, 
+    rotate = "varimax", 
+    fm = "ml", 
+    n.obs=nrow(sofa_noldr17),
+    title = ""
+    )[3]
+
+title(main = "Figure 21. VSS plot for without-leader group (long)",
+      cex.main = 1.4,
+      font.main = 1)
+```
+
+## Explore factor solutions
+
+### Explore 5-factor solution
+
+After fitting 6 models, we achieved the most optimal model for 5 factor solution. The item removal process was encapsulated in table 26. Four item was removed due to cross loading and others were removed due to factor loading <0.4. The final model has 9 items, with 60.4% variance explained, see table 27 and figure 22. Note that three of the factor identified only involves one item (i_anom2, i_comm3, i_orga1), which is not a preferred situation.  
+
+```{r, fig.align = "center"}
+sofa_noldr17_fa5_full <- finetune(sofa_noldr17[-1], num.fa = 5, num.item = 15, ld.cutoff = 0.40,
+              title = "Factor loadings of the 5 factor solution for without-leader group (long)",
+              cl = T)
+#item removal table
+sofa_noldr17_fa5_full$remove.item.table.latex|> 
+  add_header_above(c(" " = 1,
+                     "Factor loadings of the items removed" = 6, 
+                     " " = 1)) |> 
+  footnote(symbol = c("The item removed for the model is due to cross-loading",
+                      "The items removed a model include the ones in the current and preceding rows"))
+#factor loading table
+sofa_noldr17_fa5_full$loading.table.latex
+#save the results
+sofa_noldr17_fa5 <- sofa_noldr17_fa5_full$final.results
+#plot the diagram
+fa.diagram(
+  sofa_noldr17_fa5, 
+  cut = 0, 
+  digits =2,
+  main = ""
+  )
+title(main = "Figure 22. Path diagram of 5 factor solution, without-leader group (long)",
+      cex.main = 1.0,
+      font.main = 1)
+```
+
+### Explore 4-factor solution
+
+After fitting 8 models, we achieved the most optimal model for 4 factor solution. The item removal process was encapsulated in table 28. Three items were removed due to cross-loading, others removed due to factor loading <0.4. The final model has 7 items, with 58.7% variance explained, see table 29 and figure 23 Note that one factor identified only involves one item (i_comm3), which is not a preferred situation.
+
+```{r, fig.align = "center"}
+library(sjlabelled)
+sofa_noldr17_fa4_full <- finetune(sofa_noldr17[-1], num.fa = 4, num.item = 15, ld.cutoff = 0.40,
+              title = "Factor loadings of the 4 factor solution for with-leader group (long)",
+              cl = T)
+#item removal table
+sofa_noldr17_fa4_full$remove.item.table.latex|> 
+  add_header_above(c(" " = 1,
+                     "Factor loadings of the items removed" = 5, 
+                     " " = 1)) |> 
+  footnote(symbol = c("'*' indicates the model is by removing a cross-loading item",
+                      "The items removed a model include the ones in the current and preceding rows"))
+#factor loading table
+sofa_noldr17_fa4_full$loading.table.latex
+#save the results
+sofa_noldr17_fa4 <- sofa_noldr17_fa4_full$final.results
+#plot the diagram
+fa.diagram(
+  sofa_noldr17_fa4, 
+  cut = 0, 
+  digits =2,
+  main = ""
+  )
+title(main = "Figure 23. Path diagram of 4 factor solution, without-leader group (long)",
+      cex.main = 1.0,
+      font.main = 1)
+```
+
+### Explore 3-factor solution
+
+After fitting 7 models, we achieved the most optimal model for 3 factor solution. The item removal process was encapsulated in table 30. Three items were removed due tocross-loading, and others due to factor loading <0.4. The final model has 8 items, with 43.3% variance explained, see table 31 and figure 24. 
+
+```{r, fig.align = "center"}
+sofa_noldr17_fa3_full <- finetune(sofa_noldr17[-1], num.fa = 3, num.item = 15, ld.cutoff = 0.40,
+              title = "Factor loadings of the 3 factor solution for without-leader group (long)",
+              cl = T)
+#item removal table
+sofa_noldr17_fa3_full$remove.item.table.latex |> 
+  add_header_above(c(" " = 1,
+                     "Factor loadings of the items removed" = 4, 
+                     " " = 1)) |> 
+  footnote(symbol = c("The item removed for the model is due to cross-loading",
+                      "The items removed a model include the ones in the current and preceding rows"))
+#factor loading table
+sofa_noldr17_fa3_full$loading.table.latex
+#save the results
+sofa_noldr17_fa3 <- sofa_noldr17_fa3_full$final.results
+#plot the diagram
+fa.diagram(
+  sofa_noldr17_fa3, 
+  cut = 0, 
+  digits =2,
+  main = ""
+  )
+title(main = "Figure 24. Path diagram of 3 factor solution, without-leader group (long)",
+      cex.main = 1.0,
+      font.main = 1)
+```
+
+### Explore 2-factor solution 
+
+After fitting 4 models, we achieved the most optimal model for 2 factor solution. The item removal process was encapsulated in table 32 All items were removed due to factor loading <0.4. The final model has 11 items, with 38.2% variance explained, see table 33 and figure 25.
+
+```{r, fig.width=10, fig.height=10}
+sofa_noldr17_fa2_full <- finetune(sofa_noldr17[-1], num.fa = 2, num.item = 15, ld.cutoff = 0.40,
+              title = "Factor loadings of the 2 factor solution for with-noleader group (long)",
+              cl = T)
+#item removal table
+sofa_noldr17_fa2_full$remove.item.table.latex |> 
+  add_header_above(c(" " = 1,
+                     "Factor loadings of the items removed" = 3, 
+                     " " = 1)) |> 
+  footnote(symbol = c("The item removed for the model is due to cross-loading",
+                      "The items removed a model include the ones in the current and preceding rows"))
+#factor loading table
+sofa_noldr17_fa2_full$loading.table.latex
+#save the results
+sofa_noldr17_fa2 <- sofa_noldr17_fa2_full$final.results
+#plot the diagram
+fa.diagram(
+  sofa_noldr17_fa2, 
+  cut = 0, 
+  digits =2,
+  main = ""
+  )
+title(main = "Figure 25. Path diagram of 2 factor solution, without-leader group (long)",
+      cex.main = 1.0,
+      font.main = 1)
+```
+
+## Comparison between factor solutions, with-leader (long)
+
+To be discussed.
+
+```{r}
+VarianceExplained <- 
+  c(
+  sofa_noldr17_fa2_full$var.exp,
+  sofa_noldr17_fa3_full$var.exp,
+  sofa_noldr17_fa4_full$var.exp,
+  sofa_noldr17_fa5_full$var.exp
+)
+
+names(VarianceExplained) <- 
+  c(
+  "2-factor solution",
+  "3-factor solution",
+  "4-factor solution",
+  "5-factor solution"
+)
+
+VarianceExplained <- VarianceExplained |> as.data.frame()
+ 
+VarianceExplained$"Number of items" <- 
+  c(
+    15-length(sofa_noldr17_fa2_full$remove.item),
+    15-length(sofa_noldr17_fa3_full$remove.item),
+    15-length(sofa_noldr17_fa4_full$remove.item),
+    15-length(sofa_noldr17_fa5_full$remove.item)
+    )
+
+VarianceExplained |> 
+  as.data.frame() |> 
+  kable(
+    booktab = T,
+    caption = "Comparison between factor solutions, without-leader (long)",
+    linesep = ""
+  ) |> 
+  kable_styling()
+```
+
+
+
+# Factor analysis for without-leader group (short)
+
+## Check factoribility
+
+For without-leader group (short), it was observed that 5 of the 5 items correlated at least .3 with at least one other item, suggesting reasonable factorability. As such, no item was dropped for factoribility tests.
+
+The Kaiser-Meyer-Olkin measure of sampling adequacy was .805, achieving "Good acceptance", see table 35.
+
+Bartlett’s test of sphericity were significant for the items (χ2 (10) = 172.282, p < .001) , suggesting that there is a certain redundancy between the variables that we can summarize with a few number of factors. See table 36.
+
+```{r}
+ldr5.kmo <- KMO(sofa_noldr5[-1]) 
+
+KMO.ldr5 <- append(ldr5.kmo$MSAi, ldr5.kmo$MSA) 
+
+names(KMO.ldr5) [6] <- "Overall"
+
+KMO.ldr5 |> 
+  as.data.frame() |> 
+  rename(KMO = KMO.ldr5) |> 
+  kable(booktab = T,
+        digits = 3,
+        caption = "Results of KMO test of sampling adequacy for without-leader group (short)",
+        linesep = "")
+```
+
+```{r}
+cortest.bartlett(sofa_noldr5[-1], nrow(sofa_noldr5)) |> 
+  as.data.frame() |> 
+  mutate(p.value = case_when(p.value >= 0.001 ~ as.character(p.value),
+                               p.value < 0.001 ~ "<0.001")) |> 
+  dplyr::select(
+    'Chi-square' =  chisq,
+    'p-value' = p.value,
+    'DF' = df
+  ) |> 
+  kable(digits = 3,
+        caption = "Results of bartlett test for with-leader group (short)",
+        booktab = T) 
+  
+```
+
+## Explore number of factors
+
+Scree plots (figures 26),  Velicer MAP indicated an 1 factor solution, while and BIC and VSS suggested 2-factor solution (figures 27). Solutions for two was examined using varimax rotations of the factor loading matrix. 
+
+```{r}
+set.seed(123)
+parallel = fa.parallel(sofa_noldr5[-1],
+ fm = 'pa',
+ fa = 'fa',
+ n.iter = 50,
+ SMC = TRUE,
+ quant = .95,
+ plot = F)
+
+obs = data.frame(parallel$fa.values)
+obs$type = c('Observed Data')
+obs$num = c(row.names(obs))
+obs$num = as.numeric(obs$num)
+colnames(obs) = c('eigenvalue', 'type', 'num')
+
+#Calculate quantiles for eigenvalues, but only store those from simulated CF model in percentile1
+percentile = apply(parallel$values,2,function(x) quantile(x,.95))
+min = as.numeric(nrow(obs))
+min = (4*min) - (min-1)
+max = as.numeric(nrow(obs))
+max = 4*max
+percentile1 = percentile[min:max]
+ 
+#Create data frame called &amp;amp;amp;amp;amp;quot;sim&amp;amp;amp;amp;amp;quot; with simulated eigenvalue data
+sim = data.frame(percentile1)
+sim$type = c('Simulated Data (95th %ile)')
+sim$num = c(row.names(obs))
+sim$num = as.numeric(sim$num)
+colnames(sim) = c('eigenvalue', 'type', 'num')
+ 
+#Merge the two data frames (obs and sim) together into data frame called eigendat
+eigendat = rbind(obs,sim)
+
+#Use data from eigendat. Map number of factors to x-axis, eigenvalue to y-axis, and give different data point shapes depending on whether eigenvalue is observed or simulated
+ggplot(eigendat, aes(x=num, y=eigenvalue, shape=type)) +#Add lines connecting data points
+  geom_line(aes(color = type))+#Add the data points.
+  geom_point(size=3, aes(color = type))+
+  scale_y_continuous(name='Eigenvalue')+
+  scale_x_continuous(name='Factor Number', 
+                     breaks=min(eigendat$num):max(eigendat$num))+
+  scale_shape_manual(values=c(16,1)) +
+  scale_color_manual(values = c("blue", "red"))+
+  annotate(geom = "text", 
+           x = 6.5, 
+           y =2, 
+           label = " max number of factors to retain")+
+  labs(caption = "The dashed vertical line indicates suggested max number of factors to retain",
+       title = "Figure 26 Scree plot for with-leader group (short)")+
+  geom_vline(xintercept = parallel$nfact, linetype = 'dashed') +
+  theme(legend.position = c(0.82, 0.88),
+        panel.background = element_rect(color = "black",
+                                       fill = "white"),
+        legend.title = element_blank(),
+        plot.title = element_text(
+          size = 11,
+          hjust = 0.5)
+        )
+```
+
+```{r, fig.width= 10, fig.height=7}
+#very simple structure and BIC
+# nfactors(
+#   sofa_noldr5[-1],
+#   n=6,
+#   rotate = "varimax",
+#   fm = "ml",
+#   n.obs=nrow(sofa_noldr5)
+# )
+vss(sofa_noldr5[-1],n=5,
+    rotate = "varimax",
+    fm = "ml",
+    n.obs=nrow(sofa_noldr5),
+    title = ""
+    )[3]
+
+title(main = "Figure 27. VSS plot for with-leader group (short)",
+      cex.main = 1.4,
+      font.main = 1)
+```
+
+## Explore 2-factor solution
+
+```{r, fig.height=10, fig.width=10}
+sofa_noldr5_ft <- sofa_noldr5 |> 
+  dplyr::select(
+    -i_orga0
+  )
+
+sofa_noldr5_fa2 <- 
+  fa(sofa_noldr5_ft[-1], 
+     nfactors = 2, 
+     rotate = "varimax", 
+     fm = "ml", 
+     scores = "regression")
+
+fa.diagram(
+  sofa_noldr5_fa2, 
+  cut = 0, 
+  digits =2, 
+  main = "Factor Analysis, Varimax rotation"
+  )
+
+loading_noldr5_fa2 <- sofa_noldr5_fa2$loadings[1:4,]
+loading_noldr5_fa2 <- loading_noldr5_fa2 |> as.data.frame()
+loading_noldr5_fa2$Item <- rownames(loading_noldr5_fa2)
+rownames(loading_noldr5_fa2) <- NULL
+
+loading_noldr5_fa2 |> 
+  dplyr::select(Item, everything()) |> 
+  mutate(
+    across(starts_with("ML"), ~round(., digits = 3)),
+    across(starts_with("ML"), ~replace(.,abs(.)<0.3, ""))
+         ) |> 
+  kable(
+    booktab = T,
+    digits  = 3,
+    linesep = "",
+    caption = "Figure 28 Factor loadings of the 5-factor solution for without-leader group (short)"
+  ) |> 
+  kable_styling(latex_options = "striped")
+
+```
+
+
+# Supplement File: case-wise discussion on NA and IDN
+
+See the standalone md file

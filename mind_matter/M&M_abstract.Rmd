@@ -1,0 +1,24 @@
+---
+title: "Identifying expertise without ground truth—using Expert ground truth and an instrumental variable"
+author: "Rong Guang, Lauri Ahonen, Benjamin Ultan Cowley"
+date: "`r Sys.Date()`"
+output: pdf_document
+---
+
+_Abstract: _
+
+_Background:_ 
+
+Identification of expertise is crucial to any application involving performance evaluation. This is simple when a ground truth exists. However, such validated knowledge is usually unavailable in chaotic environments such as avalanche forecasting. Most avalanches causing casualties are triggered by the people involved, and the absence of avalanche activity for a slope (over certain time period) can be either the result of safe conditions or lack of triggers. We study ground-truth-free indicators for expertise identification by contrasting back-country travelers’ knowledge of current (avalanche) conditions in hazardous terrain to an avalanche expert’s observations in the same area. 
+
+_Methods:_ 
+
+Data is being collected from back-country skiers through an on-site survey in a ski resort at Tromsø, Norway, over the ski season of 2023. On 6 separate days during the ski season, we will invite back-country skiers who just finished their ski trip into our survey at the parking lot of the ski resort. Information collected will include the route of their trips, their self-perceived forecast expertise levels, the avalanche factor(s) they deem relevant for the trip, etc. Additionally, we will collect one instrumental indicator presumably correlating with the skier’s expertise by asking them to observe and estimate the angle of real reference slope within visible range of the parking lot. During these days and one day prior to each day, an expert forecaster who is familiar with the local terrain and avalanche activity was sent to patrol of the region for making nowcasts of the relevant avalanche factors for ski routes. We will calculate distance indicators including cosine similarity, Manhattan distance and Mahalanobis distance between the expert’s and skier’s selected avalanche factors. Skier’s perceived skills will be regressed on (each) distance indicator(s), nested within ski group, accounting for covariates such as days in the area (_expert-based model_). Besides, another model with same parameters except for using the slope estimates as regressor will be fitted (_slope estimate model_). We seek to test the hypothesis that slope-estimate model, which is convenient and cost-efficient, is non-inferior to the expert model, by bootstrapping. 
+
+_Results planned to be reported:_ 
+
+We will describe the dataset on both individual and group levels. We will report the model fit statistics and coefficient estimates for both models and explicate the steps and reasoning for model fine-tuning. We will report the statistics from the hypothesis testing for the non-inferiority of slope-estimate model. 
+
+_Expected conclusion:_ 
+
+We seek to establish the predictive validity of evaluating the expertise in avalanche forecasts using expert ground-truth. We seek to establish another instrumental indicator for making cost-effective estimation of skier’s expertise in avalanche forecasts with acceptably good predictive validity as the estimates based on expert-ground truth.
