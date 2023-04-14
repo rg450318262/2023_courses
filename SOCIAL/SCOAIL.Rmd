@@ -590,7 +590,7 @@ sofa_NO <-
   )
 ```
 
-```{r}
+```{r, eval=F}
 library(kableExtra)
 sofa |> 
   select(starts_with("i_s"),
@@ -620,7 +620,7 @@ sofa |>
   row_spec(c(0,5,9,13,17,22), color = "red")
 ```
 
-```{r}
+```{r, eval=F}
 sofa_NO |> 
   select(starts_with("i_s"),
          starts_with("i_o"),
