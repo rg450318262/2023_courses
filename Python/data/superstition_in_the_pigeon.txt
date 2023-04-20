@@ -1,0 +1,218 @@
+www.all-about-psychology.com
+
+Presents Superstition in the Pigeon
+By B. F. Skinner (1948) First Published in Journal of Experimental Psychology, 3
+8, 168-172
+
+To say that a reinforcement is contingent upon a response may mean nothing more
+than that it follows the response. It may follow because of some mechanical con
+nection or because of the mediation of another organism; but conditioning takes
+place presumably because of the temporal relation only, expressed in terms of th
+e order and proximity of response and reinforcement. Whenever we present a state
+of affairs which is known to be reinforcing at a given drive, we must suppose t
+hat conditioning takes place, even though we have paid no attention to the behav
+ior of the organism in making the presentation. A simple experiment demonstrates
+this to be the case. A pigeon is brought to a stable state of hunger by reducin
+g it to 75 percent of its weight when well fed. It is put into an experimental c
+age for a few minutes each day. A food hopper attached to the cage may be swung
+into place so that the pigeon can eat from it. A solenoid and a timing relay hol
+d the hopper in place for five sec. at each reinforcement. If a clock is now arr
+anged to present the food hopper at regular intervals with no reference whatsoev
+er to the bird's behavior, operant conditioning usually takes place. In six out
+of eight cases the resulting responses were so clearly defined that two observer
+s could agree perfectly in counting instances. One bird was conditioned to turn
+counter-clockwise about the cage, making two or three turns between reinforcemen
+ts. Another repeatedly thrust its head into one of the upper corners of the cage
+. A third developed a 'tossing' response, as if placing its head beneath an invi
+sible bar and lifting it repeatedly. Two birds developed a pendulum motion of th
+e head and body, in which the head was extended forward and swung from right to
+left with a sharp
+
+1
+
+movement followed by a somewhat slower return. The body generally followed the
+movement and a few steps might be taken when it was extensive. Another bird was
+conditioned to make incomplete pecking or brushing movements directed toward but
+not touching the floor. None of these responses appeared in any noticeable stre
+ngth during adaptation to the cage or until the food hopper was periodically pre
+sented. In the remaining two cases, conditioned responses were not clearly marke
+d. The conditioning process is usually obvious. The bird happens to be executing
+some response as the hopper appears; as a result it tends to repeat this respon
+se. If the interval before the next presentation is not so great that extinction
+takes place, a second 'contingency' is probable. This strengthens the response
+still further and subsequent reinforcement becomes more probable. It is true tha
+t some responses go unreinforced and some reinforcements appear when the respons
+e has not just been made, but the net result is the development of a considerabl
+e state of strength. With the exception of the counter-clockwise turn, each resp
+onse was almost always repeated in the same part of the cage, and it generally i
+nvolved an orientation toward some feature of the cage. The effect of the reinfo
+rcement was to condition the bird to respond to some aspect of the environment r
+ather than merely to execute a series of movements. All responses came to be rep
+eated rapidly between reinforcements -- typically five or six times in 15 sec. T
+he effect appears to depend upon the rate of reinforcement. In general, we shoul
+d expect that the shorter the intervening interval, the
+
+2
+
+speedier and more marked the conditioning. One reason is that the pigeon's beha
+vior becomes more diverse as time passes after reinforcement. A hundred photogra
+phs, each taken two sec. after withdrawal of the hopper, would show fairly unifo
+rm behavior. The bird would be in the same part of the cage, near the hopper, an
+d probably oriented toward the wall where the hopper has disappeared or turning
+to one side or the other. A hundred photographs taken after 10 sec., on the othe
+r hand, would find the bird in various parts of the cage responding to many diff
+erent aspects of the environment. The sooner a second reinforcement appears, the
+refore, the more likely it is that the second reinforced response will be simila
+r to the first, and also that they will both have one of a few standard forms. I
+n the limiting case of a very brief interval the behavior to be expected would b
+e holding the head toward the opening through which the magazine has disappeared
+. Another reason for the greater effectiveness of short intervals is that the lo
+nger the interval, the greater the number of intervening responses emitted witho
+ut reinforcement. The resulting extinction cancels the effect of an occasional r
+einforcement. According to this interpretation the effective interval will depen
+d upon the rate of conditioning and the rate of extinction, and will therefore v
+ary with the drive and also presumably between species. Fifteen sec. is a very e
+ffective interval at the drive level indicated above. One min. is much less so.
+When a response has once been set up, however, the interval can be lengthened. I
+n one case it was extended to two min., and a high rate of responding was mainta
+ined with no sign of
+
+3
+
+weakening. In another case, many hours of responding were observed with an inte
+rval of one min. between reinforcements. In the latter case, the response showed
+a noticeable drift in topography. It began as a sharp movement of the head from
+the middle position to the left. This movement became more energetic, and event
+ually the whole body of the bird turned in the same direction, and a step or two
+would be taken. After many hours, the stepping response became the predominant
+feature. The bird made a well defined hopping step from the right to the left fo
+ot, meanwhile turning its head and body to the left as before. When the stepping
+response became strong, it was possible to obtain a mechanical record by puttin
+g the bird on a large tambour directly connected with a small tambour which made
+a delicate electric contact each time stepping took place. By watching the bird
+and listening to the sound of the recorder it was possible to confirm the fact
+that a fairly authentic record was being made. It was possible for the bird to h
+ear the recorder at each step, but this was, of course, in no way correlated wit
+h feeding. The record obtained when the magazine was presented once every min. r
+esembles in every respect the characteristic curve for the pigeon under periodic
+reinforcement of a standard selected response. A well marked temporal discrimin
+ation develops. The bird does not respond immediately after eating, but when 10
+or 15 or even 20 sec. have elapsed it begins to respond rapidly and continues un
+til the reinforcement is received.
+
+4
+
+Fig. 1. 'Reconditioning' of a superstitious response after extinction. The resp
+onse of hopping from right to left had been thoroughly extinguished just before
+the record was taken. The arrows indicate the automatic presentation of food at
+one-min. intervals without reference to the pigeon's behavior.
+
+In this case it was possible to record the 'extinction' of the response when the
+clock was turned off and the magazine was no longer presented at any time. The
+bird continued to respond with its characteristic side to side hop. More than l0
+,000 responses were recorded before 'extinction' had reached the point at which
+few if any responses were made during a 10 or 15 min interval. When the clock wa
+s again started, the periodic presentation of the magazine (still without any co
+nnection whatsoever with the bird's behavior) brought out a typical curve for re
+conditioning after periodic reinforcement, shown in Fig. 1. The record had been
+essentially horizontal for 20 min. prior to the beginning of this curve. The fir
+st reinforcement had some slight effect and the second a greater effect. There i
+s a smooth positive acceleration in rate as the bird returns to the rate of resp
+onding which prevailed when it was reinforced every min.
+
+5
+
+When
+
+the
+
+response
+
+was
+
+again
+
+extinguished
+
+and
+
+the
+
+periodic
+
+presentation of food then resumed, a different response was picked up. This cons
+isted of a progressive walking response in which the bird moved about the cage.
+The response of hopping from side to side never reappeared and could not, of cou
+rse, be obtained deliberately without making the reinforcement contingent upon t
+he behavior. The experiment might be said to demonstrate a sort of superstition.
+The bird behaves as if there were a causal relation between its behavior and th
+e presentation of food, although such a relation is lacking. There are many anal
+ogies in human behavior. Rituals for changing one's luck at cards are good examp
+les. A few accidental connections between a ritual and favorable consequences su
+ffice to set up and maintain the behavior in spite of many unreinforced instance
+s. The bowler who has released a ball down the alley but continues to behave as
+if he were controlling it by twisting and turning his arm and shoulder is anothe
+r case in point. These behaviors have, of course, no real effect upon one's luck
+or upon a ball half way down an alley, just as in the present case the food wou
+ld appear as often if the pigeon did nothing -- or, more strictly speaking, did
+something else. It is perhaps not quite correct to say that conditioned behavior
+has been set up without any previously determined contingency whatsoever. We ha
+ve appealed to a uniform sequence of responses in the behavior of the pigeon to
+obtain an over-all net contingency. When we arrange a clock to present food ever
+y 15 sec., we are in effect basing our reinforcement upon a limited set of respo
+nses which frequently occur 15 sec. after reinforcement. When a response has bee
+n strengthened (and this may result from one reinforcement), the
+
+6
+
+setting of the clock implies an even more restricted contingency. Something of
+the same sort is true of the bowler. It is not quite correct to say that there i
+s no connection between his twisting and turning and the course taken by the bal
+l at the far end of the alley. The connection was established before the ball le
+ft the bowler's hand, but since both the path of the ball and the behavior of th
+e bowler are determined, some relation survives. The subsequent behavior of the
+bowler may have no effect upon the ball, but the behavior of the ball has an eff
+ect upon the bowler. The contingency, though not perfect, is enough to maintain
+the behavior in strength. The particular form of the behavior adopted by the bow
+ler is due to induction from responses in which there is actual contact with the
+ball. It is clearly a movement appropriate to changing the ball's direction. Bu
+t this does not invalidate the comparison, since we are not concerned with what
+response is selected but with why it persists in strength. In rituals for changi
+ng luck the inductive strengthening of a particular form of behavior is generall
+y absent. The behavior of the pigeon in this experiment is of the latter sort, a
+s the variety of responses obtained from different pigeons indicates. Whether th
+ere is any unconditioned behavior in the pigeon appropriate to a given effect up
+on the environment is under investigation. The results throws some light on inci
+dental behavior observed in experiments in which a discriminative stimulus is fr
+equently presented. Such a stimulus has reinforcing value and can set up superst
+itious behavior. A pigeon will often develop some response such as turning, twis
+ting, pecking near the locus of the discriminative stimulus, flapping its wings,
+etc. In much of the work to date in this field the interval between presentatio
+ns of the discriminative stimulus has been one
+
+7
+
+min. and many of these superstitious responses are short-lived. Their appearanc
+e as the result of accidental correlations with the presentation of the stimulus
+is unmistakable. THE END
+
+8
+
+For more free psychology eBooks please visit: http://www.all-about-psychology.c
+om/psychology-ebook.html
+
+Keep up-to-date with all the latest updates on the All About Psychology Website.
+http://twitter.com/psych101 Interested In Forensic Psychology?
+
+What is forensic psychology?, criminal profiling, the study and practice of fore
+nsic psychology. These are just some of the many topics on offer at this free an
+d comprehensive website. www.all-about-forensic-psychology.com Interested In For
+ensic Science?
+
+Forensic Science definitions, history, topic areas, theory and practice, careers
+, debates, CSI, degree and study options are all covered in detail here. www.all
+-about-forensic-science.com
+
+9
+
+

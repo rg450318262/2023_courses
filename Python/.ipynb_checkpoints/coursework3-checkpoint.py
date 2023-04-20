@@ -1,7 +1,6 @@
 {
  "cells": [
   {
-   "attachments": {},
    "cell_type": "markdown",
    "metadata": {},
    "source": [
@@ -41,7 +40,6 @@
    ]
   },
   {
-   "attachments": {},
    "cell_type": "markdown",
    "metadata": {},
    "source": [
@@ -1348,7 +1346,7 @@
  ],
  "metadata": {
   "kernelspec": {
-   "display_name": "Python 3.9.13 ('base')",
+   "display_name": "Python 3 (ipykernel)",
    "language": "python",
    "name": "python3"
   },
@@ -1364,7 +1362,6 @@
    "pygments_lexer": "ipython3",
    "version": "3.9.13"
   },
-  "orig_nbformat": 4,
   "vscode": {
    "interpreter": {
     "hash": "df0455e0fcf6e3dc06d177d50c97e8ac4f8b65a632275afc508899eb87604c24"
