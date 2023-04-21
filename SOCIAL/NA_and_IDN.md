@@ -15,10 +15,12 @@
 ## or more informal leader(s) ". Yet, he was not able to give any rating about 
 ## leader questions. 
 
-## Decisions: This respondent's overall ratings for most items were below average;
+## Decisions: 
+## Discarded decision:This respondent's overall ratings for most items were below average;
 ## This corresponds to his no idea of leadership quality. It therefore is regarded
 ## as a reasonable case. The value of leader will be imputed by within-subgroup 
 ## median. 
+## Updated decision: This case will be removed from analysis.
 
 Variable Value
 index      153
@@ -166,7 +168,7 @@ i_anom4      4
 ## below is the answers of case 200. He had skipped multiple-item leader questions;
 ## Yet, he rated the one-item leader question (5 = strongly agree; positve wording)
 
-## Decisions: to be made
+## Updated decision: This case will be removed from analysis.
 
 index      200
 i_leader0    5
