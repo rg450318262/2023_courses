@@ -16,10 +16,13 @@ plot(a, b)
 
 ```{r}
 library(DT)
-s <- data.frame(first_col = a, second_col = b)
+s <- data.frame(
+    first_col = a, second_col = b
+    )
 s |> datatable()
 ```
 
 ```{r}
 a
 ```
+
