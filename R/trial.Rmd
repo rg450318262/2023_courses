@@ -1,0 +1,25 @@
+---
+title: "My trial"
+date: 2023
+output: html_document
+---
+
+```{r}
+print("hello world")
+```
+
+```{r}
+a <- c(1, 2, 3, 4)
+b <- c(2, 3, 4, 5)
+plot(a, b)
+```
+
+```{r}
+library(DT)
+s <- data.frame(first_col = a, second_col = b)
+s |> datatable()
+```
+
+```{r}
+a
+```
